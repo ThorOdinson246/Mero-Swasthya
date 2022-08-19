@@ -108,7 +108,7 @@ class _MyHomePageState extends State<MyHomePage>
         ],*/
           title: Text(
             bottomNavIndex == 0
-                ? 'Nepal Health Frontiers '
+                ? 'Blood App'
                 : bottomNavIndex == 1
                     ? 'Profile'
                     : bottomNavIndex == 2

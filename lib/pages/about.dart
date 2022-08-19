@@ -13,24 +13,6 @@ class About extends StatefulWidget {
 
 class _AboutState extends State<About> {
   bool credvisible = true;
-  launchfbURL() async {
-    String url = 'https://www.facebook.com/abhishek.poudel.3517';
-    if (await canLaunch(url)) {
-      await launch(url);
-    } else {
-      throw 'Could not launch $url';
-    }
-  }
-
-  launcheasyscience() async {
-    String url = 'https://easysciencenotes.netlify.app/#/';
-    // ignore: deprecated_member_use
-    if (await canLaunch(url)) {
-      await launch(url);
-    } else {
-      throw 'Could not launch $url';
-    }
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -236,9 +218,7 @@ class _AboutState extends State<About> {
                     child: Padding(
                       padding: const EdgeInsets.all(15.0),
                       child: InkWell(
-                        onTap: () {
-                          launcheasyscience();
-                        },
+                        onTap: () {},
                         child: Text(
                           'You can also access the web version of this app from https://nhf.org',
                           style: TextStyle(
@@ -279,18 +259,7 @@ class _AboutState extends State<About> {
                       child: Column(
                         children: [
                           InkWell(
-                            onTap: () {
-                              launchfbURL();
-                              // if (credvisible == true) {
-                              //   setState(() {
-                              //     credvisible = false;
-                              //   });
-                              // } else {
-                              //   setState(() {
-                              //     credvisible = true;
-                              //   });
-                              // }
-                            },
+                            onTap: () {},
                             child: Text(
                               'A word from Developer',
                               style: TextStyle(

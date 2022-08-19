@@ -36,6 +36,7 @@ class _RegisterPageState extends State<RegisterPage> {
     sharedPrefs.setString('sch', _mySchool.text);
     sharedPrefs.setString('favsub', _myFavSub.text);
     sharedPrefs.setBool('isLogged', true);
+    sharedPrefs.setInt('quiz', 0);
 
     print('record added');
   }

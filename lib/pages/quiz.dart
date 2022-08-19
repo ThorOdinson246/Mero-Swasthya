@@ -277,6 +277,7 @@ class _QuizPageState extends State<QuizPage> {
                               ScaffoldMessenger.of(context).showSnackBar(
                                 const SnackBar(
                                   content: Text('Please select an option'),
+                                  behavior: SnackBarBehavior.floating,
                                 ),
                               );
                             }

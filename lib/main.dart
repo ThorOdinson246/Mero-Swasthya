@@ -20,7 +20,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return const MaterialApp(
       debugShowCheckedModeBanner: false,
-      title: 'Easy Science Notes',
+      title: 'Blood Donation App',
       home: MyHomePage(),
     );
   }

@@ -88,8 +88,8 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
               Column(
                 children: [
                   Container(
-                    
-                    width: width,
+                    // height: 300,
+                    width: MediaQuery.of(context).size.width,
                     decoration: BoxDecoration(
                       color: HexColor('#0984e3'),
                       borderRadius: const BorderRadius.only(
@@ -98,7 +98,7 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
                       ),
                     ),
                     child: Padding(
-                      padding: const EdgeInsets.fromLTRB(15, 80, 15, 10),
+                      padding: const EdgeInsets.fromLTRB(15, 80, 15, 20),
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
@@ -111,8 +111,21 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
                               }
                               if (snapshot.connectionState ==
                                   ConnectionState.waiting) {
-                                return const Center(
-                                  child: CircularProgressIndicator(),
+                                return const Text(
+                                  'The greatest glory in living lies not in never falling, but in rising every time we fall got it right i am check. ',
+                                  style: TextStyle(
+                                    height: 0.9,
+                                    fontSize: 30,
+                                    fontFamily: 'Nunito',
+                                    fontWeight: FontWeight.w900,
+                                    color: Colors.white,
+                                    shadows: [
+                                      Shadow(
+                                        offset: Offset(2, 2),
+                                        blurRadius: 2,
+                                      ),
+                                    ],
+                                  ),
                                 );
                               }
                               final List storedocs = [];
@@ -130,21 +143,47 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
                                   storedocs.length,
                                   (i) => Column(
                                     children: [
-                                      Text(
-                                        storedocs[i]['quote'],
-                                        style: const TextStyle(
-                                          height: 0.9,
-                                          fontSize: 35,
-                                          fontFamily: 'Nunito',
-                                          fontWeight: FontWeight.w900,
-                                          color: Colors.white,
-                                          shadows: [
-                                            Shadow(
-                                              offset: Offset(2, 2),
-                                              blurRadius: 2,
+                                      Column(
+                                        children: [
+                                          Text(
+                                            storedocs[i]['quote'],
+                                            style: const TextStyle(
+                                              height: 0.9,
+                                              fontSize: 30,
+                                              fontFamily: 'Nunito',
+                                              fontWeight: FontWeight.w900,
+                                              color: Colors.white,
+                                              shadows: [
+                                                Shadow(
+                                                  offset: Offset(2, 2),
+                                                  blurRadius: 2,
+                                                ),
+                                              ],
                                             ),
-                                          ],
-                                        ),
+                                          ),
+                                          Row(
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.end,
+                                            children: [
+                                              Text(
+                                                storedocs[i]['by'],
+                                                style: const TextStyle(
+                                                  height: 0.9,
+                                                  fontSize: 13,
+                                                  fontFamily: 'Nunito',
+                                                  fontWeight: FontWeight.w900,
+                                                  color: Colors.white,
+                                                  shadows: [
+                                                    Shadow(
+                                                      offset: Offset(2, 2),
+                                                      blurRadius: 2,
+                                                    ),
+                                                  ],
+                                                ),
+                                              ),
+                                            ],
+                                          ),
+                                        ],
                                       ),
                                     ],
                                   ),
@@ -155,6 +194,9 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
                         ],
                       ),
                     ),
+                  ),
+                  SizedBox(
+                    height: 10,
                   ),
                   Container(
                     height: 45,
@@ -298,7 +340,7 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
                 ],
               ),
               Padding(
-                padding: EdgeInsets.fromLTRB(15, 25, 15, 0),
+                padding: EdgeInsets.fromLTRB(15, 5, 15, 0),
                 child: Text(
                   "Areas",
                   style: TextStyle(
