@@ -146,12 +146,12 @@ class _RequestBloodState extends State<SearchBlood> {
     return Scaffold(
       backgroundColor: drkmd == true ? Colors.grey[900] : Colors.grey[100],
       appBar: AppBar(
-        elevation: 0,
-        backgroundColor: HexColor('#e63946'),
         centerTitle: true,
         toolbarHeight: 50,
-        title: const Text(
-          "Find Donors",
+        elevation: 0,
+        backgroundColor: HexColor('#e63946'),
+        title: Text(
+          'Find A Donor',
           style: TextStyle(
             fontFamily: 'SuezOne',
             color: Colors.white,
@@ -186,7 +186,7 @@ class _RequestBloodState extends State<SearchBlood> {
                               color: drkmd == true
                                   ? HexColor('#444444')
                                   : HexColor('#dfe6e9'),
-                              offset: Offset(0, 6),
+                              offset: const Offset(0, 6),
                             ),
                           ],
                         ),

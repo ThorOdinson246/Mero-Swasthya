@@ -2,9 +2,9 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:testapp1/pages/explore.dart';
 import 'package:testapp1/pages/search_blood.dart';
 import 'package:testapp1/pages/request_blood.dart';
-import 'package:testapp1/pages_notes/lesson_chemistry.dart';
-import 'package:testapp1/pages_notes/lesson_environment.dart';
-import 'package:testapp1/pages_notes/lessons_physics.dart';
+import 'package:testapp1/pages_home/lesson_chemistry.dart';
+import 'package:testapp1/pages_home/lesson_environment.dart';
+import 'package:testapp1/pages_home/find_doctor.dart';
 import 'package:flutter/material.dart';
 import 'dart:async';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -386,8 +386,9 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
                                   Text(
-                                    "NHF ",
+                                    "FIND A DOCTOR",
                                     style: TextStyle(
+                                      fontFamily: 'Nunito',
                                       color: drkmd == true
                                           ? HexColor('#bebebe')
                                           : HexColor('#636e72'),
@@ -420,7 +421,7 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
                                       Navigator.push(
                                         context,
                                         MaterialPageRoute(
-                                          builder: (context) => lessonPhysics(),
+                                          builder: (context) => findDoctors(),
                                         ),
                                       );
                                     },
@@ -473,6 +474,7 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
                                   Text(
                                     "NCD WATCH NEPAL",
                                     style: TextStyle(
+                                      fontFamily: 'Nunito',
                                       color: drkmd == true
                                           ? HexColor('#bebebe')
                                           : HexColor('#636e72'),
@@ -557,8 +559,9 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
                                   Text(
-                                    "BLOOD SEARCH",
+                                    "FIND A DONOR",
                                     style: TextStyle(
+                                      fontFamily: 'Nunito',
                                       color: drkmd == true
                                           ? HexColor('#bebebe')
                                           : HexColor('#636e72'),
@@ -644,6 +647,7 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
                                   Text(
                                     "REQUEST BLOOD",
                                     style: TextStyle(
+                                      fontFamily: 'Nunito',
                                       color: drkmd == true
                                           ? HexColor('#bebebe')
                                           : HexColor('#636e72'),
@@ -729,6 +733,7 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
                                   Text(
                                     "ENVIRONMENT",
                                     style: TextStyle(
+                                      fontFamily: 'Nunito',
                                       color: drkmd == true
                                           ? HexColor('#bebebe')
                                           : HexColor('#636e72'),

@@ -55,7 +55,7 @@ class _AboutState extends State<About> {
                     ),
 
                     Text(
-                      "Easy Science Notes",
+                      "Blood Bank Nepal",
                       style: TextStyle(
                         fontSize: 20,
                         fontWeight: FontWeight.bold,
