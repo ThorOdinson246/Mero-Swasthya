@@ -171,6 +171,13 @@ class _RequestBloodState extends State<SearchBlood> {
                               color: Colors.black,
                             ),
                           ),
+                          TextSpan(
+                            text:
+                                'BloodType: ${documentSnapshot['bloodtype']}\n',
+                            style: const TextStyle(
+                              color: Colors.black,
+                            ),
+                          ),
                         ],
                       ),
                     ),

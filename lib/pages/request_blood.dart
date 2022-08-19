@@ -10,6 +10,8 @@ class RequestBlood extends StatefulWidget {
   RequestBloodState createState() => RequestBloodState();
 }
 
+String? bloodtype;
+
 class RequestBloodState extends State<RequestBlood> {
 // text fields' controllers
   final TextEditingController _nameController = TextEditingController();
@@ -106,6 +108,9 @@ class RequestBloodState extends State<RequestBlood> {
   @override
   Widget build(BuildContext context) {
     const defaultValue = 'A+';
+
+    late String? dropdownValue = 'A+';
+
     List<String> selectedItemValue = <String>[
       'A+',
       'A-',
@@ -168,11 +173,28 @@ class RequestBloodState extends State<RequestBlood> {
             const SizedBox(
               height: 20,
             ),
-            CustomDropdownButton(
-              defaultValue: defaultValue,
-              values: selectedItemValue,
-              onItemSelected: (value) {
-                print("Selected Item : $value");
+            DropdownButtonFormField<String>(
+              decoration: const InputDecoration(
+                border: OutlineInputBorder(
+                  borderSide: BorderSide(color: Colors.red, width: 5.0),
+                ),
+                labelText: 'Blood Type',
+                prefixIcon: Icon(Icons.bloodtype),
+              ),
+              value: dropdownValue,
+              items: selectedItemValue.map((dropValue) {
+                return DropdownMenuItem<String>(
+                  value: dropValue,
+                  child: Text(dropValue),
+                );
+              }).toList(),
+              onChanged: (newDropdownValue) {
+                setState(() {
+                  bloodtype = dropdownValue = newDropdownValue!;
+                  // bloodtype = dropdownValue;
+                });
+                print('$dropdownValue$bloodtype');
+                // widget.onItemSelected(newDropdownValue);
               },
             ),
             /*
@@ -205,17 +227,26 @@ class RequestBloodState extends State<RequestBlood> {
               },
             ),
             */
+            const SizedBox(
+              height: 20,
+            ),
             ElevatedButton(
               child: const Text('Request'),
               onPressed: () async {
                 final String name = _nameController.text;
                 final int? phone = int.tryParse(_phonenumber.text);
                 final String address = _address.text;
-                // final String bloodtype = ;
+                final String? blood = bloodtype;
                 // print('selectedItemValue = ${bloodtype}');
                 if (phone != null && name != '' && address != '') {
-                  await blood_requests
-                      .add({"name": name, "phone": phone, "address": address});
+                  await blood_requests.add(
+                    {
+                      "name": name,
+                      "phone": phone,
+                      "address": address,
+                      "bloodtype": bloodtype
+                    },
+                  );
                   Navigator.of(context).pop();
                   _nameController.text = '';
                   _phonenumber.text = '';

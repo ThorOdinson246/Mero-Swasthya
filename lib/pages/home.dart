@@ -1,5 +1,6 @@
 import 'dart:ffi';
 
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:testapp1/pages/explore.dart';
 import 'package:testapp1/pages/quiz.dart';
 import 'package:testapp1/pages/search_blood.dart';
@@ -123,6 +124,8 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
 
   @override
   Widget build(BuildContext context) {
+    final CollectionReference dailyquote =
+      FirebaseFirestore.instance.collection('daily_quote');
     // String lesson;
     // double height = MediaQuery.of(context).size.height;
     double width = MediaQuery.of(context).size.width;
