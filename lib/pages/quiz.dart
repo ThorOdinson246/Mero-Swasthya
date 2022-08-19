@@ -21,11 +21,12 @@ class _QuizPageState extends State<QuizPage> {
   Color _colord = Color.fromRGBO(189, 189, 189, 1);
   // Color _colorc2 = Colors.green;
   String congratsmsg = '';
- saveQuiz() async {
-  final SharedPreferences sharedPrefs = await SharedPreferences.getInstance();
-  sharedPrefs.setInt('quiz', score);
-  print('quiz record added');
-}
+  saveQuiz() async {
+    final SharedPreferences sharedPrefs = await SharedPreferences.getInstance();
+    sharedPrefs.setInt('quiz', score);
+    print('quiz record added');
+  }
+
   int index = 0;
   int answerindex = 0;
   dynamic score = 0;
@@ -274,9 +275,10 @@ class _QuizPageState extends State<QuizPage> {
                               );
                             } else {
                               ScaffoldMessenger.of(context).showSnackBar(
-                                  const SnackBar(
-                                      content:
-                                          Text('Please select an option')));
+                                const SnackBar(
+                                  content: Text('Please select an option'),
+                                ),
+                              );
                             }
                           } else {
                             setState(
@@ -388,7 +390,3 @@ class _QuizPageState extends State<QuizPage> {
     );
   }
 }
-
-
-
-

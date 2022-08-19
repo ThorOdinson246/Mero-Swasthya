@@ -1,6 +1,6 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:testapp1/pages/homepage.dart';
-import 'package:testapp1/pages/request_blood.dart';
+// import 'package:testapp1/pages/search_blood.dart';
 // import 'package:testapp1/pages/splash.dart';
 import 'package:flutter/material.dart';
 // import 'package:hive/hive.dart';
@@ -9,14 +9,16 @@ import 'package:flutter/material.dart';
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
-  runApp(MyApp());
+  runApp(const MyApp());
 }
 
 class MyApp extends StatelessWidget {
+  const MyApp({Key? key}) : super(key: key);
+
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
+    return const MaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'Easy Science Notes',
       home: MyHomePage(),

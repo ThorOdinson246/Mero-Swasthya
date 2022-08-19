@@ -2,6 +2,7 @@ import 'dart:ffi';
 
 import 'package:testapp1/pages/explore.dart';
 import 'package:testapp1/pages/quiz.dart';
+import 'package:testapp1/pages/search_blood.dart';
 import 'package:testapp1/pages/request_blood.dart';
 import 'package:testapp1/pages_notes/lesson_astronomy.dart';
 import 'package:testapp1/pages_notes/lesson_biology.dart';
@@ -676,7 +677,7 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
                                     Navigator.push(
                                       context,
                                       MaterialPageRoute(
-                                        builder: (context) => RequestBlood(),
+                                        builder: (context) => SearchBlood(),
                                       ),
                                     );
                                   },
@@ -727,7 +728,7 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
                                 Text(
-                                  "SEEK HELP ",
+                                  "REQUEST BLOOD",
                                   style: TextStyle(
                                     color: drkmd == true
                                         ? HexColor('#bebebe')
@@ -760,7 +761,7 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
                                     Navigator.push(
                                       context,
                                       MaterialPageRoute(
-                                        builder: (context) => lessonAstronomy(),
+                                        builder: (context) => RequestBlood(),
                                       ),
                                     );
                                   },

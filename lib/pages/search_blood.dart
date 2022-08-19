@@ -6,17 +6,17 @@ class SearchBlood extends StatefulWidget {
   const SearchBlood({Key? key}) : super(key: key);
 
   @override
-  SearchBloodState createState() => SearchBloodState();
+  _RequestBloodState createState() => _RequestBloodState();
 }
 
-class SearchBloodState extends State<SearchBlood> {
+class _RequestBloodState extends State<SearchBlood> {
 // text fields' controllers
   final TextEditingController _nameController = TextEditingController();
   final TextEditingController _phonenumber = TextEditingController();
 
   final CollectionReference blood_requests =
       FirebaseFirestore.instance.collection('blood_requests');
-
+/*
   Future<void> _create([DocumentSnapshot? documentSnapshot]) async {
     await showModalBottomSheet(
       isScrollControlled: true,
@@ -54,6 +54,11 @@ class SearchBloodState extends State<SearchBlood> {
                   final int? phone = int.tryParse(_phonenumber.text);
                   if (phone != null) {
                     await blood_requests.add({"name": name, "phone": phone});
+                    CircularProgressIndicator(
+                      color: Colors.black,
+                      strokeWidth: 4.0,
+                      value: 1.0,
+                    );
                     Navigator.of(context).pop();
                     _nameController.text = '';
                     _phonenumber.text = '';
@@ -66,7 +71,7 @@ class SearchBloodState extends State<SearchBlood> {
       },
     );
   }
-
+*/
   Future<void> _update([DocumentSnapshot? documentSnapshot]) async {
     if (documentSnapshot != null) {
       _nameController.text = documentSnapshot['name'];
@@ -133,52 +138,71 @@ class SearchBloodState extends State<SearchBlood> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: AppBar(
-          title: const Center(child: Text('Firebase Firestore')),
-        ),
-        body: StreamBuilder(
-          stream: blood_requests.snapshots(),
-          builder: (context, AsyncSnapshot<QuerySnapshot> streamSnapshot) {
-            if (streamSnapshot.hasData) {
-              return ListView.builder(
-                itemCount: streamSnapshot.data!.docs.length,
-                itemBuilder: (context, index) {
-                  final DocumentSnapshot documentSnapshot =
-                      streamSnapshot.data!.docs[index];
-                  return Card(
-                    margin: const EdgeInsets.all(10),
-                    child: ListTile(
-                      title: Text(documentSnapshot['name']),
-                      subtitle: Text(documentSnapshot['phone'].toString()),
-                      trailing: SizedBox(
-                        width: 100,
-                        child: Row(
-                          children: [
-                            IconButton(
-                                icon: const Icon(Icons.edit),
-                                onPressed: () => _update(documentSnapshot)),
-                            IconButton(
-                                icon: const Icon(Icons.delete),
-                                onPressed: () => _delete(documentSnapshot.id)),
-                          ],
-                        ),
+      appBar: AppBar(
+        title: const Center(child: Text('Search Blood')),
+      ),
+      body: StreamBuilder(
+        stream: blood_requests.snapshots(),
+        builder: (context, AsyncSnapshot<QuerySnapshot> streamSnapshot) {
+          if (streamSnapshot.hasData) {
+            return ListView.builder(
+              itemCount: streamSnapshot.data!.docs.length,
+              itemBuilder: (context, index) {
+                final DocumentSnapshot documentSnapshot =
+                    streamSnapshot.data!.docs[index];
+                return Card(
+                  margin: const EdgeInsets.all(10),
+                  child: ListTile(
+                    title: Text(
+                      'Name: ${documentSnapshot['name']}',
+                    ),
+                    subtitle: RichText(
+                      text: TextSpan(
+                        children: [
+                          TextSpan(
+                            text: 'Phone: ${documentSnapshot['phone']}\n',
+                            style: const TextStyle(
+                              color: Colors.black,
+                            ),
+                          ),
+                          TextSpan(
+                            text: 'Address: ${documentSnapshot['address']}\n',
+                            style: const TextStyle(
+                              color: Colors.black,
+                            ),
+                          ),
+                        ],
                       ),
                     ),
-                  );
-                },
-              );
-            }
-
-            return const Center(
-              child: CircularProgressIndicator(),
+                    trailing: SizedBox(
+                      width: 100,
+                      child: Row(
+                        children: [
+                          IconButton(
+                              icon: const Icon(Icons.edit),
+                              onPressed: () => _update(documentSnapshot)),
+                          IconButton(
+                              icon: const Icon(Icons.delete),
+                              onPressed: () => _delete(documentSnapshot.id)),
+                        ],
+                      ),
+                    ),
+                  ),
+                );
+              },
             );
-          },
-        ),
+          }
+          return const Center(
+            child: CircularProgressIndicator(),
+          );
+        },
+      ),
 // Add new product
-        floatingActionButton: FloatingActionButton(
-          onPressed: () => _create(),
-          child: const Icon(Icons.add),
-        ),
-        floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat);
+      // floatingActionButton: FloatingActionButton(
+      //   onPressed: () => _create(),
+      //   child: const Icon(Icons.add),
+      // ),
+      // floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
+    );
   }
 }
