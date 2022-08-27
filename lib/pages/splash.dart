@@ -26,16 +26,19 @@ class _SplashState extends State<Splash> {
       isLoggedIn = logInInfo.getBool('isLogged') ?? false;
       drkmd = logInInfo.getBool('isDarkModeEnabled') ?? false;
     });
-    print('isLoggedIn' + '=' + '${isLoggedIn}');
-    if (isLoggedIn == false) {
-      print('Taking to register page');
-      Navigator.pushReplacement(
-          context, MaterialPageRoute(builder: (context) => RegisterPage()));
-    } else {
-      print('Taking to homePage');
-      Navigator.pushReplacement(
-          context, MaterialPageRoute(builder: (context) => MyHomePage()));
-    }
+    Future.delayed(const Duration(milliseconds: 500), () {
+// Here you can write your code
+      print('isLoggedIn' + '=' + '${isLoggedIn}');
+      if (isLoggedIn == false) {
+        print('Taking to register page');
+        Navigator.pushReplacement(
+            context, MaterialPageRoute(builder: (context) => RegisterPage()));
+      } else {
+        print('Taking to homePage');
+        Navigator.pushReplacement(
+            context, MaterialPageRoute(builder: (context) => MyHomePage()));
+      }
+    });
   }
 
   @override

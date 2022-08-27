@@ -1,9 +1,10 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:testapp1/pages/explore.dart';
+import 'package:testapp1/pages/quiz.dart';
 import 'package:testapp1/pages/search_blood.dart';
 import 'package:testapp1/pages/request_blood.dart';
 import 'package:testapp1/pages_home/lesson_chemistry.dart';
-import 'package:testapp1/pages_home/lesson_environment.dart';
+import 'package:testapp1/pages_home/blood_banks.dart';
 import 'package:testapp1/pages_home/find_doctor.dart';
 import 'package:flutter/material.dart';
 import 'dart:async';
@@ -60,13 +61,13 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
     String pastdata = sharedPrefs.getString('nm').toString();
     String grde = sharedPrefs.getString('grd').toString();
     String schnm = sharedPrefs.getString('sch').toString();
-    int quizScore = sharedPrefs.getInt('quiz')!.toInt();
+    // int quizScore = sharedPrefs.getInt('quiz')!.toInt();
 
     setState(() {
       pastd = pastdata;
       grade = grde;
       schname = schnm;
-      quizScore = quizScore;
+      // quizScore = quizScore;
     });
 
     print('geting  record in 2nd page');
@@ -106,9 +107,7 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
                             stream: dataStream,
                             builder: (BuildContext context,
                                 AsyncSnapshot<QuerySnapshot> snapshot) {
-                              if (snapshot.hasError) {
-                                //TODO: snackbar
-                              }
+                              /*
                               if (snapshot.connectionState ==
                                   ConnectionState.waiting) {
                                 return const Text(
@@ -127,68 +126,70 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
                                     ],
                                   ),
                                 );
-                              }
-                              final List storedocs = [];
-                              snapshot.data!.docs.map(
-                                (DocumentSnapshot document) {
-                                  Map a =
-                                      document.data() as Map<String, dynamic>;
-                                  storedocs.add(a);
-                                  a['id'] = document.id;
-                                },
-                              ).toList();
-
-                              return Column(
-                                children: List.generate(
-                                  storedocs.length,
-                                  (i) => Column(
-                                    children: [
-                                      Column(
-                                        children: [
-                                          Text(
-                                            storedocs[i]['quote'],
-                                            style: const TextStyle(
-                                              height: 0.9,
-                                              fontSize: 30,
-                                              fontFamily: 'Nunito',
-                                              fontWeight: FontWeight.w900,
-                                              color: Colors.white,
-                                              shadows: [
-                                                Shadow(
-                                                  offset: Offset(2, 2),
-                                                  blurRadius: 2,
+                              }*/
+                              if (snapshot.hasData) {
+                                final List storedocs = [];
+                                snapshot.data!.docs.map(
+                                  (DocumentSnapshot document) {
+                                    Map a =
+                                        document.data() as Map<String, dynamic>;
+                                    storedocs.add(a);
+                                    a['id'] = document.id;
+                                  },
+                                ).toList();
+                                return Column(
+                                  children: List.generate(
+                                    storedocs.length,
+                                    (i) => Column(
+                                      children: [
+                                        Column(
+                                          children: [
+                                            Text(
+                                              storedocs[i]['quote'],
+                                              style: const TextStyle(
+                                                height: 0.9,
+                                                fontSize: 30,
+                                                fontFamily: 'Nunito',
+                                                fontWeight: FontWeight.w900,
+                                                color: Colors.white,
+                                                shadows: [
+                                                  Shadow(
+                                                    offset: Offset(2, 2),
+                                                    blurRadius: 2,
+                                                  ),
+                                                ],
+                                              ),
+                                            ),
+                                            Row(
+                                              mainAxisAlignment:
+                                                  MainAxisAlignment.end,
+                                              children: [
+                                                Text(
+                                                  storedocs[i]['by'],
+                                                  style: const TextStyle(
+                                                    height: 0.9,
+                                                    fontSize: 13,
+                                                    fontFamily: 'Nunito',
+                                                    fontWeight: FontWeight.w900,
+                                                    color: Colors.white,
+                                                    shadows: [
+                                                      Shadow(
+                                                        offset: Offset(2, 2),
+                                                        blurRadius: 2,
+                                                      ),
+                                                    ],
+                                                  ),
                                                 ),
                                               ],
                                             ),
-                                          ),
-                                          Row(
-                                            mainAxisAlignment:
-                                                MainAxisAlignment.end,
-                                            children: [
-                                              Text(
-                                                storedocs[i]['by'],
-                                                style: const TextStyle(
-                                                  height: 0.9,
-                                                  fontSize: 13,
-                                                  fontFamily: 'Nunito',
-                                                  fontWeight: FontWeight.w900,
-                                                  color: Colors.white,
-                                                  shadows: [
-                                                    Shadow(
-                                                      offset: Offset(2, 2),
-                                                      blurRadius: 2,
-                                                    ),
-                                                  ],
-                                                ),
-                                              ),
-                                            ],
-                                          ),
-                                        ],
-                                      ),
-                                    ],
+                                          ],
+                                        ),
+                                      ],
+                                    ),
                                   ),
-                                ),
-                              );
+                                );
+                              }
+                              return CircularProgressIndicator();
                             },
                           ),
                         ],
@@ -472,7 +473,7 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
                                   Text(
-                                    "NCD WATCH NEPAL",
+                                    "ANXIETY CHECK",
                                     style: TextStyle(
                                       fontFamily: 'Nunito',
                                       color: drkmd == true
@@ -507,8 +508,7 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
                                       Navigator.push(
                                         context,
                                         MaterialPageRoute(
-                                          builder: (context) =>
-                                              lessonChemistry(),
+                                          builder: (context) => QuizPage(),
                                         ),
                                       );
                                     },
@@ -731,7 +731,7 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
                                   Text(
-                                    "ENVIRONMENT",
+                                    "BLOOD BANKS",
                                     style: TextStyle(
                                       fontFamily: 'Nunito',
                                       color: drkmd == true
@@ -766,8 +766,7 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
                                       Navigator.push(
                                         context,
                                         MaterialPageRoute(
-                                          builder: (context) =>
-                                              lessonEnvironment(),
+                                          builder: (context) => bloodBanks(),
                                         ),
                                       );
                                     },

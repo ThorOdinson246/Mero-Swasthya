@@ -6,6 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import '../lists/questions_lists.dart';
+import 'homepage.dart';
 
 class QuizPage extends StatefulWidget {
   @override
@@ -13,12 +14,12 @@ class QuizPage extends StatefulWidget {
 }
 
 class _QuizPageState extends State<QuizPage> {
-  Color _colora = Color.fromRGBO(189, 189, 189, 1);
+  Color _colora = HexColor('#dfe6e9');
   Color _colorgreen = Colors.green;
-  Color _colorb = Color.fromRGBO(189, 189, 189, 1);
-  Color _colorgrey = Color.fromRGBO(189, 189, 189, 1);
-  Color _colorc = Color.fromRGBO(189, 189, 189, 1);
-  Color _colord = Color.fromRGBO(189, 189, 189, 1);
+  Color _colorb = HexColor('#dfe6e9');
+  Color _colorgrey = HexColor('#dfe6e9');
+  Color _colorc = HexColor('#dfe6e9');
+  Color _colord = HexColor('#dfe6e9');
   // Color _colorc2 = Colors.green;
   String congratsmsg = '';
   saveQuiz() async {
@@ -139,9 +140,13 @@ class _QuizPageState extends State<QuizPage> {
                       Padding(
                         padding: const EdgeInsets.fromLTRB(10.0, 10, 10, 10),
                         child: TextButton(
-                          style: ButtonStyle(
-                            backgroundColor:
-                                MaterialStateProperty.all<Color>(_colora),
+                          style: TextButton.styleFrom(
+                            alignment: Alignment.centerLeft,
+                            backgroundColor: _colora,
+                            shape: RoundedRectangleBorder(
+                              borderRadius:
+                                  BorderRadius.all(Radius.circular(40)),
+                            ),
                           ),
                           onPressed: () {
                             optionclicked = 0;
@@ -153,11 +158,14 @@ class _QuizPageState extends State<QuizPage> {
                             });
                           },
                           child: Padding(
-                            padding: const EdgeInsets.all(8.0),
+                            padding: const EdgeInsets.fromLTRB(8.0, 4, 4, 4),
                             child: Text(
                               'A. ' + Options[answerindex][0].toString(),
                               style: TextStyle(
-                                  fontSize: 20, fontStyle: FontStyle.italic),
+                                fontFamily: 'Nunito',
+                                fontWeight: FontWeight.bold,
+                                fontSize: 20,
+                              ),
                             ),
                           ),
                         ),
@@ -165,9 +173,13 @@ class _QuizPageState extends State<QuizPage> {
                       Padding(
                         padding: const EdgeInsets.fromLTRB(10.0, 10, 10, 10),
                         child: TextButton(
-                          style: ButtonStyle(
-                            backgroundColor:
-                                MaterialStateProperty.all<Color>(_colorb),
+                          style: TextButton.styleFrom(
+                            alignment: Alignment.centerLeft,
+                            backgroundColor: _colorb,
+                            shape: RoundedRectangleBorder(
+                              borderRadius:
+                                  BorderRadius.all(Radius.circular(40)),
+                            ),
                           ),
                           onPressed: () {
                             optionclicked = 1;
@@ -181,12 +193,13 @@ class _QuizPageState extends State<QuizPage> {
                             );
                           },
                           child: Padding(
-                            padding: const EdgeInsets.all(8.0),
+                            padding: const EdgeInsets.fromLTRB(8.0, 5, 4, 5),
                             child: Text(
                               'B. ' + Options[answerindex][1].toString(),
                               style: TextStyle(
+                                fontFamily: 'Nunito',
+                                fontWeight: FontWeight.bold,
                                 fontSize: 20,
-                                fontStyle: FontStyle.italic,
                               ),
                             ),
                           ),
@@ -195,9 +208,13 @@ class _QuizPageState extends State<QuizPage> {
                       Padding(
                         padding: const EdgeInsets.fromLTRB(10.0, 10, 10, 10),
                         child: TextButton(
-                          style: ButtonStyle(
-                            backgroundColor:
-                                MaterialStateProperty.all<Color>(_colorc),
+                          style: TextButton.styleFrom(
+                            alignment: Alignment.centerLeft,
+                            backgroundColor: _colorc,
+                            shape: RoundedRectangleBorder(
+                              borderRadius:
+                                  BorderRadius.all(Radius.circular(40)),
+                            ),
                           ),
                           onPressed: () {
                             optionclicked = 2;
@@ -211,20 +228,28 @@ class _QuizPageState extends State<QuizPage> {
                             );
                           },
                           child: Padding(
-                            padding: const EdgeInsets.all(8.0),
+                            padding: const EdgeInsets.fromLTRB(8.0, 5, 4, 5),
                             child: Text(
-                                'C. ' + Options[answerindex][2].toString(),
-                                style: TextStyle(
-                                    fontSize: 20, fontStyle: FontStyle.italic)),
+                              'C. ' + Options[answerindex][2].toString(),
+                              style: TextStyle(
+                                fontFamily: 'Nunito',
+                                fontWeight: FontWeight.bold,
+                                fontSize: 20,
+                              ),
+                            ),
                           ),
                         ),
                       ),
                       Padding(
                         padding: const EdgeInsets.fromLTRB(10.0, 10, 10, 10),
                         child: TextButton(
-                          style: ButtonStyle(
-                            backgroundColor:
-                                MaterialStateProperty.all<Color>(_colord),
+                          style: TextButton.styleFrom(
+                            alignment: Alignment.centerLeft,
+                            backgroundColor: _colord,
+                            shape: RoundedRectangleBorder(
+                              borderRadius:
+                                  BorderRadius.all(Radius.circular(40)),
+                            ),
                           ),
                           onPressed: () {
                             optionclicked = 3;
@@ -238,11 +263,15 @@ class _QuizPageState extends State<QuizPage> {
                             );
                           },
                           child: Padding(
-                            padding: const EdgeInsets.all(8.0),
+                            padding: const EdgeInsets.fromLTRB(8.0, 5, 4, 5),
                             child: Text(
-                                'D. ' + Options[answerindex][3].toString(),
-                                style: TextStyle(
-                                    fontSize: 20, fontStyle: FontStyle.italic)),
+                              'D. ' + Options[answerindex][3].toString(),
+                              style: TextStyle(
+                                fontFamily: 'Nunito',
+                                fontWeight: FontWeight.bold,
+                                fontSize: 20,
+                              ),
+                            ),
                           ),
                         ),
                       ),
@@ -252,13 +281,21 @@ class _QuizPageState extends State<QuizPage> {
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       TextButton(
-                        style: ButtonStyle(
-                          backgroundColor:
-                              MaterialStateProperty.all<Color>(Colors.blue),
+                        style: TextButton.styleFrom(
+                          backgroundColor: Colors.blue,
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.all(Radius.circular(40)),
+                          ),
                         ),
                         child: Text(
-                          index != Questions.length - 1 ? 'Next' : 'Finish',
-                          style: TextStyle(color: Colors.white),
+                          index != Questions.length - 1
+                              ? '  Next  '
+                              : '  Finish  ',
+                          style: TextStyle(
+                            color: Colors.white,
+                            fontFamily: 'Nunito',
+                            fontWeight: FontWeight.w800,
+                          ),
                         ),
                         onPressed: () {
                           if (index != Questions.length - 1) {
@@ -363,9 +400,11 @@ class _QuizPageState extends State<QuizPage> {
                       ),
                     ),
                     TextButton(
-                      style: ButtonStyle(
-                        backgroundColor:
-                            MaterialStateProperty.all<Color>(Colors.blue),
+                      style: TextButton.styleFrom(
+                        backgroundColor: Colors.blue,
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.all(Radius.circular(40)),
+                        ),
                       ),
                       onPressed: () {
                         saveQuiz();

@@ -44,71 +44,6 @@ class RequestBloodState extends State<RequestBlood> {
     );
   }
 
-/*
-  Future<void> _update([DocumentSnapshot? documentSnapshot]) async {
-    if (documentSnapshot != null) {
-      _nameController.text = documentSnapshot['name'];
-      _phonenumber.text = documentSnapshot['phone'].toString();
-    }
-
-    await showModalBottomSheet(
-        isScrollControlled: true,
-        context: context,
-        builder: (BuildContext ctx) {
-          return Padding(
-            padding: EdgeInsets.only(
-                top: 20,
-                left: 20,
-                right: 20,
-                bottom: MediaQuery.of(ctx).viewInsets.bottom + 20),
-            child: Column(
-              mainAxisSize: MainAxisSize.min,
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                TextField(
-                  controller: _nameController,
-                  decoration: const InputDecoration(labelText: 'Name'),
-                ),
-                TextField(
-                  keyboardType:
-                      const TextInputType.numberWithOptions(decimal: true),
-                  controller: _phonenumber,
-                  decoration: const InputDecoration(
-                    labelText: 'Phone No',
-                  ),
-                ),
-                const SizedBox(
-                  height: 20,
-                ),
-                ElevatedButton(
-                  child: const Text('Update'),
-                  onPressed: () async {
-                    final String name = _nameController.text;
-                    final int? phone = int.tryParse(_phonenumber.text);
-                    if (phone != null) {
-                      await blood_requests
-                          .doc(documentSnapshot!.id)
-                          .update({"name": name, "phone": phone});
-                      _nameController.text = '';
-                      _phonenumber.text = '';
-                      Navigator.of(context).pop();
-                    }
-                  },
-                )
-              ],
-            ),
-          );
-        });
-  }
-*/
-/*
-  Future<void> _delete(String productId) async {
-    await blood_requests.doc(productId).delete();
-
-    ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
-        content: Text('You have successfully deleted a product')));
-  }
-*/
   @override
   Widget build(BuildContext context) {
     const defaultValue = 'A+';
@@ -356,6 +291,7 @@ class RequestBloodState extends State<RequestBlood> {
                       ScaffoldMessenger.of(context).showSnackBar(
                         const SnackBar(
                           content: Text('Please enter all the details'),
+                          behavior: SnackBarBehavior.floating,
                         ),
                       );
                     }

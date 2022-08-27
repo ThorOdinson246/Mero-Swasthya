@@ -1,6 +1,7 @@
 import 'dart:async';
 import 'package:animated_bottom_navigation_bar/animated_bottom_navigation_bar.dart';
 import 'package:circular_reveal_animation/circular_reveal_animation.dart';
+// import 'package:internet_popup/internet_popup.dart';
 import 'package:testapp1/pages/quiz.dart';
 import 'package:testapp1/widgets/mydrawer.dart';
 import 'package:flutter/foundation.dart';
@@ -42,6 +43,7 @@ class _MyHomePageState extends State<MyHomePage>
   @override
   void initState() {
     super.initState();
+    // InternetPopup().initialize(context: context);
 
     final systemTheme = SystemUiOverlayStyle.light.copyWith(
       systemNavigationBarColor: HexColor('#373A36'),

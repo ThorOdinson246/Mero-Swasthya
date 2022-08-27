@@ -150,7 +150,7 @@ class _RequestBloodState extends State<SearchBlood> {
         toolbarHeight: 50,
         elevation: 0,
         backgroundColor: HexColor('#e63946'),
-        title: Text(
+        title: const Text(
           'Find A Donor',
           style: TextStyle(
             fontFamily: 'SuezOne',

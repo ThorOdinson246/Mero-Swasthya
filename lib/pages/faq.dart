@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:testapp1/pages/settings.dart';
 import 'package:flutter/material.dart';
 import 'homepage.dart';
@@ -11,6 +12,13 @@ class _FAQsState extends State<FAQs> {
   @override
   Widget build(BuildContext context) {
     double width = MediaQuery.of(context).size.width;
+    final Stream<QuerySnapshot> dataStream = FirebaseFirestore.instance
+        .collection('faqs')
+        .orderBy(
+          'no',
+          descending: false,
+        )
+        .snapshots();
     return Scaffold(
       backgroundColor: drkmd == true ? Colors.grey[900] : Colors.grey[100],
       appBar: AppBar(
@@ -50,278 +58,61 @@ class _FAQsState extends State<FAQs> {
               ),
             ),
             //FAQS HERE
-            ExpansionTile(
-              // initiallyExpanded: true,
-              title: Text(
-                'Who was this app developed by?',
-                style: TextStyle(
-                  color: drkmd == true ? HexColor('#bebebe') : Colors.grey[800],
-                  fontFamily: 'Nunito',
-                  fontWeight: FontWeight.w800,
-                ),
-              ),
-              expandedCrossAxisAlignment: CrossAxisAlignment.start,
-              expandedAlignment: Alignment.topLeft,
-              children: [
-                Padding(
-                  padding: const EdgeInsets.fromLTRB(8, 2, 0, 0),
-                  child: RichText(
-                    text: TextSpan(children: [
-                      TextSpan(
-                        text: 'This app was made by ',
-                        style: TextStyle(
-                          color: drkmd == true
-                              ? HexColor('#bebebe')
-                              : Colors.grey[800],
-                          fontFamily: 'Nunito',
-                          fontWeight: FontWeight.w600,
+            StreamBuilder<QuerySnapshot>(
+              stream: dataStream,
+              builder: (BuildContext context,
+                  AsyncSnapshot<QuerySnapshot> snapshot) {
+                if (snapshot.hasData) {
+                  final List storedocs = [];
+                  snapshot.data!.docs.map(
+                    (DocumentSnapshot document) {
+                      Map a = document.data() as Map<String, dynamic>;
+                      storedocs.add(a);
+                      a['id'] = document.id;
+                    },
+                  ).toList();
+                  return Column(
+                    children: List.generate(
+                      storedocs.length,
+                      (i) => ExpansionTile(
+                        // initiallyExpanded: true,
+                        title: Text(
+                          storedocs[i]['question'],
+                          style: TextStyle(
+                            color: drkmd == true
+                                ? HexColor('#bebebe')
+                                : Colors.grey[800],
+                            fontFamily: 'Nunito',
+                            fontWeight: FontWeight.w800,
+                          ),
                         ),
+                        expandedCrossAxisAlignment: CrossAxisAlignment.start,
+                        expandedAlignment: Alignment.topLeft,
+                        children: [
+                          Padding(
+                            padding: const EdgeInsets.fromLTRB(8, 2, 0, 0),
+                            child: RichText(
+                              text: TextSpan(children: [
+                                TextSpan(
+                                  text: storedocs[i]['answer'],
+                                  style: TextStyle(
+                                    color: drkmd == true
+                                        ? HexColor('#bebebe')
+                                        : Colors.grey[800],
+                                    fontFamily: 'Nunito',
+                                    fontWeight: FontWeight.w600,
+                                  ),
+                                ),
+                              ]),
+                            ),
+                          ),
+                        ],
                       ),
-                      TextSpan(
-                        text: 'Mukesh Poudel. ',
-                        style: TextStyle(
-                          color: drkmd == true
-                              ? HexColor('#bebebe')
-                              : Colors.grey[800],
-                          fontFamily: 'Nunito',
-                          fontWeight: FontWeight.w900,
-                        ),
-                      )
-                    ]),
-                  ),
-                ),
-              ],
-            ),
-            ExpansionTile(
-              // initiallyExpanded: true,
-              title: Text(
-                'What is the EXPLORE button in the homepage?',
-                style: TextStyle(
-                  color: drkmd == true ? HexColor('#bebebe') : Colors.grey[800],
-                  fontFamily: 'Nunito',
-                  fontWeight: FontWeight.w800,
-                ),
-              ),
-              expandedCrossAxisAlignment: CrossAxisAlignment.start,
-              expandedAlignment: Alignment.topLeft,
-              children: [
-                Padding(
-                  padding: const EdgeInsets.fromLTRB(8, 2, 0, 4),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text(
-                        'Well you can receive interesting content You can get knowledge,articles and videos about interesting events happening in the world. Make sure you check it daily for new and exciting stuffs.',
-                        style: TextStyle(
-                          color: drkmd == true
-                              ? HexColor('#bebebe')
-                              : Colors.grey[800],
-                          fontFamily: 'Nunito',
-                          fontWeight: FontWeight.w600,
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
-              ],
-            ),
-            ExpansionTile(
-              title: Text(
-                'I found a bug in the app. Who may I report to?',
-                style: TextStyle(
-                  color: drkmd == true ? HexColor('#bebebe') : Colors.grey[800],
-                  fontFamily: 'Nunito',
-                  fontWeight: FontWeight.w800,
-                ),
-              ),
-              expandedCrossAxisAlignment: CrossAxisAlignment.start,
-              expandedAlignment: Alignment.topLeft,
-              childrenPadding: EdgeInsets.zero,
-              children: [
-                Padding(
-                  padding: const EdgeInsets.fromLTRB(8, 2, 0, 4),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text(
-                        'You may report the bug along with screenshot to abhishekpoudel246@gmail.com',
-                        style: TextStyle(
-                          color: drkmd == true
-                              ? HexColor('#bebebe')
-                              : Colors.grey[800],
-                          fontFamily: 'Nunito',
-                          fontWeight: FontWeight.w600,
-                        ),
-                      )
-                    ],
-                  ),
-                ),
-              ],
-            ),
-            ExpansionTile(
-              title: Text(
-                'I want to play quiz in the app. How can I play?',
-                style: TextStyle(
-                  color: drkmd == true ? HexColor('#bebebe') : Colors.grey[800],
-                  fontFamily: 'Nunito',
-                  fontWeight: FontWeight.w800,
-                ),
-              ),
-              expandedCrossAxisAlignment: CrossAxisAlignment.start,
-              expandedAlignment: Alignment.topLeft,
-              childrenPadding: EdgeInsets.zero,
-              children: [
-                Padding(
-                  padding: const EdgeInsets.fromLTRB(8, 2, 0, 4),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text(
-                        'You may click on the yellow button on the homescreen to play a Quiz game in the app.',
-                        style: TextStyle(
-                          color: drkmd == true
-                              ? HexColor('#bebebe')
-                              : Colors.grey[800],
-                          fontFamily: 'Nunito',
-                          fontWeight: FontWeight.w600,
-                        ),
-                      )
-                    ],
-                  ),
-                ),
-              ],
-            ),
-            ExpansionTile(
-              title: Text(
-                'I want new questions in the quiz. How may I achieve so?',
-                style: TextStyle(
-                  color: drkmd == true ? HexColor('#bebebe') : Colors.grey[800],
-                  fontFamily: 'Nunito',
-                  fontWeight: FontWeight.w800,
-                ),
-              ),
-              expandedCrossAxisAlignment: CrossAxisAlignment.start,
-              expandedAlignment: Alignment.topLeft,
-              childrenPadding: EdgeInsets.zero,
-              children: [
-                Padding(
-                  padding: const EdgeInsets.fromLTRB(8, 2, 0, 4),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text(
-                        'You can always check the app on the store for a newer version. This also gives you access to new quizes,features,notes and games.',
-                        style: TextStyle(
-                          color: drkmd == true
-                              ? HexColor('#bebebe')
-                              : Colors.grey[800],
-                          fontFamily: 'Nunito',
-                          fontWeight: FontWeight.w600,
-                        ),
-                      )
-                    ],
-                  ),
-                ),
-              ],
-            ),
-            ExpansionTile(
-              title: Text(
-                'I am experiencing some problems in the app. How may I fix it?',
-                style: TextStyle(
-                  color: drkmd == true ? HexColor('#bebebe') : Colors.grey[800],
-                  fontFamily: 'Nunito',
-                  fontWeight: FontWeight.w800,
-                ),
-              ),
-              expandedCrossAxisAlignment: CrossAxisAlignment.start,
-              expandedAlignment: Alignment.topLeft,
-              childrenPadding: EdgeInsets.zero,
-              children: [
-                Padding(
-                  padding: const EdgeInsets.fromLTRB(8, 2, 0, 4),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text(
-                        'You can always check the app on the store for a newer version to fix it. This also gives you access to new features,notes and games.',
-                        style: TextStyle(
-                          color: drkmd == true
-                              ? HexColor('#bebebe')
-                              : Colors.grey[800],
-                          fontFamily: 'Nunito',
-                          fontWeight: FontWeight.w600,
-                        ),
-                      )
-                    ],
-                  ),
-                ),
-              ],
-            ),
-            ExpansionTile(
-              title: Text(
-                'I am not getting new notices on the Explore page. How may I fix it?',
-                style: TextStyle(
-                  color: drkmd == true ? HexColor('#bebebe') : Colors.grey[800],
-                  fontFamily: 'Nunito',
-                  fontWeight: FontWeight.w800,
-                ),
-              ),
-              expandedCrossAxisAlignment: CrossAxisAlignment.start,
-              expandedAlignment: Alignment.topLeft,
-              childrenPadding: EdgeInsets.zero,
-              children: [
-                Padding(
-                  padding: const EdgeInsets.fromLTRB(8, 2, 0, 4),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text(
-                        'You can always check the app on the store for a newer version to fix it. This also gives you access to new features,notes and games and improvements of the currently existing problems.',
-                        style: TextStyle(
-                          color: drkmd == true
-                              ? HexColor('#bebebe')
-                              : Colors.grey[800],
-                          fontFamily: 'Nunito',
-                          fontWeight: FontWeight.w600,
-                        ),
-                      )
-                    ],
-                  ),
-                ),
-              ],
-            ),
-            ExpansionTile(
-              title: Text(
-                'I want to give some suggestion regarding app. How may I?',
-                style: TextStyle(
-                  color: drkmd == true ? HexColor('#bebebe') : Colors.grey[800],
-                  fontFamily: 'Nunito',
-                  fontWeight: FontWeight.w800,
-                ),
-              ),
-              expandedCrossAxisAlignment: CrossAxisAlignment.start,
-              expandedAlignment: Alignment.topLeft,
-              childrenPadding: EdgeInsets.zero,
-              children: [
-                Padding(
-                  padding: const EdgeInsets.fromLTRB(8, 2, 0, 4),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text(
-                        'You can mail us freely at abhishekpoudel246@gmail.com',
-                        style: TextStyle(
-                          color: drkmd == true
-                              ? HexColor('#bebebe')
-                              : Colors.grey[800],
-                          fontFamily: 'Nunito',
-                          fontWeight: FontWeight.w600,
-                        ),
-                      )
-                    ],
-                  ),
-                ),
-              ],
+                    ),
+                  );
+                }
+                return CircularProgressIndicator();
+              },
             ),
           ],
         ),

@@ -1,4 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+// import 'package:internet_popup/internet_popup.dart';
 import 'package:testapp1/pages/homepage.dart';
 import 'package:testapp1/pages/settings.dart';
 import 'package:flutter/material.dart';
@@ -16,6 +17,7 @@ class _findDoctorsState extends State<findDoctors> {
       FirebaseFirestore.instance.collection('find_doctors');
   @override
   Widget build(BuildContext context) {
+    
     double width = MediaQuery.of(context).size.width;
     return Scaffold(
       // extendBodyBehindAppBar: true,
@@ -219,9 +221,7 @@ class _findDoctorsState extends State<findDoctors> {
                     },
                   );
                 }
-                if (streamSnapshot.connectionState == ConnectionState.waiting) {
-                  return const Center(child: Text('Connect to Internet '));
-                }
+
                 return const Center(child: CircularProgressIndicator());
               },
             ),

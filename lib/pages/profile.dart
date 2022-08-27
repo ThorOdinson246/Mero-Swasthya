@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+
 import 'homepage.dart';
 import 'settings.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -17,6 +18,7 @@ class _ProfileState extends State<Profile> {
   @override
   void initState() {
     super.initState();
+
     getDetails();
   }
 
