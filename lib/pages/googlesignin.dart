@@ -1,106 +1,179 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+// import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:google_sign_in/google_sign_in.dart';
+import 'package:testapp1/pages/homepage.dart';
 
-final GoogleSignIn _googleSignIn = GoogleSignIn(scopes: ['email']);
+class GoogleButton extends StatelessWidget {
+  GoogleButton({Key? key}) : super(key: key);
 
-class GSN extends StatefulWidget {
-  const GSN({Key? key}) : super(key: key);
+  Future<void> _googleSignIn(context) async {
+    final googleSignIn = GoogleSignIn();
+    final googleAccount = await googleSignIn.signIn();
+    if (googleAccount != null) {
+      final googleAuth = await googleAccount.authentication;
+      if (googleAuth.accessToken != null && googleAuth.idToken != null) {
+        try {
+          final authResult = await authInstance.signInWithCredential(
+            GoogleAuthProvider.credential(
+                idToken: googleAuth.idToken,
+                accessToken: googleAuth.accessToken),
+          );
 
-  @override
-  _GSNState createState() => _GSNState();
-}
-
-class _GSNState extends State<GSN> {
-  GoogleSignInAccount? _currentUser;
-  @override
-  void initState() {
-    _googleSignIn.onCurrentUserChanged.listen((account) {
-      setState(() {
-        _currentUser = account;
-      });
-    });
-    _googleSignIn.signInSilently();
-    super.initState();
+          if (authResult.additionalUserInfo!.isNewUser) {
+            await FirebaseFirestore.instance
+                .collection('users')
+                .doc(authResult.user!.uid)
+                .set({
+              'id': authResult.user!.uid,
+              'name': authResult.user!.displayName, // ask for name
+              'email': authResult.user!.email,
+              'address': '',
+              'userWish': [],
+              'userCart': [],
+              'createdAt': Timestamp.now(),
+            });
+          }
+          Navigator.of(context).pushReplacement(
+            MaterialPageRoute(
+              builder: (context) => const MyHomePage(),
+            ),
+          );
+        } on FirebaseException catch (error) {
+          GlobalMethods.errorDialog(
+              subtitle: '${error.message}', context: context);
+        } catch (error) {
+          GlobalMethods.errorDialog(subtitle: '$error', context: context);
+        } finally {}
+      }
+    }
   }
+
+  final FirebaseAuth authInstance = FirebaseAuth.instance;
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: const Text('Flutter Google Sign in'),
+    return TextButton(
+      style: TextButton.styleFrom(
+        backgroundColor: Colors.yellow[800],
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(20),
+        ),
       ),
-      body: Container(
-        alignment: Alignment.center,
-        child: _buildWidget(),
+      // textColor: Colors.black,
+
+      // splashColor: Colors.red[700],
+      child: Center(
+        child: Padding(
+          padding: EdgeInsets.fromLTRB(8.0, 0.0, 8.0, 0.0),
+          child: Text(
+            'Imp Google Sign In ',
+            style: TextStyle(
+              fontWeight: FontWeight.w900,
+              fontFamily: 'Nunito',
+              color: Colors.white,
+              fontSize: 18,
+            ),
+          ),
+        ),
       ),
+      onPressed: () {
+        _googleSignIn(context);
+      },
     );
   }
+}
 
-  Widget _buildWidget() {
-    GoogleSignInAccount? user = _currentUser;
-    if (user != null) {
-      return Padding(
-        padding: const EdgeInsets.fromLTRB(2, 12, 2, 12),
-        child: Column(
-          children: [
-            ListTile(
-              leading: GoogleUserCircleAvatar(identity: user),
-              title: Text(
-                user.displayName ?? '',
-                style: TextStyle(fontSize: 22),
+class GlobalMethods {
+  static navigateTo({required BuildContext ctx, required String routeName}) {
+    Navigator.pushNamed(ctx, routeName);
+  }
+
+  static Future<void> warningDialog({
+    required String title,
+    required String subtitle,
+    required Function fct,
+    required BuildContext context,
+  }) async {
+    await showDialog(
+        context: context,
+        builder: (context) {
+          return AlertDialog(
+            title: Row(children: [
+              Image.asset(
+                'assets/images/warning-sign.png',
+                height: 20,
+                width: 20,
+                fit: BoxFit.fill,
               ),
-              subtitle: Text(user.email, style: TextStyle(fontSize: 22)),
-            ),
-            const SizedBox(
-              height: 20,
-            ),
-            const Text(
-              'Signed in successfully',
-              style: TextStyle(fontSize: 20),
-            ),
-            const SizedBox(
-              height: 10,
-            ),
-            ElevatedButton(onPressed: signOut, child: const Text('Sign out'))
-          ],
-        ),
-      );
-    } else {
-      return Padding(
-        padding: const EdgeInsets.all(12.0),
-        child: Column(
-          children: [
-            const SizedBox(
-              height: 20,
-            ),
-            const Text(
-              'You are not signed in',
-              style: TextStyle(fontSize: 30),
-            ),
-            const SizedBox(
-              height: 10,
-            ),
-            ElevatedButton(
-                onPressed: signIn,
-                child: const Padding(
-                  padding: EdgeInsets.all(8.0),
-                  child: Text('Sign in', style: TextStyle(fontSize: 30)),
-                )),
-          ],
-        ),
-      );
-    }
+              const SizedBox(
+                width: 8,
+              ),
+              Text(title),
+            ]),
+            content: Text(subtitle),
+            actions: [
+              TextButton(
+                onPressed: () {
+                  if (Navigator.canPop(context)) {
+                    Navigator.pop(context);
+                  }
+                },
+                child: Text(
+                  'Cancel',
+                ),
+              ),
+              TextButton(
+                onPressed: () {
+                  fct();
+                  if (Navigator.canPop(context)) {
+                    Navigator.pop(context);
+                  }
+                },
+                child: Text(
+                  'OK',
+                ),
+              ),
+            ],
+          );
+        });
   }
 
-  void signOut() {
-    _googleSignIn.disconnect();
-  }
-
-  Future<void> signIn() async {
-    try {
-      await _googleSignIn.signIn();
-    } catch (e) {
-      print('Error signing in $e');
-    }
+  static Future<void> errorDialog({
+    required String subtitle,
+    required BuildContext context,
+  }) async {
+    await showDialog(
+        context: context,
+        builder: (context) {
+          return AlertDialog(
+            title: Row(children: [
+              Image.asset(
+                'assets/images/warning-sign.png',
+                height: 20,
+                width: 20,
+                fit: BoxFit.fill,
+              ),
+              const SizedBox(
+                width: 8,
+              ),
+              const Text('An Error occured'),
+            ]),
+            content: Text(subtitle),
+            actions: [
+              TextButton(
+                onPressed: () {
+                  if (Navigator.canPop(context)) {
+                    Navigator.pop(context);
+                  }
+                },
+                child: Text(
+                  'Ok',
+                ),
+              ),
+            ],
+          );
+        });
   }
 }

@@ -1,48 +1,28 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:google_sign_in/google_sign_in.dart';
+// import 'package:testapp1/widgets/loadingmanager.dart';
 
+import 'googlesignin.dart';
 import 'homepage.dart';
 import 'settings.dart';
-import 'package:shared_preferences/shared_preferences.dart';
+// import 'package:shared_preferences/shared_preferences.dart';
 
 class Profile extends StatefulWidget {
   @override
   _ProfileState createState() => _ProfileState();
 }
 
+final FirebaseAuth authInstance = FirebaseAuth.instance;
+final User? user = authInstance.currentUser;
+
 class _ProfileState extends State<Profile> {
-  String name = 'Abhishek';
-  String grade = '10';
-  String school = 'ESN';
-  String favTopic = 'PHYSICS';
-
-  @override
-  void initState() {
-    super.initState();
-
-    getDetails();
-  }
-
-  getDetails() async {
-    final SharedPreferences sharedPrefs = await SharedPreferences.getInstance();
-    String pastdata = sharedPrefs.getString('nm') ?? 'Abhishek';
-    String lasname = sharedPrefs.getString('lstnm') ?? 'Poudel';
-    String grde = sharedPrefs.getString('grd') ?? '10';
-    String schnm = sharedPrefs.getString('sch') ?? 'ESN';
-    String favtpc = sharedPrefs.getString('favsub') ?? 'Physics';
-
-    setState(() {
-      name = pastdata + " " + lasname;
-      grade = grde;
-      school = schnm;
-      favTopic = favtpc;
-    });
-  }
-
   @override
   Widget build(BuildContext context) {
     // double height = MediaQuery.of(context).size.height;
     double width = MediaQuery.of(context).size.width;
-
+    print(user!.email);
     //HOME PAGE
     return Scaffold(
       backgroundColor: Colors.transparent,
@@ -70,7 +50,8 @@ class _ProfileState extends State<Profile> {
                         child: CircleAvatar(
                           radius: 75,
                           child: Text(
-                            name.substring(0, 1).toUpperCase(),
+                            'R',
+                            // _name.substring(0, 1).toUpperCase(),
                             style: TextStyle(
                                 fontSize: 76, fontWeight: FontWeight.bold),
                           ),
@@ -78,7 +59,7 @@ class _ProfileState extends State<Profile> {
                       ),
                     ),
                     Text(
-                      name.isNotEmpty ? '${name}' : 'Abhishek',
+                      user!.displayName!,
                       style: TextStyle(
                         fontSize: 20,
                         fontWeight: FontWeight.bold,
@@ -140,7 +121,7 @@ class _ProfileState extends State<Profile> {
                                   ),
                                 ),
                                 TextSpan(
-                                  text: name,
+                                  text: '_name',
                                   style: TextStyle(
                                     height: 0.9,
                                     fontSize: 20,
@@ -170,7 +151,7 @@ class _ProfileState extends State<Profile> {
                                   ),
                                 ),
                                 TextSpan(
-                                  text: grade,
+                                  text: 'grade',
                                   style: TextStyle(
                                     height: 0.9,
                                     fontSize: 20,
@@ -200,7 +181,7 @@ class _ProfileState extends State<Profile> {
                                   ),
                                 ),
                                 TextSpan(
-                                  text: school,
+                                  text: 'school',
                                   style: TextStyle(
                                     height: 0.9,
                                     fontSize: 20,
@@ -230,7 +211,7 @@ class _ProfileState extends State<Profile> {
                                   ),
                                 ),
                                 TextSpan(
-                                  text: favTopic,
+                                  text: 'favTopic',
                                   style: TextStyle(
                                     height: 0.9,
                                     fontSize: 20,

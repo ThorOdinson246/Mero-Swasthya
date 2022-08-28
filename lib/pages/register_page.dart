@@ -1,5 +1,6 @@
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:testapp1/allpages.dart';
+import 'package:testapp1/pages/googlesignin.dart';
 import 'package:testapp1/pages/homepage.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -28,52 +29,33 @@ class _RegisterPageState extends State<RegisterPage> {
 
   @override
   void initState() {
-    _googleSignIn.onCurrentUserChanged.listen((account) {
-      setState(() {
-        _currentUser = account;
-      });
-    });
-    _googleSignIn.signInSilently();
     super.initState();
+    final googleSignIn = GoogleSignIn();
+    googleSignIn.disconnect();
   }
 
   save() async {
     final SharedPreferences sharedPrefs = await SharedPreferences.getInstance();
-    sharedPrefs.setString('nm', _myController.text);
-    sharedPrefs.setString('lstnm', _myLastName.text);
-    sharedPrefs.setString('grd', _phoneno.text);
-    sharedPrefs.setString('sch', _mySchool.text);
-    sharedPrefs.setString('favsub', _myFavSub.text);
+    // sharedPrefs.setString('nm', _myController.text);
+    // sharedPrefs.setString('lstnm', _myLastName.text);
+    // sharedPrefs.setString('grd', _phoneno.text);
+    // sharedPrefs.setString('sch', _mySchool.text);
+    // sharedPrefs.setString('favsub', _myFavSub.text);
     sharedPrefs.setBool('isLogged', true);
     sharedPrefs.setInt('quiz', 0);
 
-    print('record added');
+    // print('record added');
   }
 
   get() async {
     final SharedPreferences sharedPrefs = await SharedPreferences.getInstance();
-    String pastdata = sharedPrefs.getString('nm').toString();
+    // String pastdata = sharedPrefs.getString('nm').toString();
     print('geting record');
-    print('pastdata' + pastdata);
+    // print('pastdata' + pastdata);
   }
 
   @override
   Widget build(BuildContext context) {
-    GoogleSignInAccount? user = _currentUser;
-    Future<void> signIn() async {
-      try {
-        await _googleSignIn.signIn();
-
-        Navigator.of(context).pushReplacement(
-          MaterialPageRoute(
-            builder: (context) => MyHomePage(),
-          ),
-        );
-      } catch (e) {
-        print('Error signing in $e');
-      }
-    }
-
     return Scaffold(
       backgroundColor: Colors.yellow[900],
       body: Center(
@@ -308,65 +290,8 @@ class _RegisterPageState extends State<RegisterPage> {
                         ),
                       ),
                       Center(
-                        child: TextButton(
-                          style: TextButton.styleFrom(
-                            backgroundColor: Colors.yellow[800],
-                            shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(20),
-                            ),
-                          ),
-                          // textColor: Colors.black,
-                          // splashColor: Colors.red[700],
-                          child: Center(
-                            child: Padding(
-                              padding: EdgeInsets.fromLTRB(8.0, 0.0, 8.0, 0.0),
-                              child: Text(
-                                'Google Sign in ',
-                                style: TextStyle(
-                                  fontWeight: FontWeight.w900,
-                                  fontFamily: 'Nunito',
-                                  color: Colors.white,
-                                  fontSize: 18,
-                                ),
-                              ),
-                            ),
-                          ),
-                          onPressed: () {
-                            signIn();
-                            save();
-                          },
-                        ),
-                      ),
-                      Center(
-                        child: TextButton(
-                          style: TextButton.styleFrom(
-                            backgroundColor: Colors.yellow[800],
-                            shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(20),
-                            ),
-                          ),
-                          // textColor: Colors.black,
-
-                          // splashColor: Colors.red[700],
-                          child: Center(
-                            child: Padding(
-                              padding: EdgeInsets.fromLTRB(8.0, 0.0, 8.0, 0.0),
-                              child: Text(
-                                'Google Sign Out ',
-                                style: TextStyle(
-                                  fontWeight: FontWeight.w900,
-                                  fontFamily: 'Nunito',
-                                  color: Colors.white,
-                                  fontSize: 18,
-                                ),
-                              ),
-                            ),
-                          ),
-                          onPressed: () {
-                            signOut();
-                          },
-                        ),
-                      ),
+                        child: GoogleButton(),
+                      )
                     ],
                   ),
                 ),
@@ -503,6 +428,8 @@ class _RegisterPageState extends State<RegisterPage> {
   }
 
   void signOut() {
-    _googleSignIn.disconnect();
+    final googleSignIn = GoogleSignIn();
+    googleSignIn.disconnect();
+    // googleSignIn.disconnect();
   }
 }

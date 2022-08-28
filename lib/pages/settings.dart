@@ -1,3 +1,8 @@
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:google_sign_in/google_sign_in.dart';
+import 'package:phoenix_native/phoenix_native.dart';
+import 'package:testapp1/main.dart';
+import 'package:testapp1/pages/register_page.dart';
 import 'package:testapp1/pages/splash.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
@@ -34,6 +39,9 @@ class _SettingsState extends State<Settings> {
     prefs.setBool('isDarkModeEnabled', drkmd);
     // drkmd = true;
   }
+
+  final FirebaseAuth authInstance = FirebaseAuth.instance;
+
 /*
   disableDarkMode() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
@@ -277,11 +285,10 @@ class _SettingsState extends State<Settings> {
                                 shape: RoundedRectangleBorder(
                                     borderRadius: BorderRadius.circular(15)),
                                 onPressed: () {
+                                  final googleSignIn = GoogleSignIn();
+                                  googleSignIn.disconnect();
                                   clear();
-                                  Navigator.pushReplacement(
-                                      context,
-                                      MaterialPageRoute(
-                                          builder: (context) => Splash()));
+                                  PhoenixNative.restartApp();
                                 },
                                 child: Text(
                                   "Log Out",
