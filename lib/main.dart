@@ -3,6 +3,7 @@ import 'package:testapp1/pages/homepage.dart';
 // import 'package:testapp1/pages/search_blood.dart';
 // import 'package:testapp1/pages/splash.dart';
 import 'package:flutter/material.dart';
+import 'package:testapp1/pages/medicine_reminder.dart';
 import 'package:testapp1/pages/register_page.dart';
 import 'package:testapp1/pages/splash.dart';
 // import 'package:flutter_no_internet_widget/flutter_no_internet_widget.dart';

@@ -95,8 +95,8 @@ class _ExplorePageState extends State<ExplorePage> {
                                         height: 10,
                                       ),
                                       Padding(
-                                        padding:
-                                           const EdgeInsets.fromLTRB(10, 0, 10, 0),
+                                        padding: const EdgeInsets.fromLTRB(
+                                            10, 0, 10, 0),
                                         child: Column(
                                           crossAxisAlignment:
                                               CrossAxisAlignment.start,
@@ -190,9 +190,7 @@ class _ExplorePageState extends State<ExplorePage> {
               },
             );
           }
-          if (streamSnapshot.connectionState == ConnectionState.waiting) {
-            return const Center(child: Text('Connect to Internet '));
-          }
+
           return const Center(child: CircularProgressIndicator());
         },
       ),

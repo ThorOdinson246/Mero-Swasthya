@@ -262,12 +262,6 @@ class bBloodBanksBtate extends State<bloodBanks> {
             );
           }
 
-          if (streamSnapshot.connectionState == ConnectionState.waiting) {
-            return const Center(
-              child: Text('Connect to Internet'),
-            );
-          }
-
           return const Center(
             child: CircularProgressIndicator(),
           );

@@ -5,6 +5,7 @@ import 'package:testapp1/pages/bmi_calculator.dart';
 import 'package:testapp1/pages/bpm.dart';
 import 'package:testapp1/pages/homepage.dart';
 import 'package:testapp1/pages/ibw_calculator.dart';
+import 'package:testapp1/pages/medicine_reminder.dart';
 import 'package:testapp1/pages/quiz.dart';
 
 import 'settings.dart';
@@ -26,7 +27,7 @@ class _HealthToolsState extends State<HealthTools> {
         centerTitle: true,
         toolbarHeight: 50,
         elevation: 0,
-        backgroundColor: drkmd == true ? Colors.grey[900] : Colors.grey[100],
+        backgroundColor: Color(0xff0984e3),
         title: Text(
           'Health Utiltities',
           style: TextStyle(
@@ -36,6 +37,7 @@ class _HealthToolsState extends State<HealthTools> {
           ),
         ),
       ),
+      backgroundColor: drkmd == true ? Colors.grey[900] : Colors.grey[100],
       body: SingleChildScrollView(
         child: Column(
           children: [
@@ -290,9 +292,38 @@ class _HealthToolsState extends State<HealthTools> {
                   showDialog(
                       context: context,
                       builder: (BuildContext context) {
-                        return new AlertDialog(
-                          title: new Text("My Super title"),
-                          content: new Text("Hello World"),
+                        return AlertDialog(
+                          backgroundColor: drkmd == true
+                              ? Colors.grey[900]
+                              : Colors.grey[100],
+                          title: Text(
+                            "BPM",
+                            style: TextStyle(
+                              color: drkmd == true
+                                  ? HexColor('#bebebe')
+                                  : HexColor('#636e72'),
+                              fontSize: 17,
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
+                          actions: [
+                            TextButton(
+                              onPressed: () {
+                                Navigator.pop(context);
+                              },
+                              child: Text('OK'),
+                            )
+                          ],
+                          content: Text(
+                            "This feature is currently under development. It will me made available soon.",
+                            style: TextStyle(
+                              color: drkmd == true
+                                  ? HexColor('#bebebe')
+                                  : HexColor('#636e72'),
+                              fontSize: 17,
+                              fontWeight: FontWeight.w400,
+                            ),
+                          ),
                         );
                       });
                 },
@@ -315,7 +346,7 @@ class _HealthToolsState extends State<HealthTools> {
                           child: CircleAvatar(
                             radius: 30,
                             child: Icon(
-                              Icons.stream_sharp,
+                              Icons.heart_broken,
                               size: 45,
                             ),
                           ),
@@ -342,7 +373,88 @@ class _HealthToolsState extends State<HealthTools> {
                               Padding(
                                 padding: EdgeInsets.fromLTRB(15, 0, 8, 0),
                                 child: Text(
-                                  'This anxiety self test can give you an understanding of the likelihood that you have an anxiety disorder. Please note, results are not a diagnosis.',
+                                  'BPM measures your heart rate with the help of the camera sensor in your device to provide you with accurate results to diagnose problems and conditions.',
+                                  maxLines: 3,
+                                  textAlign: TextAlign.justify,
+                                  style: TextStyle(
+                                    color: drkmd == true
+                                        ? HexColor('#bebebe')
+                                        : HexColor('#636e72'),
+                                    fontSize: 15,
+                                    fontFamily: 'Nunito',
+                                    fontWeight: FontWeight.w400,
+                                    overflow: TextOverflow.ellipsis,
+                                  ),
+                                ),
+                              )
+                            ],
+                          ),
+                        )
+                      ],
+                    ),
+                  ),
+                ),
+              ),
+            ),
+            Padding(
+              padding: const EdgeInsets.all(10.0),
+              child: InkWell(
+                borderRadius: BorderRadius.circular(30),
+                onTap: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => MedReminder(title: ''),
+                    ),
+                  );
+                },
+                child: Container(
+                  // margin: const EdgeInsets.all(10),
+                  height: 100,
+                  width: width,
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(30),
+                    color: drkmd == true
+                        ? HexColor('#444444')
+                        : HexColor('#dfe6e9'),
+                  ),
+                  child: Padding(
+                    padding: const EdgeInsets.fromLTRB(10.0, 5, 10, 5),
+                    child: Row(
+                      children: [
+                        const Expanded(
+                          flex: 1,
+                          child: CircleAvatar(
+                            radius: 30,
+                            child: Icon(
+                              Icons.heart_broken,
+                              size: 45,
+                            ),
+                          ),
+                        ),
+                        Expanded(
+                          flex: 6,
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Padding(
+                                padding: EdgeInsets.fromLTRB(15, 0, 8, 1),
+                                child: Text(
+                                  'Med Reminder',
+                                  style: TextStyle(
+                                    color: drkmd == true
+                                        ? HexColor('#bebebe')
+                                        : HexColor('#636e72'),
+                                    fontSize: 20,
+                                    fontFamily: 'Nunito',
+                                    fontWeight: FontWeight.w900,
+                                  ),
+                                ),
+                              ),
+                              Padding(
+                                padding: EdgeInsets.fromLTRB(15, 0, 8, 0),
+                                child: Text(
+                                  'BPM measures your heart rate with the help of the camera sensor in your device to provide you with accurate results to diagnose problems and conditions.',
                                   maxLines: 3,
                                   textAlign: TextAlign.justify,
                                   style: TextStyle(
