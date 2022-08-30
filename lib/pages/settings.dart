@@ -28,10 +28,21 @@ class _SettingsState extends State<Settings> {
     // checkDarkMode();
   }
 
+  signOut() {
+    final googleSignIn = GoogleSignIn();
+    googleSignIn.disconnect();
+    // print('signed out');
+  }
+
   clear() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     await prefs.clear();
     print('All Records Cleared');
+    // Navigator.of(context).pushReplacement(
+    //   MaterialPageRoute(
+    //     builder: (context) => Splash(),
+    //   ),
+    // );
   }
 
   darkMode() async {
@@ -285,8 +296,7 @@ class _SettingsState extends State<Settings> {
                                 shape: RoundedRectangleBorder(
                                     borderRadius: BorderRadius.circular(15)),
                                 onPressed: () {
-                                  final googleSignIn = GoogleSignIn();
-                                  googleSignIn.disconnect();
+                                  signOut();
                                   clear();
                                   PhoenixNative.restartApp();
                                 },

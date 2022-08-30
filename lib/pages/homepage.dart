@@ -1,6 +1,9 @@
 import 'dart:async';
 import 'package:animated_bottom_navigation_bar/animated_bottom_navigation_bar.dart';
 import 'package:circular_reveal_animation/circular_reveal_animation.dart';
+import 'package:testapp1/pages/bmi_calculator.dart';
+import 'package:testapp1/pages/health_tools.dart';
+import 'package:testapp1/pages/ibw_calculator.dart';
 // import 'package:internet_popup/internet_popup.dart';
 import 'package:testapp1/pages/quiz.dart';
 import 'package:testapp1/widgets/mydrawer.dart';
@@ -86,7 +89,7 @@ class _MyHomePageState extends State<MyHomePage>
     ];
     return Scaffold(
         extendBody: true,
-        drawer: MyDrawer(),
+        // drawer: MyDrawer(),
         // Drawer(
         //   child: Container(
         //     color: drkmd == true ? Colors.grey[900] : Colors.grey[50],
@@ -134,19 +137,6 @@ class _MyHomePageState extends State<MyHomePage>
                       : bottomNavIndex == 3
                           ? HexColor('#00b894')
                           : HexColor('#55efc4'),
-          leading: StreamBuilder<Object>(
-            stream: null,
-            builder: (context, snapshot) {
-              return IconButton(
-                tooltip: 'Open Drawer',
-                // splashRadius: 3,
-                icon: Icon(Icons.dehaze),
-                onPressed: () {
-                  Scaffold.of(context).openDrawer();
-                },
-              );
-            },
-          ),
         ),
         extendBodyBehindAppBar: true,
         body: CircularRevealAnimation(
@@ -168,7 +158,7 @@ class _MyHomePageState extends State<MyHomePage>
         floatingActionButton: ScaleTransition(
           scale: animation,
           child: FloatingActionButton(
-            tooltip: 'Play Games',
+            tooltip: 'Health Tools',
             elevation: 8,
             backgroundColor: HexColor('#FFA400'),
             child: Icon(
@@ -176,8 +166,8 @@ class _MyHomePageState extends State<MyHomePage>
               color: HexColor('#373A36'),
             ),
             onPressed: () {
-              Navigator.push(
-                  context, MaterialPageRoute(builder: (context) => QuizPage()));
+              Navigator.push(context,
+                  MaterialPageRoute(builder: (context) => HealthTools()));
               // _animationController.reset();
               // _animationController.forward();
             },

@@ -1,45 +1,36 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter/src/foundation/key.dart';
+import 'package:flutter/src/widgets/framework.dart';
 import 'package:google_sign_in/google_sign_in.dart';
-import 'package:testapp1/allpages.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:testapp1/pages/googlesignin.dart';
 import 'package:testapp1/pages/homepage.dart';
-import 'package:flutter/material.dart';
-import 'package:shared_preferences/shared_preferences.dart';
-import 'package:testapp1/pages/splash.dart';
 
-class RegisterPage extends StatefulWidget {
+import '../allpages.dart';
+
+class RegisterPageTwo extends StatefulWidget {
+  const RegisterPageTwo({Key? key}) : super(key: key);
+
   @override
-  _RegisterPageState createState() => _RegisterPageState();
+  State<RegisterPageTwo> createState() => _RegisterPageTwoState();
 }
 
-// TextEditingController classes;
-final GoogleSignIn _googleSignIn = GoogleSignIn(scopes: ['email']);
+class _RegisterPageTwoState extends State<RegisterPageTwo> {
+  final _myController = TextEditingController();
+  final _myLastName = TextEditingController();
+  final _phoneno = TextEditingController();
+  final _location = TextEditingController();
+  final _myFavSub = TextEditingController();
 
-class _RegisterPageState extends State<RegisterPage> {
-  GoogleSignInAccount? _currentUser;
-  // String? name;
-  // String? lastName;
-  // String? grade;
-  // String? school;
-  // String? favSub;
-  // final _myController = TextEditingController();
-  // final _myLastName = TextEditingController();
-  // final _phoneno = TextEditingController();
-  // final _mySchool = TextEditingController();
-  // final _myFavSub = TextEditingController();
-
-  @override
-  void initState() {
-    super.initState();
-    final googleSignIn = GoogleSignIn();
-    googleSignIn.disconnect();
-  }
-
+  final FirebaseAuth authInstance = FirebaseAuth.instance;
   save() async {
     final SharedPreferences sharedPrefs = await SharedPreferences.getInstance();
     // sharedPrefs.setString('nm', _myController.text);
     // sharedPrefs.setString('lstnm', _myLastName.text);
     // sharedPrefs.setString('grd', _phoneno.text);
-    // sharedPrefs.setString('sch', _mySchool.text);
+    // sharedPrefs.setString('sch', _location.text);
     // sharedPrefs.setString('favsub', _myFavSub.text);
     sharedPrefs.setBool('isLogged', true);
     sharedPrefs.setInt('quiz', 0);
@@ -47,11 +38,34 @@ class _RegisterPageState extends State<RegisterPage> {
     // print('record added');
   }
 
-  get() async {
-    final SharedPreferences sharedPrefs = await SharedPreferences.getInstance();
-    // String pastdata = sharedPrefs.getString('nm').toString();
-    print('geting record');
-    // print('pastdata' + pastdata);
+  Future<void> _userDetailsAdd(context) async {
+    final googleSignIn = GoogleSignIn();
+    final googleAccount = await googleSignIn.signIn();
+    if (googleAccount != null) {
+      final googleAuth = await googleAccount.authentication;
+      final authResult = await authInstance.signInWithCredential(
+        GoogleAuthProvider.credential(
+            idToken: googleAuth.idToken, accessToken: googleAuth.accessToken),
+      );
+      await FirebaseFirestore.instance
+          .collection('users')
+          .doc(authResult.user!.uid)
+          .set({
+        'id': authResult.user!.uid,
+        'name': authResult.user!.displayName, // ask for name
+        'email': authResult.user!.email,
+        'phone': _phoneno.text,
+        'location': _location.text,
+        'field2': '',
+        'createdAt': Timestamp.now(),
+      });
+
+      Navigator.of(context).pushReplacement(
+        MaterialPageRoute(
+          builder: (context) => const MyHomePage(),
+        ),
+      );
+    }
   }
 
   @override
@@ -96,11 +110,10 @@ class _RegisterPageState extends State<RegisterPage> {
                       const SizedBox(
                         height: 20,
                       ),
-                      /*        TextField(
+                      TextField(
                         controller: _myController,
                         style: TextStyle(
-                          color:
-                              drkmd == true ? Colors.white : Colors.grey[600],
+                          color: Colors.grey[600],
                         ),
                         decoration: InputDecoration(
                           border: const OutlineInputBorder(
@@ -113,13 +126,11 @@ class _RegisterPageState extends State<RegisterPage> {
                           ),
                           labelText: 'First Name',
                           labelStyle: TextStyle(
-                            color:
-                                drkmd == true ? Colors.white : Colors.grey[600],
+                            color: Colors.grey[600],
                           ),
                           prefixIcon: Icon(
                             Icons.people,
-                            color:
-                                drkmd == true ? Colors.white : Colors.grey[600],
+                            color: Colors.grey[600],
                           ),
                         ),
                       ),
@@ -128,8 +139,7 @@ class _RegisterPageState extends State<RegisterPage> {
                       ),
                       TextField(
                         style: TextStyle(
-                          color:
-                              drkmd == true ? Colors.white : Colors.grey[600],
+                          color: Colors.grey[600],
                         ),
                         controller: _myLastName,
                         decoration: InputDecoration(
@@ -143,13 +153,11 @@ class _RegisterPageState extends State<RegisterPage> {
                           ),
                           labelText: 'Last Name',
                           labelStyle: TextStyle(
-                            color:
-                                drkmd == true ? Colors.white : Colors.grey[600],
+                            color: Colors.grey[600],
                           ),
                           prefixIcon: Icon(
                             Icons.phone_android,
-                            color:
-                                drkmd == true ? Colors.white : Colors.grey[600],
+                            color: Colors.grey[600],
                           ),
                         ),
                       ),
@@ -158,8 +166,7 @@ class _RegisterPageState extends State<RegisterPage> {
                       ),
                       TextField(
                         style: TextStyle(
-                          color:
-                              drkmd == true ? Colors.white : Colors.grey[600],
+                          color: Colors.grey[600],
                         ),
                         keyboardType: TextInputType.number,
                         controller: _phoneno,
@@ -174,13 +181,11 @@ class _RegisterPageState extends State<RegisterPage> {
                           ),
                           labelText: 'Phone no ',
                           labelStyle: TextStyle(
-                            color:
-                                drkmd == true ? Colors.white : Colors.grey[600],
+                            color: Colors.grey[600],
                           ),
                           prefixIcon: Icon(
                             Icons.phone_android,
-                            color:
-                                drkmd == true ? Colors.white : Colors.grey[600],
+                            color: Colors.grey[600],
                           ),
                         ),
                       ),
@@ -189,12 +194,11 @@ class _RegisterPageState extends State<RegisterPage> {
                       ),
                       TextField(
                         style: TextStyle(
-                          color:
-                              drkmd == true ? Colors.white : Colors.grey[600],
+                          color: Colors.grey[600],
                         ),
-                        keyboardType: const TextInputType.numberWithOptions(
-                            decimal: true),
-                        controller: _mySchool,
+                        // keyboardType: const TextInputType.numberWithOptions(
+                        // decimal: true),
+                        controller: _location,
                         decoration: InputDecoration(
                           border: const OutlineInputBorder(
                             borderRadius: BorderRadius.horizontal(
@@ -208,13 +212,11 @@ class _RegisterPageState extends State<RegisterPage> {
                           ),
                           labelText: 'Field 4 ',
                           labelStyle: TextStyle(
-                            color:
-                                drkmd == true ? Colors.white : Colors.grey[600],
+                            color: Colors.grey[600],
                           ),
                           prefixIcon: Icon(
-                            Icons.bloodtype_outlined,
-                            color:
-                                drkmd == true ? Colors.white : Colors.grey[600],
+                            Icons.location_on,
+                            color: Colors.grey[600],
                           ),
                         ),
                       ),
@@ -223,8 +225,7 @@ class _RegisterPageState extends State<RegisterPage> {
                       ),
                       TextField(
                         style: TextStyle(
-                          color:
-                              drkmd == true ? Colors.white : Colors.grey[600],
+                          color: Colors.grey[600],
                         ),
                         keyboardType: const TextInputType.numberWithOptions(
                             decimal: true),
@@ -242,21 +243,18 @@ class _RegisterPageState extends State<RegisterPage> {
                           ),
                           labelText: 'Field 5 ',
                           labelStyle: TextStyle(
-                            color:
-                                drkmd == true ? Colors.white : Colors.grey[600],
+                            color: Colors.grey[600],
                           ),
                           prefixIcon: Icon(
                             Icons.book,
-                            color:
-                                drkmd == true ? Colors.white : Colors.grey[600],
+                            color: Colors.grey[600],
                           ),
                         ),
                       ),
-                    */
                       const SizedBox(
                         height: 15,
                       ),
-                      /* Center(
+                      Center(
                         child: TextButton(
                           style: TextButton.styleFrom(
                             backgroundColor: Colors.yellow[800],
@@ -282,6 +280,7 @@ class _RegisterPageState extends State<RegisterPage> {
                             ),
                           ),
                           onPressed: () {
+                            _userDetailsAdd(context);
                             Navigator.pushReplacement(
                                 context,
                                 MaterialPageRoute(
@@ -290,148 +289,17 @@ class _RegisterPageState extends State<RegisterPage> {
                           },
                         ),
                       ),
-                     */
-                      Center(
-                        child: GoogleButton(),
-                      )
+                      // Center(
+                      //   child: GoogleButton(),
+                      // )
                     ],
                   ),
                 ),
               ),
-              // Padding(
-              //   padding: const EdgeInsets.fromLTRB(25, 10, 25, 5),
-              //   child: TextField(
-              //     controller: _myController,
-              //     decoration: InputDecoration(
-              //       border: const OutlineInputBorder(
-              //         borderRadius: BorderRadius.horizontal(
-              //           left: Radius.circular(40),
-              //           right: Radius.circular(40),
-              //         ),
-              //         borderSide: BorderSide(color: Colors.red, width: 5.0),
-              //       ),
-              //       labelText: 'Name',
-              //       labelStyle: TextStyle(
-              //         color: drkmd == true ? Colors.white : Colors.grey[600],
-              //       ),
-              //       prefixIcon: Icon(
-              //         Icons.people,
-              //         color: drkmd == true ? Colors.white : Colors.grey[600],
-              //       ),
-              //     ),
-              //   ),
-              // ),
-              // Padding(
-              //   padding: const EdgeInsets.fromLTRB(25, 10, 25, 5),
-              //   child: Container(
-              //     height: 45,
-              //     decoration: BoxDecoration(
-              //       borderRadius: BorderRadius.circular(30),
-              //       color: Colors.grey[300],
-              //     ),
-              //     child: Padding(
-              //       padding: const EdgeInsets.fromLTRB(12.0, 2.0, 0, 2.0),
-              //       child: TextField(
-              //         controller: _myLastName,
-              //         decoration: InputDecoration(
-              //           border: InputBorder.none,
-              //           hintText: 'Last Name',
-              //         ),
-              //       ),
-              //     ),
-              //   ),
-              // ),
-              // Padding(
-              //   padding: const EdgeInsets.fromLTRB(25, 10, 25, 5),
-              //   child: Container(
-              //     height: 45,
-              //     decoration: BoxDecoration(
-              //       borderRadius: BorderRadius.circular(30),
-              //       color: Colors.grey[300],
-              //     ),
-              //     child: Padding(
-              //       padding: const EdgeInsets.fromLTRB(12.0, 2.0, 0, 2.0),
-              //       child: TextField(
-              //         controller: _phoneno,
-              //         decoration: InputDecoration(
-              //           border: InputBorder.none,
-              //           hintText: 'Grade',
-              //         ),
-              //       ),
-              //     ),
-              //   ),
-              // ),
-              // Padding(
-              //   padding: const EdgeInsets.fromLTRB(25, 10, 25, 5),
-              //   child: Container(
-              //     height: 45,
-              //     decoration: BoxDecoration(
-              //       borderRadius: BorderRadius.circular(30),
-              //       color: Colors.grey[300],
-              //     ),
-              //     child: Padding(
-              //       padding: const EdgeInsets.fromLTRB(12.0, 2.0, 0, 2.0),
-              //       child: TextField(
-              //         controller: _mySchool,
-              //         decoration: InputDecoration(
-              //           border: InputBorder.none,
-              //           hintText: 'School\'s Name',
-              //         ),
-              //       ),
-              //     ),
-              //   ),
-              // ),
-              // Padding(
-              //   padding: const EdgeInsets.fromLTRB(25, 10, 25, 5),
-              //   child: Container(
-              //     height: 45,
-              //     decoration: BoxDecoration(
-              //       borderRadius: BorderRadius.circular(30),
-              //       color: Colors.grey[300],
-              //     ),
-              //     child: Padding(
-              //       padding: const EdgeInsets.fromLTRB(12.0, 2.0, 0, 2.0),
-              //       child: TextField(
-              //         controller: _myFavSub,
-              //         decoration: InputDecoration(
-              //           border: InputBorder.none,
-              //           hintText: 'Fav Topic',
-              //         ),
-              //       ),
-              //     ),
-              //   ),
-              // ),
-              // SizedBox(height: 10),
-              // Center(
-              //   child: RaisedButton(
-              //     shape: RoundedRectangleBorder(
-              //       borderRadius: BorderRadius.circular(30),
-              //     ),
-
-              //     // textColor: Colors.black,
-              //     color: Colors.yellow[800],
-              //     // splashColor: Colors.red[700],
-              //     child: Text(
-              //       'Register',
-              //       style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
-              //     ),
-              //     onPressed: () {
-              //       save();
-              //       Navigator.pushReplacement(context,
-              //           MaterialPageRoute(builder: (context) => MyHomePage()));
-              //     },
-              //   ),
-              // ),
             ],
           ),
         ),
       ),
     );
-  }
-
-  void signOut() {
-    final googleSignIn = GoogleSignIn();
-    googleSignIn.disconnect();
-    // googleSignIn.disconnect();
   }
 }

@@ -31,6 +31,8 @@ class _QuizPageState extends State<QuizPage> {
   int index = 0;
   int answerindex = 0;
   dynamic score = 0;
+  String scoreresult = 'normal';
+  String completed = 'normal';
   bool visibli = false;
   bool visiblinxt = true;
   int optionclicked = 4;
@@ -49,7 +51,7 @@ class _QuizPageState extends State<QuizPage> {
         elevation: 0,
         backgroundColor: Color(0xff0404f1),
         title: Text(
-          'Quiz',
+          'Anxiety Check',
           style: TextStyle(
             fontFamily: 'SuezOne',
             color: Colors.white,
@@ -324,6 +326,34 @@ class _QuizPageState extends State<QuizPage> {
                                 isVisible = !isVisible;
                                 score += Marks[index][optionclicked];
                                 optionclicked = 4;
+                                if (score <= 5) {
+                                  setState(() {
+                                    scoreresult = 'normal';
+                                    completed =
+                                        'You need not worry. Your anxiety is very normal. Live out the rest of your days as cheerful and happy as you are now';
+                                  });
+                                }
+                                if (score >= 5 && score <= 10) {
+                                  setState(() {
+                                    scoreresult = 'mild';
+                                    completed =
+                                        'You have a slight level of anxiety. It is perfectly normal but you may want to change your habit. ';
+                                  });
+                                }
+                                if (score > 10 && score <= 15) {
+                                  setState(() {
+                                    scoreresult = 'severe';
+                                    completed =
+                                        'You have a concerning anxiety level. It would be best if you seek a doctors help.';
+                                  });
+                                }
+                                if (score > 15 && score <= 21) {
+                                  setState(() {
+                                    scoreresult = 'panic';
+                                    completed =
+                                        'You have severe anxiety. Please contact a medical professional as soon as possible. You can give us a call as well. ';
+                                  });
+                                }
                               },
                             );
                           }
@@ -336,91 +366,99 @@ class _QuizPageState extends State<QuizPage> {
             ),
             Visibility(
               visible: !isVisible,
-              child: Padding(
-                padding: const EdgeInsets.all(10),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.stretch,
-                  children: [
-                    RichText(
-                      textAlign: TextAlign.center,
-                      text: TextSpan(
-                        children: [
-                          TextSpan(
-                            text: 'Your final score is ',
-                            style: TextStyle(
-                              color: Colors.white,
-                              fontFamily: 'Nunito',
-                              fontSize: 23,
-                              fontWeight: FontWeight.w900,
-                            ),
-                          ),
-                          TextSpan(
-                            text: '$score',
-                            style: TextStyle(
-                              color: Colors.white,
-                              fontFamily: 'Nunito',
-                              fontSize: 23,
-                              fontWeight: FontWeight.w900,
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
-                    Container(
-                      child: Column(
-                        children: [
-                          Padding(
-                            padding: const EdgeInsets.all(8.0),
-                            child: RichText(
-                              text: TextSpan(
-                                children: const [
-                                  TextSpan(
-                                    text: 'The quiz is ',
-                                    style: TextStyle(
-                                      color: Colors.white,
-                                      fontFamily: 'Nunito',
-                                      fontSize: 23,
-                                      fontWeight: FontWeight.w900,
-                                    ),
-                                  ),
-                                  TextSpan(
-                                    text: 'completed',
-                                    style: TextStyle(
-                                      color: Colors.green,
-                                      fontFamily: 'Nunito',
-                                      fontSize: 23,
-                                      fontWeight: FontWeight.w900,
-                                    ),
-                                  ),
-                                ],
+              child: Center(
+                child: Padding(
+                  padding: const EdgeInsets.all(10),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.stretch,
+                    children: [
+                      RichText(
+                        textAlign: TextAlign.center,
+                        text: TextSpan(
+                          children: [
+                            TextSpan(
+                              text: 'Your anxiety level is ',
+                              style: TextStyle(
+                                color: Colors.white,
+                                fontFamily: 'Nunito',
+                                fontSize: 23,
+                                fontWeight: FontWeight.w900,
                               ),
                             ),
+                            TextSpan(
+                              text: '$scoreresult',
+                              style: TextStyle(
+                                color: scoreresult == 'normal'
+                                    ? Colors.green
+                                    : scoreresult == 'mild'
+                                        ? Colors.yellow
+                                        : scoreresult == 'severe'
+                                            ? Colors.yellow[900]
+                                            : Colors.red,
+                                fontFamily: 'Nunito',
+                                fontSize: 23,
+                                fontWeight: FontWeight.w900,
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                      Container(
+                        child: Column(
+                          children: [
+                            Padding(
+                              padding: const EdgeInsets.all(8.0),
+                              child: RichText(
+                                text: TextSpan(
+                                  children: [
+                                    TextSpan(
+                                      text: 'Suggestions: \n',
+                                      style: TextStyle(
+                                        color: Colors.green,
+                                        fontFamily: 'Nunito',
+                                        fontSize: 18,
+                                        fontWeight: FontWeight.w900,
+                                      ),
+                                    ),
+                                    TextSpan(
+                                      text: completed,
+                                      style: TextStyle(
+                                        // color: Colors.green,
+                                        fontFamily: 'Nunito',
+                                        fontSize: 15,
+                                        fontWeight: FontWeight.w700,
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                      TextButton(
+                        style: TextButton.styleFrom(
+                          backgroundColor: Colors.blue,
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.all(Radius.circular(40)),
                           ),
-                        ],
-                      ),
-                    ),
-                    TextButton(
-                      style: TextButton.styleFrom(
-                        backgroundColor: Colors.blue,
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.all(Radius.circular(40)),
+                        ),
+                        onPressed: () {
+                          saveQuiz();
+                          Navigator.pop(context);
+                          // optionclicked = 4;
+                        },
+                        child: Text(
+                          index != Questions.length - 1 ? 'Next' : 'Exit',
+                          style: TextStyle(
+                            color: Colors.white,
+                            fontFamily: 'Nunito',
+                            fontWeight: FontWeight.w900,
+                          ),
                         ),
                       ),
-                      onPressed: () {
-                        saveQuiz();
-                        Navigator.pop(context);
-                        optionclicked = 4;
-                      },
-                      child: Text(
-                        index != Questions.length - 1 ? 'Next' : 'View Results',
-                        style: TextStyle(
-                          color: Colors.white,
-                          fontFamily: 'Nunito',
-                          fontWeight: FontWeight.w900,
-                        ),
-                      ),
-                    ),
-                  ],
+                    ],
+                  ),
                 ),
               ),
             ),

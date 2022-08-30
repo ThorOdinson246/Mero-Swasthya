@@ -26,7 +26,7 @@ class _SplashState extends State<Splash> {
       isLoggedIn = logInInfo.getBool('isLogged') ?? false;
       drkmd = logInInfo.getBool('isDarkModeEnabled') ?? false;
     });
-    Future.delayed(const Duration(milliseconds: 500), () {
+    Future.delayed(const Duration(milliseconds: 200), () {
 // Here you can write your code
       print('isLoggedIn' + '=' + '${isLoggedIn}');
       if (isLoggedIn == false) {

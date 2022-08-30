@@ -1,5 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:testapp1/pages/explore.dart';
+import 'package:testapp1/pages/health_tools.dart';
 import 'package:testapp1/pages/quiz.dart';
 import 'package:testapp1/pages/search_blood.dart';
 import 'package:testapp1/pages/request_blood.dart';
@@ -29,12 +30,12 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
     super.initState();
 
     _animationController = AnimationController(
-      duration: Duration(seconds: 0),
+      duration: const Duration(seconds: 0),
       vsync: this,
     );
     curve = CurvedAnimation(
       parent: _animationController,
-      curve: Interval(
+      curve: const Interval(
         0.5,
         1.0,
         curve: Curves.fastOutSlowIn,
@@ -46,7 +47,7 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
     ).animate(curve);
 
     Future.delayed(
-      Duration(milliseconds: 200),
+      const Duration(milliseconds: 200),
       () => _animationController.forward(),
     );
     geat();
@@ -189,14 +190,14 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
                                   ),
                                 );
                               }
-                              return CircularProgressIndicator();
+                              return const CircularProgressIndicator();
                             },
                           ),
                         ],
                       ),
                     ),
                   ),
-                  SizedBox(
+                  const SizedBox(
                     height: 10,
                   ),
                   Container(
@@ -221,7 +222,7 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
                             padding: const EdgeInsets.fromLTRB(12, 2, 0, 2),
                             child: Center(
                               child: Text(
-                                "What's New",
+                                "New in Health ",
                                 style: TextStyle(
                                   color: HexColor('#0984e3'),
                                   fontFamily: 'Nunito',
@@ -237,7 +238,7 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
                             height: 45,
                             child: FlatButton(
                               color: HexColor('#FFA400'),
-                              padding: EdgeInsets.all(0),
+                              padding: const EdgeInsets.all(0),
                               onPressed: () {
                                 Navigator.push(
                                   context,
@@ -245,17 +246,17 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
                                       builder: (context) => ExplorePage()),
                                 );
                               },
-                              shape: RoundedRectangleBorder(
+                              shape: const RoundedRectangleBorder(
                                 borderRadius: BorderRadius.only(
-                                  bottomLeft: Radius.circular(30),
+                                  bottomLeft: const Radius.circular(30),
                                   topLeft: Radius.circular(30),
-                                  bottomRight: Radius.circular(30),
+                                  bottomRight: const Radius.circular(30),
                                   topRight: Radius.circular(30),
                                 ),
                               ),
-                              child: Text(
+                              child: const Text(
                                 "EXPLORE",
-                                style: TextStyle(
+                                style: const TextStyle(
                                   fontFamily: 'Nunito',
                                   fontWeight: FontWeight.w900,
                                   fontSize: 18,
@@ -341,9 +342,9 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
                 ],
               ),
               Padding(
-                padding: EdgeInsets.fromLTRB(15, 5, 15, 0),
+                padding: const EdgeInsets.fromLTRB(15, 5, 15, 0),
                 child: Text(
-                  "Areas",
+                  "Services",
                   style: TextStyle(
                       fontFamily: 'Nunito',
                       fontSize: 25,
@@ -358,7 +359,7 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Padding(
-                    padding: const EdgeInsets.all(15),
+                    padding: const EdgeInsets.fromLTRB(15, 15, 15, 15),
                     child: Container(
                       width: width,
                       height: 150,
@@ -373,21 +374,21 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
                             color: drkmd == true
                                 ? HexColor('#444444')
                                 : HexColor('#dfe6e9'),
-                            offset: Offset(0, 6),
+                            offset: const Offset(0, 6),
                           ),
                         ],
                       ),
                       child: Padding(
-                        padding: EdgeInsets.fromLTRB(15, 15, 20, 5),
+                        padding: const EdgeInsets.fromLTRB(15, 15, 20, 5),
                         child: Row(
                           children: [
                             Expanded(
-                              flex: 1,
+                              flex: 3,
                               child: Column(
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
                                   Text(
-                                    "FIND A DOCTOR",
+                                    "BLOOD BANKS",
                                     style: TextStyle(
                                       fontFamily: 'Nunito',
                                       color: drkmd == true
@@ -399,7 +400,7 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
                                   ),
                                   const Image(
                                     image: AssetImage(
-                                      "images/PHYSICS.png",
+                                      "images/environment.png",
                                     ),
                                     height: 110,
                                     width: 120,
@@ -408,93 +409,7 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
                               ),
                             ),
                             Expanded(
-                              flex: 1,
-                              child: Row(
-                                mainAxisAlignment: MainAxisAlignment.end,
-                                children: [
-                                  FlatButton(
-                                    color: HexColor('#0984e3'),
-                                    textColor: Colors.white,
-                                    shape: RoundedRectangleBorder(
-                                        borderRadius:
-                                            BorderRadius.circular(20)),
-                                    onPressed: () {
-                                      Navigator.push(
-                                        context,
-                                        MaterialPageRoute(
-                                          builder: (context) => findDoctors(),
-                                        ),
-                                      );
-                                    },
-                                    child: Text(
-                                      "Proceed",
-                                      style: TextStyle(
-                                        fontSize: 18,
-                                        fontWeight: FontWeight.w900,
-                                        fontFamily: 'Nunito',
-                                      ),
-                                    ),
-                                  )
-                                ],
-                              ),
-                            ),
-                          ],
-                        ),
-                      ),
-                    ),
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.all(15),
-                    child: Container(
-                      width: width,
-                      height: 150,
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(30),
-                        color: drkmd == true
-                            ? HexColor('#444444')
-                            : HexColor('#dfe6e9'),
-                        boxShadow: [
-                          BoxShadow(
-                            spreadRadius: 3,
-                            color: drkmd == true
-                                ? HexColor('#444444')
-                                : HexColor('#dfe6e9'),
-                            offset: Offset(0, 6),
-                          ),
-                        ],
-                      ),
-                      child: Padding(
-                        padding: EdgeInsets.fromLTRB(15, 15, 20, 5),
-                        child: Row(
-                          children: [
-                            Expanded(
-                              flex: 1,
-                              child: Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  Text(
-                                    "ANXIETY CHECK",
-                                    style: TextStyle(
-                                      fontFamily: 'Nunito',
-                                      color: drkmd == true
-                                          ? HexColor('#bebebe')
-                                          : HexColor('#636e72'),
-                                      fontSize: 15,
-                                      fontWeight: FontWeight.bold,
-                                    ),
-                                  ),
-                                  Image(
-                                    image: AssetImage(
-                                      "images/chemistry.png",
-                                    ),
-                                    height: 110,
-                                    width: 120,
-                                  ),
-                                ],
-                              ),
-                            ),
-                            Expanded(
-                              flex: 1,
+                              flex: 2,
                               child: Row(
                                 mainAxisAlignment: MainAxisAlignment.end,
                                 children: [
@@ -508,11 +423,11 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
                                       Navigator.push(
                                         context,
                                         MaterialPageRoute(
-                                          builder: (context) => QuizPage(),
+                                          builder: (context) => bloodBanks(),
                                         ),
                                       );
                                     },
-                                    child: Text(
+                                    child: const Text(
                                       "Proceed",
                                       style: TextStyle(
                                         fontWeight: FontWeight.w900,
@@ -545,102 +460,16 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
                             color: drkmd == true
                                 ? HexColor('#444444')
                                 : HexColor('#dfe6e9'),
-                            offset: Offset(0, 6),
+                            offset: const Offset(0, 6),
                           ),
                         ],
                       ),
                       child: Padding(
-                        padding: EdgeInsets.fromLTRB(15, 15, 20, 5),
+                        padding: const EdgeInsets.fromLTRB(15, 15, 20, 5),
                         child: Row(
                           children: [
                             Expanded(
-                              flex: 1,
-                              child: Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  Text(
-                                    "FIND A DONOR",
-                                    style: TextStyle(
-                                      fontFamily: 'Nunito',
-                                      color: drkmd == true
-                                          ? HexColor('#bebebe')
-                                          : HexColor('#636e72'),
-                                      fontSize: 15,
-                                      fontWeight: FontWeight.bold,
-                                    ),
-                                  ),
-                                  Image(
-                                    image: AssetImage(
-                                      "images/Biology.png",
-                                    ),
-                                    height: 110,
-                                    width: 120,
-                                  ),
-                                ],
-                              ),
-                            ),
-                            Expanded(
-                              flex: 1,
-                              child: Row(
-                                mainAxisAlignment: MainAxisAlignment.end,
-                                children: [
-                                  FlatButton(
-                                    textColor: Colors.white,
-                                    color: HexColor('#0984e3'),
-                                    shape: RoundedRectangleBorder(
-                                        borderRadius:
-                                            BorderRadius.circular(20)),
-                                    onPressed: () {
-                                      Navigator.push(
-                                        context,
-                                        MaterialPageRoute(
-                                          builder: (context) => SearchBlood(),
-                                        ),
-                                      );
-                                    },
-                                    child: Text(
-                                      "Proceed",
-                                      style: TextStyle(
-                                        fontWeight: FontWeight.w900,
-                                        fontFamily: 'Nunito',
-                                        fontSize: 18,
-                                      ),
-                                    ),
-                                  ),
-                                ],
-                              ),
-                            ),
-                          ],
-                        ),
-                      ),
-                    ),
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.fromLTRB(15, 15, 15, 15),
-                    child: Container(
-                      width: width,
-                      height: 150,
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(30),
-                        color: drkmd == true
-                            ? HexColor('#444444')
-                            : HexColor('#dfe6e9'),
-                        boxShadow: [
-                          BoxShadow(
-                            spreadRadius: 3,
-                            color: drkmd == true
-                                ? HexColor('#444444')
-                                : HexColor('#dfe6e9'),
-                            offset: Offset(0, 6),
-                          ),
-                        ],
-                      ),
-                      child: Padding(
-                        padding: EdgeInsets.fromLTRB(15, 15, 20, 5),
-                        child: Row(
-                          children: [
-                            Expanded(
-                              flex: 1,
+                              flex: 3,
                               child: Column(
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
@@ -655,8 +484,8 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
                                       fontWeight: FontWeight.bold,
                                     ),
                                   ),
-                                  Image(
-                                    image: AssetImage(
+                                  const Image(
+                                    image: const AssetImage(
                                       "images/Astronomy.png",
                                     ),
                                     height: 110,
@@ -666,7 +495,7 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
                               ),
                             ),
                             Expanded(
-                              flex: 1,
+                              flex: 2,
                               child: Row(
                                 mainAxisAlignment: MainAxisAlignment.end,
                                 children: [
@@ -680,11 +509,185 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
                                       Navigator.push(
                                         context,
                                         MaterialPageRoute(
-                                          builder: (context) => RequestBlood(),
+                                          builder: (context) =>
+                                              const RequestBlood(),
                                         ),
                                       );
                                     },
-                                    child: Text(
+                                    child: const Text(
+                                      "Proceed",
+                                      style: const TextStyle(
+                                        fontWeight: FontWeight.w900,
+                                        fontFamily: 'Nunito',
+                                        fontSize: 18,
+                                      ),
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                    ),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.all(15),
+                    child: Container(
+                      width: width,
+                      height: 150,
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(30),
+                        color: drkmd == true
+                            ? HexColor('#444444')
+                            : HexColor('#dfe6e9'),
+                        boxShadow: [
+                          BoxShadow(
+                            spreadRadius: 3,
+                            color: drkmd == true
+                                ? HexColor('#444444')
+                                : HexColor('#dfe6e9'),
+                            offset: const Offset(0, 6),
+                          ),
+                        ],
+                      ),
+                      child: Padding(
+                        padding: const EdgeInsets.fromLTRB(15, 15, 20, 5),
+                        child: Row(
+                          children: [
+                            Expanded(
+                              flex: 3,
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Text(
+                                    "HEALTH UTILITIES",
+                                    style: TextStyle(
+                                      fontFamily: 'Nunito',
+                                      color: drkmd == true
+                                          ? HexColor('#bebebe')
+                                          : HexColor('#636e72'),
+                                      fontSize: 15,
+                                      fontWeight: FontWeight.bold,
+                                    ),
+                                  ),
+                                  const Image(
+                                    image: AssetImage(
+                                      "images/chemistry.png",
+                                    ),
+                                    height: 110,
+                                    width: 120,
+                                  ),
+                                ],
+                              ),
+                            ),
+                            Expanded(
+                              flex: 2,
+                              child: Row(
+                                mainAxisAlignment: MainAxisAlignment.end,
+                                children: [
+                                  FlatButton(
+                                    textColor: Colors.white,
+                                    color: HexColor('#0984e3'),
+                                    shape: RoundedRectangleBorder(
+                                        borderRadius:
+                                            BorderRadius.circular(20)),
+                                    onPressed: () {
+                                      Navigator.push(
+                                        context,
+                                        MaterialPageRoute(
+                                          builder: (context) => HealthTools(),
+                                        ),
+                                      );
+                                    },
+                                    child: const Text(
+                                      "Proceed",
+                                      style: TextStyle(
+                                        fontWeight: FontWeight.w900,
+                                        fontFamily: 'Nunito',
+                                        fontSize: 18,
+                                      ),
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                    ),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.fromLTRB(15, 15, 15, 15),
+                    child: Container(
+                      width: width,
+                      height: 150,
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(30),
+                        color: drkmd == true
+                            ? HexColor('#444444')
+                            : HexColor('#dfe6e9'),
+                        boxShadow: [
+                          BoxShadow(
+                            spreadRadius: 3,
+                            color: drkmd == true
+                                ? HexColor('#444444')
+                                : HexColor('#dfe6e9'),
+                            offset: const Offset(0, 6),
+                          ),
+                        ],
+                      ),
+                      child: Padding(
+                        padding: const EdgeInsets.fromLTRB(15, 15, 20, 5),
+                        child: Row(
+                          children: [
+                            Expanded(
+                              flex: 3,
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Text(
+                                    "FIND A BLOOD DONOR",
+                                    style: TextStyle(
+                                      fontFamily: 'Nunito',
+                                      color: drkmd == true
+                                          ? HexColor('#bebebe')
+                                          : HexColor('#636e72'),
+                                      fontSize: 15,
+                                      fontWeight: FontWeight.bold,
+                                    ),
+                                  ),
+                                  const Image(
+                                    image: AssetImage(
+                                      "images/Biology.png",
+                                    ),
+                                    height: 110,
+                                    width: 120,
+                                  ),
+                                ],
+                              ),
+                            ),
+                            Expanded(
+                              flex: 2,
+                              child: Row(
+                                mainAxisAlignment: MainAxisAlignment.end,
+                                children: [
+                                  FlatButton(
+                                    textColor: Colors.white,
+                                    color: HexColor('#0984e3'),
+                                    shape: RoundedRectangleBorder(
+                                        borderRadius:
+                                            BorderRadius.circular(20)),
+                                    onPressed: () {
+                                      Navigator.push(
+                                        context,
+                                        MaterialPageRoute(
+                                          builder: (context) =>
+                                              const SearchBlood(),
+                                        ),
+                                      );
+                                    },
+                                    child: const Text(
                                       "Proceed",
                                       style: TextStyle(
                                         fontWeight: FontWeight.w900,
@@ -717,21 +720,21 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
                             color: drkmd == true
                                 ? HexColor('#444444')
                                 : HexColor('#dfe6e9'),
-                            offset: Offset(0, 6),
+                            offset: const Offset(0, 6),
                           ),
                         ],
                       ),
                       child: Padding(
-                        padding: EdgeInsets.fromLTRB(15, 15, 20, 5),
+                        padding: const EdgeInsets.fromLTRB(15, 15, 20, 5),
                         child: Row(
                           children: [
                             Expanded(
-                              flex: 1,
+                              flex: 3,
                               child: Column(
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
                                   Text(
-                                    "BLOOD BANKS",
+                                    "CONSULT A DOCTOR",
                                     style: TextStyle(
                                       fontFamily: 'Nunito',
                                       color: drkmd == true
@@ -741,9 +744,9 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
                                       fontWeight: FontWeight.bold,
                                     ),
                                   ),
-                                  Image(
+                                  const Image(
                                     image: AssetImage(
-                                      "images/environment.png",
+                                      "images/PHYSICS.png",
                                     ),
                                     height: 110,
                                     width: 120,
@@ -752,13 +755,13 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
                               ),
                             ),
                             Expanded(
-                              flex: 1,
+                              flex: 2,
                               child: Row(
                                 mainAxisAlignment: MainAxisAlignment.end,
                                 children: [
                                   FlatButton(
-                                    textColor: Colors.white,
                                     color: HexColor('#0984e3'),
+                                    textColor: Colors.white,
                                     shape: RoundedRectangleBorder(
                                         borderRadius:
                                             BorderRadius.circular(20)),
@@ -766,19 +769,19 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
                                       Navigator.push(
                                         context,
                                         MaterialPageRoute(
-                                          builder: (context) => bloodBanks(),
+                                          builder: (context) => findDoctors(),
                                         ),
                                       );
                                     },
-                                    child: Text(
+                                    child: const Text(
                                       "Proceed",
-                                      style: TextStyle(
+                                      style: const TextStyle(
+                                        fontSize: 18,
                                         fontWeight: FontWeight.w900,
                                         fontFamily: 'Nunito',
-                                        fontSize: 18,
                                       ),
                                     ),
-                                  ),
+                                  )
                                 ],
                               ),
                             ),

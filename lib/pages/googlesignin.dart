@@ -4,6 +4,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:testapp1/pages/homepage.dart';
+import 'package:testapp1/pages/register_page_2.dart';
 
 class GoogleButton extends StatelessWidget {
   GoogleButton({Key? key}) : super(key: key);
@@ -11,41 +12,28 @@ class GoogleButton extends StatelessWidget {
   Future<void> _googleSignIn(context) async {
     final googleSignIn = GoogleSignIn();
     final googleAccount = await googleSignIn.signIn();
+
     if (googleAccount != null) {
       final googleAuth = await googleAccount.authentication;
       if (googleAuth.accessToken != null && googleAuth.idToken != null) {
-        try {
-          final authResult = await authInstance.signInWithCredential(
-            GoogleAuthProvider.credential(
-                idToken: googleAuth.idToken,
-                accessToken: googleAuth.accessToken),
-          );
+        final authResult = await authInstance.signInWithCredential(
+          GoogleAuthProvider.credential(
+              idToken: googleAuth.idToken, accessToken: googleAuth.accessToken),
+        );
 
-          if (authResult.additionalUserInfo!.isNewUser) {
-            await FirebaseFirestore.instance
-                .collection('users')
-                .doc(authResult.user!.uid)
-                .set({
-              'id': authResult.user!.uid,
-              'name': authResult.user!.displayName, // ask for name
-              'email': authResult.user!.email,
-              'address': '',
-              'userWish': [],
-              'userCart': [],
-              'createdAt': Timestamp.now(),
-            });
-          }
+        if (authResult.additionalUserInfo!.isNewUser) {
+          Navigator.of(context).pushReplacement(
+            MaterialPageRoute(
+              builder: (context) => const RegisterPageTwo(),
+            ),
+          );
+        } else {
           Navigator.of(context).pushReplacement(
             MaterialPageRoute(
               builder: (context) => const MyHomePage(),
             ),
           );
-        } on FirebaseException catch (error) {
-          GlobalMethods.errorDialog(
-              subtitle: '${error.message}', context: context);
-        } catch (error) {
-          GlobalMethods.errorDialog(subtitle: '$error', context: context);
-        } finally {}
+        }
       }
     }
   }
@@ -67,14 +55,31 @@ class GoogleButton extends StatelessWidget {
       child: Center(
         child: Padding(
           padding: EdgeInsets.fromLTRB(8.0, 0.0, 8.0, 0.0),
-          child: Text(
-            'Imp Google Sign In ',
-            style: TextStyle(
-              fontWeight: FontWeight.w900,
-              fontFamily: 'Nunito',
-              color: Colors.white,
-              fontSize: 18,
-            ),
+          child: Row(
+            children: [
+              Expanded(
+                flex: 1,
+                child: CircleAvatar(
+                  backgroundColor: Colors.transparent,
+                  child: Padding(
+                    padding: const EdgeInsets.all(4.0),
+                    child: Image(image: AssetImage('images/google.png')),
+                  ),
+                ),
+              ),
+              Expanded(
+                flex: 6,
+                child: Text(
+                  ' Sign In With Google  ',
+                  style: TextStyle(
+                    fontWeight: FontWeight.w900,
+                    fontFamily: 'Nunito',
+                    color: Colors.white,
+                    fontSize: 18,
+                  ),
+                ),
+              ),
+            ],
           ),
         ),
       ),

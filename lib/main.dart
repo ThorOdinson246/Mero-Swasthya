@@ -13,7 +13,6 @@ import 'package:testapp1/pages/splash.dart';
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
-
   runApp(const MyApp());
 }
 

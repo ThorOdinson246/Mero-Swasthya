@@ -475,7 +475,7 @@ class _RequestBloodState extends State<SearchBlood> {
 
           if (streamSnapshot.connectionState == ConnectionState.waiting) {
             return const Center(
-              child: Text('Connect to Internet'),
+              child: CircularProgressIndicator(),
             );
           }
           if (streamSnapshot.connectionState == ConnectionState.none) {

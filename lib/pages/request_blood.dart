@@ -77,227 +77,235 @@ class RequestBloodState extends State<RequestBlood> {
       ),
       backgroundColor: drkmd == true ? Colors.grey[900] : Colors.grey[100],
       body: SingleChildScrollView(
-        child: Container(
-          margin: EdgeInsets.all(20),
-          decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(30),
-            color: drkmd == true ? HexColor('#444444') : HexColor('#dfe6e9'),
-          ),
-          child: Padding(
-            padding: const EdgeInsets.all(20.0),
-            child: Column(
-              mainAxisSize: MainAxisSize.min,
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                TextField(
-                  controller: _nameController,
-                  style: TextStyle(
-                    color: drkmd == true ? Colors.white : Colors.grey[600],
+        child: Center(
+          child: Container(
+            margin: EdgeInsets.all(20),
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(30),
+              color: drkmd == true ? HexColor('#444444') : HexColor('#dfe6e9'),
+            ),
+            child: Padding(
+              padding: const EdgeInsets.all(20.0),
+              child: Column(
+                mainAxisSize: MainAxisSize.min,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    'Place a personal request for blood for other users using this app to see.\n',
+                    style: TextStyle(
+                        color: drkmd == true ? Colors.white : Colors.grey[600],
+                        fontFamily: 'Nunito'),
                   ),
-                  decoration: InputDecoration(
-                    border: const OutlineInputBorder(
-                      borderRadius: BorderRadius.horizontal(
-                        left: Radius.circular(40),
-                        right: Radius.circular(40),
+                  TextField(
+                    controller: _nameController,
+                    style: TextStyle(
+                      color: drkmd == true ? Colors.white : Colors.grey[600],
+                    ),
+                    decoration: InputDecoration(
+                      border: const OutlineInputBorder(
+                        borderRadius: BorderRadius.horizontal(
+                          left: Radius.circular(40),
+                          right: Radius.circular(40),
+                        ),
+                        borderSide: BorderSide(color: Colors.red, width: 5.0),
                       ),
-                      borderSide: BorderSide(color: Colors.red, width: 5.0),
-                    ),
-                    labelText: 'Name',
-                    labelStyle: TextStyle(
-                      color: drkmd == true ? Colors.white : Colors.grey[600],
-                    ),
-                    prefixIcon: Icon(
-                      Icons.people,
-                      color: drkmd == true ? Colors.white : Colors.grey[600],
-                    ),
-                  ),
-                ),
-                const SizedBox(
-                  height: 20.0,
-                ),
-                TextField(
-                  style: TextStyle(
-                    color: drkmd == true ? Colors.white : Colors.grey[600],
-                  ),
-                  keyboardType:
-                      const TextInputType.numberWithOptions(decimal: true),
-                  controller: _phonenumber,
-                  decoration: InputDecoration(
-                    border: OutlineInputBorder(
-                      borderRadius: BorderRadius.horizontal(
-                        left: Radius.circular(40),
-                        right: Radius.circular(40),
+                      labelText: 'Name',
+                      labelStyle: TextStyle(
+                        color: drkmd == true ? Colors.white : Colors.grey[600],
                       ),
-                      borderSide: BorderSide(color: Colors.red, width: 5.0),
-                    ),
-                    labelText: 'Phone no',
-                    labelStyle: TextStyle(
-                      color: drkmd == true ? Colors.white : Colors.grey[600],
-                    ),
-                    prefixIcon: Icon(
-                      Icons.phone_android,
-                      color: drkmd == true ? Colors.white : Colors.grey[600],
-                    ),
-                  ),
-                ),
-                const SizedBox(
-                  height: 20,
-                ),
-                TextField(
-                  style: TextStyle(
-                    color: drkmd == true ? Colors.white : Colors.grey[600],
-                  ),
-                  controller: _address,
-                  decoration: InputDecoration(
-                    border: OutlineInputBorder(
-                      borderRadius: BorderRadius.horizontal(
-                        left: Radius.circular(40),
-                        right: Radius.circular(40),
-                      ),
-                      borderSide: BorderSide(color: Colors.red, width: 5.0),
-                    ),
-                    labelText: 'Address',
-                    labelStyle: TextStyle(
-                      color: drkmd == true ? Colors.white : Colors.grey[600],
-                    ),
-                    prefixIcon: Icon(
-                      Icons.location_on,
-                      color: drkmd == true ? Colors.white : Colors.grey[600],
-                    ),
-                  ),
-                ),
-                const SizedBox(
-                  height: 20,
-                ),
-                TextField(
-                  style: TextStyle(
-                    color: drkmd == true ? Colors.white : Colors.grey[600],
-                  ),
-                  keyboardType:
-                      const TextInputType.numberWithOptions(decimal: true),
-                  controller: _bloodamount,
-                  decoration: InputDecoration(
-                    border: const OutlineInputBorder(
-                      borderRadius: BorderRadius.horizontal(
-                        left: Radius.circular(40),
-                        right: Radius.circular(40),
-                      ),
-                      borderSide: BorderSide(
-                        color: Colors.red,
-                        width: 5.0,
+                      prefixIcon: Icon(
+                        Icons.people,
+                        color: drkmd == true ? Colors.white : Colors.grey[600],
                       ),
                     ),
-                    labelText: 'Amount',
-                    labelStyle: TextStyle(
-                      color: drkmd == true ? Colors.white : Colors.grey[600],
-                    ),
-                    prefixIcon: Icon(
-                      Icons.bloodtype_outlined,
-                      color: drkmd == true ? Colors.white : Colors.grey[600],
-                    ),
                   ),
-                ),
-                const SizedBox(
-                  height: 20,
-                ),
-                DropdownButtonFormField<String>(
-                  decoration: InputDecoration(
-                    border: const OutlineInputBorder(
-                      borderRadius: BorderRadius.horizontal(
-                        left: Radius.circular(40),
-                        right: Radius.circular(40),
+                  const SizedBox(
+                    height: 20.0,
+                  ),
+                  TextField(
+                    style: TextStyle(
+                      color: drkmd == true ? Colors.white : Colors.grey[600],
+                    ),
+                    keyboardType:
+                        const TextInputType.numberWithOptions(decimal: true),
+                    controller: _phonenumber,
+                    decoration: InputDecoration(
+                      border: OutlineInputBorder(
+                        borderRadius: BorderRadius.horizontal(
+                          left: Radius.circular(40),
+                          right: Radius.circular(40),
+                        ),
+                        borderSide: BorderSide(color: Colors.red, width: 5.0),
                       ),
-                      borderSide: BorderSide(color: Colors.red, width: 5.0),
-                    ),
-                    labelText: 'Blood Type',
-                    prefixIcon: Icon(
-                      Icons.bloodtype,
-                      color: drkmd == true ? Colors.white : Colors.grey[600],
+                      labelText: 'Phone no',
+                      labelStyle: TextStyle(
+                        color: drkmd == true ? Colors.white : Colors.grey[600],
+                      ),
+                      prefixIcon: Icon(
+                        Icons.phone_android,
+                        color: drkmd == true ? Colors.white : Colors.grey[600],
+                      ),
                     ),
                   ),
-                  value: dropdownValue,
-                  dropdownColor:
-                      drkmd == true ? Colors.grey[600] : Colors.white,
-                  items: selectedItemValue.map((dropValue) {
-                    return DropdownMenuItem<String>(
-                      value: dropValue,
-                      child: Text(
-                        dropValue,
-                        style: TextStyle(
-                          color:
-                              drkmd == true ? Colors.white : Colors.grey[600],
+                  const SizedBox(
+                    height: 20,
+                  ),
+                  TextField(
+                    style: TextStyle(
+                      color: drkmd == true ? Colors.white : Colors.grey[600],
+                    ),
+                    controller: _address,
+                    decoration: InputDecoration(
+                      border: OutlineInputBorder(
+                        borderRadius: BorderRadius.horizontal(
+                          left: Radius.circular(40),
+                          right: Radius.circular(40),
+                        ),
+                        borderSide: BorderSide(color: Colors.red, width: 5.0),
+                      ),
+                      labelText: 'Address',
+                      labelStyle: TextStyle(
+                        color: drkmd == true ? Colors.white : Colors.grey[600],
+                      ),
+                      prefixIcon: Icon(
+                        Icons.location_on,
+                        color: drkmd == true ? Colors.white : Colors.grey[600],
+                      ),
+                    ),
+                  ),
+                  const SizedBox(
+                    height: 20,
+                  ),
+                  TextField(
+                    style: TextStyle(
+                      color: drkmd == true ? Colors.white : Colors.grey[600],
+                    ),
+                    keyboardType:
+                        const TextInputType.numberWithOptions(decimal: true),
+                    controller: _bloodamount,
+                    decoration: InputDecoration(
+                      border: const OutlineInputBorder(
+                        borderRadius: BorderRadius.horizontal(
+                          left: Radius.circular(40),
+                          right: Radius.circular(40),
+                        ),
+                        borderSide: BorderSide(
+                          color: Colors.red,
+                          width: 5.0,
                         ),
                       ),
-                    );
-                  }).toList(),
-                  onChanged: (newDropdownValue) {
-                    setState(() {
-                      bloodtype = dropdownValue = newDropdownValue!;
-                      // bloodtype = dropdownValue;
-                    });
-                    print('$dropdownValue$bloodtype');
-                    // widget.onItemSelected(newDropdownValue);
-                  },
-                ),
-                const SizedBox(
-                  height: 20,
-                ),
-                TextButton(
-                  style: TextButton.styleFrom(
-                    backgroundColor: HexColor('#0984e3'),
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(20),
-                    ),
-                  ),
-                  child: const Center(
-                    child: Padding(
-                      padding: EdgeInsets.fromLTRB(8.0, 0.0, 8.0, 0.0),
-                      child: Text(
-                        'Request',
-                        style: TextStyle(
-                          fontWeight: FontWeight.w900,
-                          fontFamily: 'Nunito',
-                          color: Colors.white,
-                          fontSize: 18,
-                        ),
+                      labelText: 'Amount',
+                      labelStyle: TextStyle(
+                        color: drkmd == true ? Colors.white : Colors.grey[600],
+                      ),
+                      prefixIcon: Icon(
+                        Icons.bloodtype_outlined,
+                        color: drkmd == true ? Colors.white : Colors.grey[600],
                       ),
                     ),
                   ),
-                  onPressed: () async {
-                    final String name = _nameController.text;
-                    final int? phone = int.tryParse(_phonenumber.text);
-                    final String address = _address.text;
-                    final String? blood = bloodtype;
-                    final int? bloodamount = int.tryParse(_bloodamount.text);
-                    // print('selectedItemValue = ${bloodtype}');
-                    if (phone != null && name != '' && address != '') {
-                      await blood_requests.add(
-                        {
-                          "name": name,
-                          "phone": phone,
-                          "address": address,
-                          "bloodtype": bloodtype,
-                          "bloodamount": bloodamount
-                        },
-                      );
-                      Navigator.of(context).pop();
-                      _nameController.text = '';
-                      _phonenumber.text = '';
-                      _address.text = '';
-                    } else if (phone == null ||
-                        name == '' ||
-                        address == '' ||
-                        bloodamount == null) {
-                      ScaffoldMessenger.of(context).showSnackBar(
-                        const SnackBar(
-                          content: Text('Please enter all the details'),
-                          behavior: SnackBarBehavior.floating,
+                  const SizedBox(
+                    height: 20,
+                  ),
+                  DropdownButtonFormField<String>(
+                    decoration: InputDecoration(
+                      border: const OutlineInputBorder(
+                        borderRadius: BorderRadius.horizontal(
+                          left: Radius.circular(40),
+                          right: Radius.circular(40),
+                        ),
+                        borderSide: BorderSide(color: Colors.red, width: 5.0),
+                      ),
+                      labelText: 'Blood Type',
+                      prefixIcon: Icon(
+                        Icons.bloodtype,
+                        color: drkmd == true ? Colors.white : Colors.grey[600],
+                      ),
+                    ),
+                    value: dropdownValue,
+                    dropdownColor:
+                        drkmd == true ? Colors.grey[600] : Colors.white,
+                    items: selectedItemValue.map((dropValue) {
+                      return DropdownMenuItem<String>(
+                        value: dropValue,
+                        child: Text(
+                          dropValue,
+                          style: TextStyle(
+                            color:
+                                drkmd == true ? Colors.white : Colors.grey[600],
+                          ),
                         ),
                       );
-                    }
-                  },
-                ),
-              ],
+                    }).toList(),
+                    onChanged: (newDropdownValue) {
+                      setState(() {
+                        bloodtype = dropdownValue = newDropdownValue!;
+                        // bloodtype = dropdownValue;
+                      });
+                      print('$dropdownValue$bloodtype');
+                      // widget.onItemSelected(newDropdownValue);
+                    },
+                  ),
+                  const SizedBox(
+                    height: 20,
+                  ),
+                  TextButton(
+                    style: TextButton.styleFrom(
+                      backgroundColor: HexColor('#0984e3'),
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(20),
+                      ),
+                    ),
+                    child: const Center(
+                      child: Padding(
+                        padding: EdgeInsets.fromLTRB(8.0, 0.0, 8.0, 0.0),
+                        child: Text(
+                          'Request',
+                          style: TextStyle(
+                            fontWeight: FontWeight.w900,
+                            fontFamily: 'Nunito',
+                            color: Colors.white,
+                            fontSize: 18,
+                          ),
+                        ),
+                      ),
+                    ),
+                    onPressed: () async {
+                      final String name = _nameController.text;
+                      final int? phone = int.tryParse(_phonenumber.text);
+                      final String address = _address.text;
+                      final String? blood = bloodtype;
+                      final int? bloodamount = int.tryParse(_bloodamount.text);
+                      // print('selectedItemValue = ${bloodtype}');
+                      if (phone != null && name != '' && address != '') {
+                        await blood_requests.add(
+                          {
+                            "name": name,
+                            "phone": phone,
+                            "address": address,
+                            "bloodtype": bloodtype,
+                            "bloodamount": bloodamount
+                          },
+                        );
+                        Navigator.of(context).pop();
+                        _nameController.text = '';
+                        _phonenumber.text = '';
+                        _address.text = '';
+                      } else if (phone == null ||
+                          name == '' ||
+                          address == '' ||
+                          bloodamount == null) {
+                        ScaffoldMessenger.of(context).showSnackBar(
+                          const SnackBar(
+                            content: Text('Please enter all the details'),
+                            behavior: SnackBarBehavior.floating,
+                          ),
+                        );
+                      }
+                    },
+                  ),
+                ],
+              ),
             ),
           ),
         ),

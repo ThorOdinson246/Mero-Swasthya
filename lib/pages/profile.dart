@@ -49,12 +49,7 @@ class _ProfileState extends State<Profile> {
                         backgroundColor: Colors.blue,
                         child: CircleAvatar(
                           radius: 75,
-                          child: Text(
-                            'R',
-                            // _name.substring(0, 1).toUpperCase(),
-                            style: TextStyle(
-                                fontSize: 76, fontWeight: FontWeight.bold),
-                          ),
+                          backgroundImage: NetworkImage(user!.photoURL!),
                         ),
                       ),
                     ),
