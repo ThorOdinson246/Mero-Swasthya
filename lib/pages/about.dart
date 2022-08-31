@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 // import 'package:social_media_buttons/social_media_icons.dart';
 import 'homepage.dart';
 import 'settings.dart';
-import 'package:url_launcher/url_launcher.dart';
+// import 'package:url_launcher/url_launcher.dart';
 
 class About extends StatefulWidget {
   @override
@@ -12,7 +12,7 @@ class About extends StatefulWidget {
 }
 
 class _AboutState extends State<About> {
-  bool credvisible = true;
+  // bool credvisible = true;
 
   @override
   Widget build(BuildContext context) {
@@ -41,21 +41,13 @@ class _AboutState extends State<About> {
                     Padding(
                       padding: const EdgeInsets.fromLTRB(0, 80, 0, 20),
                       child: CircleAvatar(
-                        backgroundColor: Colors.blue,
-                        // maxRadius: 90,
-                        radius: 80,
-                        child: Text(
-                          "ESN",
-                          style: TextStyle(
-                            fontSize: 40,
-                            fontWeight: FontWeight.bold,
-                          ),
-                        ),
-                      ),
+                          backgroundColor: Colors.blue,
+                          // maxRadius: 90,
+                          radius: 80,
+                          backgroundImage: AssetImage('images/logo_heart.png')),
                     ),
-
                     Text(
-                      "Blood Bank Nepal",
+                      "Mero Swasthya",
                       style: TextStyle(
                         fontSize: 20,
                         fontWeight: FontWeight.bold,
@@ -118,28 +110,28 @@ class _AboutState extends State<About> {
                               padding: const EdgeInsets.all(8.0),
                               child: Column(
                                 children: [
-                                  Padding(
-                                    padding:
-                                        const EdgeInsets.fromLTRB(0, 0, 0, 8),
-                                    child: CircleAvatar(
-                                      // backgroundColor: Colors.yellow,
-                                      radius: 40,
-                                      backgroundImage: AssetImage(
-                                        'images/bipinsir.png',
-                                      ),
-                                    ),
-                                  ),
-                                  Text(
-                                    "Mukesh Poudel ",
-                                    textAlign: TextAlign.center,
-                                    style: TextStyle(
-                                      fontFamily: 'Nunito',
-                                      fontWeight: FontWeight.w700,
-                                      color: drkmd == true
-                                          ? HexColor('#bebebe')
-                                          : Colors.grey[800],
-                                    ),
-                                  ),
+                                  // Padding(
+                                  //   padding:
+                                  //       const EdgeInsets.fromLTRB(0, 0, 0, 8),
+                                  //   child: CircleAvatar(
+                                  //     // backgroundColor: Colors.yellow,
+                                  //     radius: 40,
+                                  //     backgroundImage: AssetImage(
+                                  //       'images/bipinsir.png',
+                                  //     ),
+                                  //   ),
+                                  // ),
+                                  // Text(
+                                  //   "Mukesh Poudel ",
+                                  //   textAlign: TextAlign.center,
+                                  //   style: TextStyle(
+                                  //     fontFamily: 'Nunito',
+                                  //     fontWeight: FontWeight.w700,
+                                  //     color: drkmd == true
+                                  //         ? HexColor('#bebebe')
+                                  //         : Colors.grey[800],
+                                  //   ),
+                                  // ),
                                 ],
                               ),
                             ),
@@ -148,11 +140,12 @@ class _AboutState extends State<About> {
                             //   flex: 1,
                             // child:
                             Padding(
-                                padding: const EdgeInsets.all(8.0),
-                                child: RichText(
-                                  text: TextSpan(children: [
+                              padding: const EdgeInsets.all(8.0),
+                              child: RichText(
+                                text: TextSpan(
+                                  children: [
                                     TextSpan(
-                                      text: 'Hello, I am ',
+                                      text: '',
                                       style: TextStyle(
                                         fontFamily: 'Nunito',
                                         fontSize: 13,
@@ -163,7 +156,7 @@ class _AboutState extends State<About> {
                                       ),
                                     ),
                                     TextSpan(
-                                      text: 'Mukesh Poudel',
+                                      text: 'Mero Swasthya',
                                       style: TextStyle(
                                         fontFamily: 'Nunito',
                                         fontSize: 13,
@@ -175,7 +168,7 @@ class _AboutState extends State<About> {
                                     ),
                                     TextSpan(
                                       text:
-                                          '. I am a student and MSc holder in Computer Science specializing in Artificial Intelligence. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam.\n Check out my youtube channel:\n Reach me out here:.',
+                                          ' is a all-in-one solution to all your health problems. Through this app you can receive new health and lifestyle tips. You can access various emergency services as Blood Bank, free Doctor\'s consultation*, measure Heart Rate*, BMI Calculator, IBW Calculator, Self Anxiety Check and many more. MOre features are to be added soon.',
                                       style: TextStyle(
                                         fontFamily: 'Nunito',
                                         fontSize: 13,
@@ -185,8 +178,10 @@ class _AboutState extends State<About> {
                                             : Colors.grey[800],
                                       ),
                                     ),
-                                  ]),
-                                )),
+                                  ],
+                                ),
+                              ),
+                            ),
                             // )
                           ],
                         ),
@@ -196,47 +191,7 @@ class _AboutState extends State<About> {
                   ),
                 ),
                 Padding(
-                  padding: const EdgeInsets.all(15),
-                  child: Container(
-                    width: width,
-                    // height: 150,
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(30),
-                      color: drkmd == true
-                          ? HexColor('#444444')
-                          : HexColor('#dfe6e9'),
-                      boxShadow: [
-                        BoxShadow(
-                          spreadRadius: 3,
-                          color: drkmd == true
-                              ? HexColor('#444444')
-                              : HexColor('#dfe6e9'),
-                          offset: Offset(0, 6),
-                        ),
-                      ],
-                    ),
-                    child: Padding(
-                      padding: const EdgeInsets.all(15.0),
-                      child: InkWell(
-                        onTap: () {},
-                        child: Text(
-                          'You can also access the web version of this app from https://nhf.org',
-                          style: TextStyle(
-                            color: drkmd == true
-                                ? HexColor('#bebebe')
-                                : Colors.grey[800],
-                            fontFamily: 'Nunito',
-                            fontWeight: FontWeight.w700,
-                          ),
-                        ),
-                      ),
-                    ),
-                  ),
-                ),
-                //My and other intro starts here
-
-                Padding(
-                  padding: const EdgeInsets.fromLTRB(15, 15, 15, 60),
+                  padding: const EdgeInsets.fromLTRB(15, 15, 15, 70),
                   child: Container(
                     width: width,
                     // height: 150,
@@ -261,7 +216,7 @@ class _AboutState extends State<About> {
                           InkWell(
                             onTap: () {},
                             child: Text(
-                              'A word from Developer',
+                              'Navigation Help',
                               style: TextStyle(
                                 fontFamily: 'Nunito',
                                 fontWeight: FontWeight.w800,
@@ -271,12 +226,11 @@ class _AboutState extends State<About> {
                               ),
                             ),
                           ),
-                          Visibility(
-                            visible: credvisible,
-                            child: RichText(
-                              text: TextSpan(children: [
+                          RichText(
+                            text: TextSpan(
+                              children: [
                                 TextSpan(
-                                  text: 'Hello Students, I am',
+                                  text: '',
                                   style: TextStyle(
                                     color: drkmd == true
                                         ? HexColor('#bebebe')
@@ -286,7 +240,7 @@ class _AboutState extends State<About> {
                                   ),
                                 ),
                                 TextSpan(
-                                  text: ' Abhishek Poudel. ',
+                                  text: 'Blood Banks',
                                   style: TextStyle(
                                     color: drkmd == true
                                         ? HexColor('#bebebe')
@@ -297,7 +251,7 @@ class _AboutState extends State<About> {
                                 ),
                                 TextSpan(
                                   text:
-                                      'Lorem ipsum wahdkahdiaa afuaih afoa hao agiudgf iagugfd fg sfis fu fi',
+                                      '\nAccess the bloodbanks located near you and contact them quickly with just click of a button.\n',
                                   style: TextStyle(
                                     color: drkmd == true
                                         ? HexColor('#bebebe')
@@ -307,7 +261,7 @@ class _AboutState extends State<About> {
                                   ),
                                 ),
                                 TextSpan(
-                                  text: ' ANy thing important ',
+                                  text: 'Request Blood',
                                   style: TextStyle(
                                     color: drkmd == true
                                         ? HexColor('#bebebe')
@@ -318,7 +272,7 @@ class _AboutState extends State<About> {
                                 ),
                                 TextSpan(
                                   text:
-                                      ' while the notes and amazing contents of the app are provided by our respected ',
+                                      '\nPlace a personal request for blood for other users using the app to see and contact you.',
                                   style: TextStyle(
                                     color: drkmd == true
                                         ? HexColor('#bebebe')
@@ -328,7 +282,7 @@ class _AboutState extends State<About> {
                                   ),
                                 ),
                                 TextSpan(
-                                  text: 'any thing imopie ',
+                                  text: '\nHealth Utilities',
                                   style: TextStyle(
                                     color: drkmd == true
                                         ? HexColor('#bebebe')
@@ -339,7 +293,7 @@ class _AboutState extends State<About> {
                                 ),
                                 TextSpan(
                                   text:
-                                      'sir. This app was created with the intention to help  Feel free to suggest us for any improvements.',
+                                      '\n A single pathway to various most useful health tools you need. Access Body Mass INdex, Ideal Body Weight Calculators or take a Self Anxiety Test to assess yourself. Heart Beat Measure and Medicine Reminder are currently in development. ',
                                   style: TextStyle(
                                     color: drkmd == true
                                         ? HexColor('#bebebe')
@@ -348,7 +302,70 @@ class _AboutState extends State<About> {
                                     fontWeight: FontWeight.w600,
                                   ),
                                 ),
-                              ]),
+                                TextSpan(
+                                  text: '\nFind A Blood Donor',
+                                  style: TextStyle(
+                                    color: drkmd == true
+                                        ? HexColor('#bebebe')
+                                        : Colors.grey[800],
+                                    fontFamily: 'Nunito',
+                                    fontWeight: FontWeight.w900,
+                                  ),
+                                ),
+                                TextSpan(
+                                  text:
+                                      '\nQuickly find volunteers willing to donate blood or recruit them for the your next Blood Donation Campaign.',
+                                  style: TextStyle(
+                                    color: drkmd == true
+                                        ? HexColor('#bebebe')
+                                        : Colors.grey[800],
+                                    fontFamily: 'Nunito',
+                                    fontWeight: FontWeight.w600,
+                                  ),
+                                ),
+                                TextSpan(
+                                  text: '\nConsult A Doctor',
+                                  style: TextStyle(
+                                    color: drkmd == true
+                                        ? HexColor('#bebebe')
+                                        : Colors.grey[800],
+                                    fontFamily: 'Nunito',
+                                    fontWeight: FontWeight.w900,
+                                  ),
+                                ),
+                                TextSpan(
+                                  text:
+                                      '\nGet a free consultation with doctors regarding your minor health problems and queries. You can then directly meet up or schedule an appointment later if you decided to get further assistance.',
+                                  style: TextStyle(
+                                    color: drkmd == true
+                                        ? HexColor('#bebebe')
+                                        : Colors.grey[800],
+                                    fontFamily: 'Nunito',
+                                    fontWeight: FontWeight.w600,
+                                  ),
+                                ),
+                                TextSpan(
+                                  text: '\nExplore',
+                                  style: TextStyle(
+                                    color: drkmd == true
+                                        ? HexColor('#bebebe')
+                                        : Colors.grey[800],
+                                    fontFamily: 'Nunito',
+                                    fontWeight: FontWeight.w900,
+                                  ),
+                                ),
+                                TextSpan(
+                                  text:
+                                      '\nQuickly Read articles curated by medical professionals about daily health, advancement in healths and offers for your health checkup. ',
+                                  style: TextStyle(
+                                    color: drkmd == true
+                                        ? HexColor('#bebebe')
+                                        : Colors.grey[800],
+                                    fontFamily: 'Nunito',
+                                    fontWeight: FontWeight.w600,
+                                  ),
+                                ),
+                              ],
                             ),
                           ),
                         ],

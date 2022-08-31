@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:testapp1/allpages.dart';
 import 'package:testapp1/lists/dropdown_requestblood.dart';
 import 'package:testapp1/pages/homepage.dart';
 import 'package:testapp1/pages/settings.dart';
@@ -91,7 +92,7 @@ class RequestBloodState extends State<RequestBlood> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    'Place a personal request for blood for other users using this app to see.\n',
+                    'Place a personal request for blood for other users using this app or us to see and contact you.\n',
                     style: TextStyle(
                         color: drkmd == true ? Colors.white : Colors.grey[600],
                         fontFamily: 'Nunito'),
@@ -280,6 +281,7 @@ class RequestBloodState extends State<RequestBlood> {
                       if (phone != null && name != '' && address != '') {
                         await blood_requests.add(
                           {
+                            "user-id": user!.uid,
                             "name": name,
                             "phone": phone,
                             "address": address,
@@ -288,6 +290,12 @@ class RequestBloodState extends State<RequestBlood> {
                           },
                         );
                         Navigator.of(context).pop();
+                        ScaffoldMessenger.of(context).showSnackBar(
+                          const SnackBar(
+                            content: Text('Your Request is placed.'),
+                            behavior: SnackBarBehavior.floating,
+                          ),
+                        );
                         _nameController.text = '';
                         _phonenumber.text = '';
                         _address.text = '';
@@ -310,6 +318,7 @@ class RequestBloodState extends State<RequestBlood> {
           ),
         ),
       ),
+
       // floatingActionButton: FloatingActionButton(
       //   onPressed: () => _create(),
       //   child: const Icon(Icons.add),

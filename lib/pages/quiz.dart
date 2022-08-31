@@ -106,7 +106,7 @@ class _QuizPageState extends State<QuizPage> {
                                   mainAxisAlignment: MainAxisAlignment.end,
                                   children: [
                                     Text(
-                                      'Score: ' + score.toString(),
+                                      '',
                                       style: TextStyle(
                                         fontWeight: FontWeight.w700,
                                         fontSize: 17,

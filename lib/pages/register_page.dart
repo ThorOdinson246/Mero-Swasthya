@@ -1,4 +1,7 @@
+import 'dart:developer';
+
 import 'package:google_sign_in/google_sign_in.dart';
+import 'package:phoenix_native/phoenix_native.dart';
 import 'package:testapp1/allpages.dart';
 import 'package:testapp1/pages/googlesignin.dart';
 import 'package:testapp1/pages/homepage.dart';
@@ -32,27 +35,29 @@ class _RegisterPageState extends State<RegisterPage> {
     super.initState();
     final googleSignIn = GoogleSignIn();
     googleSignIn.disconnect();
+    log('signedout');
+    // PhoenixNative.restartApp();
   }
 
-  save() async {
-    final SharedPreferences sharedPrefs = await SharedPreferences.getInstance();
-    // sharedPrefs.setString('nm', _myController.text);
-    // sharedPrefs.setString('lstnm', _myLastName.text);
-    // sharedPrefs.setString('grd', _phoneno.text);
-    // sharedPrefs.setString('sch', _mySchool.text);
-    // sharedPrefs.setString('favsub', _myFavSub.text);
-    sharedPrefs.setBool('isLogged', true);
-    sharedPrefs.setInt('quiz', 0);
+  // save() async {
+  //   final SharedPreferences sharedPrefs = await SharedPreferences.getInstance();
+  //   // sharedPrefs.setString('nm', _myController.text);
+  //   // sharedPrefs.setString('lstnm', _myLastName.text);
+  //   // sharedPrefs.setString('grd', _phoneno.text);
+  //   // sharedPrefs.setString('sch', _mySchool.text);
+  //   // sharedPrefs.setString('favsub', _myFavSub.text);
+  //   sharedPrefs.setBool('isLogged', true);
+  //   sharedPrefs.setInt('quiz', 0);
 
-    // print('record added');
-  }
+  //   // print('record added');
+  // }
 
-  get() async {
-    final SharedPreferences sharedPrefs = await SharedPreferences.getInstance();
-    // String pastdata = sharedPrefs.getString('nm').toString();
-    print('geting record');
-    // print('pastdata' + pastdata);
-  }
+  // get() async {
+  //   final SharedPreferences sharedPrefs = await SharedPreferences.getInstance();
+  //   // String pastdata = sharedPrefs.getString('nm').toString();
+  //   print('geting record');
+  //   // print('pastdata' + pastdata);
+  // }
 
   @override
   Widget build(BuildContext context) {

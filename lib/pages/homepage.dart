@@ -113,11 +113,11 @@ class _MyHomePageState extends State<MyHomePage>
         ],*/
           title: Text(
             bottomNavIndex == 0
-                ? 'Blood App'
+                ? 'Mero Swasthya'
                 : bottomNavIndex == 1
                     ? 'Profile'
                     : bottomNavIndex == 2
-                        ? 'About Us'
+                        ? 'About App'
                         : bottomNavIndex == 3
                             ? 'Settings'
                             : '',
@@ -234,7 +234,7 @@ class _NavigationScreenState extends State<NavigationScreen>
   void initState() {
     _controller = AnimationController(
       vsync: this,
-      duration: Duration(milliseconds: 1000),
+      duration: Duration(milliseconds: 500),
     );
     animation = CurvedAnimation(
       parent: _controller,

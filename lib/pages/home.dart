@@ -6,7 +6,7 @@ import 'package:testapp1/pages/search_blood.dart';
 import 'package:testapp1/pages/request_blood.dart';
 import 'package:testapp1/pages_home/lesson_chemistry.dart';
 import 'package:testapp1/pages_home/blood_banks.dart';
-import 'package:testapp1/pages_home/find_doctor.dart';
+import 'package:testapp1/pages_home/consult_doctor.dart';
 import 'package:flutter/material.dart';
 import 'dart:async';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -108,26 +108,6 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
                             stream: dataStream,
                             builder: (BuildContext context,
                                 AsyncSnapshot<QuerySnapshot> snapshot) {
-                              /*
-                              if (snapshot.connectionState ==
-                                  ConnectionState.waiting) {
-                                return const Text(
-                                  'The greatest glory in living lies not in never falling, but in rising every time we fall got it right i am check. ',
-                                  style: TextStyle(
-                                    height: 0.9,
-                                    fontSize: 30,
-                                    fontFamily: 'Nunito',
-                                    fontWeight: FontWeight.w900,
-                                    color: Colors.white,
-                                    shadows: [
-                                      Shadow(
-                                        offset: Offset(2, 2),
-                                        blurRadius: 2,
-                                      ),
-                                    ],
-                                  ),
-                                );
-                              }*/
                               if (snapshot.hasData) {
                                 final List storedocs = [];
                                 snapshot.data!.docs.map(
@@ -769,7 +749,8 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
                                       Navigator.push(
                                         context,
                                         MaterialPageRoute(
-                                          builder: (context) => findDoctors(),
+                                          builder: (context) =>
+                                              consultDoctors(),
                                         ),
                                       );
                                     },

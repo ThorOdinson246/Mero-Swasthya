@@ -1,7 +1,10 @@
+import 'dart:developer';
+
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:phoenix_native/phoenix_native.dart';
 import 'package:testapp1/main.dart';
+import 'package:testapp1/pages/log_out.dart';
 import 'package:testapp1/pages/register_page.dart';
 import 'package:testapp1/pages/splash.dart';
 import 'package:flutter/gestures.dart';
@@ -36,8 +39,10 @@ class _SettingsState extends State<Settings> {
 
   clear() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
-    await prefs.clear();
-    print('All Records Cleared');
+    final SharedPreferences sharedPrefs = await SharedPreferences.getInstance();
+
+    sharedPrefs.setBool('isLogged', false);
+    log('All Records Cleared');
     // Navigator.of(context).pushReplacement(
     //   MaterialPageRoute(
     //     builder: (context) => Splash(),
@@ -52,21 +57,6 @@ class _SettingsState extends State<Settings> {
   }
 
   final FirebaseAuth authInstance = FirebaseAuth.instance;
-
-/*
-  disableDarkMode() async {
-    SharedPreferences prefs = await SharedPreferences.getInstance();
-    prefs.setBool('isDarkModeEnabled', false);
-    drkmd = false;
-  }
-
-  checkDarkMode() async {
-    SharedPreferences prefs = await SharedPreferences.getInstance();
-    //Return bool
-    bool drkmddm = prefs.getBool('isDarkModeEnabled');
-    drkmd = drkmddm;
-    return drkmddm;
-  }*/
 
   @override
   Widget build(BuildContext context) {
@@ -296,9 +286,15 @@ class _SettingsState extends State<Settings> {
                                 shape: RoundedRectangleBorder(
                                     borderRadius: BorderRadius.circular(15)),
                                 onPressed: () {
-                                  signOut();
-                                  clear();
-                                  PhoenixNative.restartApp();
+                                  // signOut();
+                                  // clear();
+                                  // Navigator.pop(context);
+                                  Navigator.of(context).pushReplacement(
+                                    MaterialPageRoute(
+                                      builder: (context) => LogOut(),
+                                    ),
+                                  );
+                                  // PhoenixNative.restartApp();
                                 },
                                 child: Text(
                                   "Log Out",

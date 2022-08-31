@@ -5,19 +5,18 @@ import 'package:testapp1/pages/settings.dart';
 import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher.dart';
 
-class findDoctors extends StatefulWidget {
+class consultDoctors extends StatefulWidget {
   @override
-  _findDoctorsState createState() => _findDoctorsState();
+  _consultDoctorsState createState() => _consultDoctorsState();
 }
 
 String pdfOfLesson = 'assests/sample2.pdf';
 
-class _findDoctorsState extends State<findDoctors> {
+class _consultDoctorsState extends State<consultDoctors> {
   final CollectionReference find_doctors =
       FirebaseFirestore.instance.collection('find_doctors');
   @override
   Widget build(BuildContext context) {
-    
     double width = MediaQuery.of(context).size.width;
     return Scaffold(
       // extendBodyBehindAppBar: true,
@@ -32,7 +31,7 @@ class _findDoctorsState extends State<findDoctors> {
         centerTitle: true,
         toolbarHeight: 50,
         title: const Text(
-          "Find Doctor",
+          "Consult A Doctor",
           style: TextStyle(
             fontFamily: 'SuezOne',
             color: Colors.white,
@@ -46,7 +45,7 @@ class _findDoctorsState extends State<findDoctors> {
           Padding(
             padding: const EdgeInsets.fromLTRB(15, 10, 0, 0),
             child: Text(
-              "Consult top rated doctors all over nepal ",
+              "Consult top rated doctors all over nepal \nPlease note this feature is currently under development. The phone number below will not work as of this moment.",
               style: TextStyle(
                 fontFamily: 'Nunito',
                 color:
@@ -192,7 +191,7 @@ class _findDoctorsState extends State<findDoctors> {
                                           TextButton(
                                             onPressed: () {
                                               launch(
-                                                  "tel://${documentSnapshot['phone']}");
+                                                  "sms://${documentSnapshot['phone']}");
                                             },
                                             // color: HexColor('#e63946'),
                                             style: TextButton.styleFrom(
@@ -204,7 +203,7 @@ class _findDoctorsState extends State<findDoctors> {
                                               ),
                                             ),
                                             child: const Icon(
-                                              Icons.call,
+                                              Icons.chat,
                                               color: Colors.white,
                                             ),
                                           ),

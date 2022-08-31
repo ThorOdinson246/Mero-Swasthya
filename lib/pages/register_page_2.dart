@@ -210,7 +210,7 @@ class _RegisterPageTwoState extends State<RegisterPageTwo> {
                               width: 5.0,
                             ),
                           ),
-                          labelText: 'Field 4 ',
+                          labelText: 'Address ',
                           labelStyle: TextStyle(
                             color: Colors.grey[600],
                           ),
@@ -241,7 +241,7 @@ class _RegisterPageTwoState extends State<RegisterPageTwo> {
                               width: 5.0,
                             ),
                           ),
-                          labelText: 'Field 5 ',
+                          labelText: 'Refer Code(if any) ',
                           labelStyle: TextStyle(
                             color: Colors.grey[600],
                           ),
@@ -280,12 +280,24 @@ class _RegisterPageTwoState extends State<RegisterPageTwo> {
                             ),
                           ),
                           onPressed: () {
-                            _userDetailsAdd(context);
-                            Navigator.pushReplacement(
-                                context,
-                                MaterialPageRoute(
-                                    builder: (context) => MyHomePage()));
-                            save();
+                            if (_myController.text != '' &&
+                                _myLastName.text != '' &&
+                                _phoneno.text != '' &&
+                                _location.text != '') {
+                              _userDetailsAdd(context);
+                              Navigator.pushReplacement(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (context) => MyHomePage()));
+                              save();
+                            } else {
+                              ScaffoldMessenger.of(context).showSnackBar(
+                                const SnackBar(
+                                  content: Text('Please enter all the details'),
+                                  behavior: SnackBarBehavior.floating,
+                                ),
+                              );
+                            }
                           },
                         ),
                       ),

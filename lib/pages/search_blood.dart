@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:testapp1/pages/be_donor.dart';
 import 'package:testapp1/pages/homepage.dart';
 import 'package:testapp1/pages/settings.dart';
 import 'package:url_launcher/url_launcher.dart';
@@ -18,7 +19,7 @@ class _RequestBloodState extends State<SearchBlood> {
   final TextEditingController _phonenumber = TextEditingController();
 
   final CollectionReference blood_requests =
-      FirebaseFirestore.instance.collection('blood_requests');
+      FirebaseFirestore.instance.collection('donors_regitration');
 
 /*
   Future<void> _create([DocumentSnapshot? documentSnapshot]) async {
@@ -159,334 +160,411 @@ class _RequestBloodState extends State<SearchBlood> {
           ),
         ),
       ),
-      body: StreamBuilder(
-        stream: blood_requests.snapshots(),
-        builder: (context, AsyncSnapshot<QuerySnapshot> streamSnapshot) {
-          if (streamSnapshot.hasData) {
-            return ListView.builder(
-              itemCount: streamSnapshot.data!.docs.length,
-              itemBuilder: (context, index) {
-                final DocumentSnapshot documentSnapshot =
-                    streamSnapshot.data!.docs[index];
-                return Column(
-                  children: [
-                    Padding(
-                      padding: const EdgeInsets.all(15),
-                      child: Container(
-                        width: width,
-                        // height: 150,
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(30),
-                          color: drkmd == true
-                              ? HexColor('#444444')
-                              : HexColor('#dfe6e9'),
-                          boxShadow: [
-                            BoxShadow(
-                              spreadRadius: 3,
-                              color: drkmd == true
-                                  ? HexColor('#444444')
-                                  : HexColor('#dfe6e9'),
-                              offset: const Offset(0, 6),
-                            ),
-                          ],
-                        ),
-                        child: Padding(
-                          padding: EdgeInsets.fromLTRB(5, 15, 10, 5),
-                          child: Row(
-                            children: [
-                              CircleAvatar(
-                                radius: 30,
-                                backgroundColor: HexColor('#e63946'),
-                                child: Icon(
-                                  size: 40,
-                                  Icons.person,
-                                ),
-                              ),
-                              Expanded(
-                                flex: 5,
-                                child: Padding(
-                                  padding: const EdgeInsets.fromLTRB(
-                                      10.0, 10.0, 0, 5.0),
-                                  child: Column(
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.start,
-                                    mainAxisAlignment: MainAxisAlignment.center,
-                                    children: [
-                                      RichText(
-                                        text: TextSpan(
-                                          children: [
-                                            TextSpan(
-                                              text: 'Name: ',
-                                              style: TextStyle(
-                                                color: drkmd == true
-                                                    ? HexColor('#bebebe')
-                                                    : HexColor('#636e72'),
-                                                fontSize: 17,
-                                                fontWeight: FontWeight.bold,
-                                              ),
-                                            ),
-                                            TextSpan(
-                                              text:
-                                                  '${documentSnapshot['name']}',
-                                              style: TextStyle(
-                                                color: drkmd == true
-                                                    ? HexColor('#bebebe')
-                                                    : HexColor('#636e72'),
-                                                fontSize: 17,
-                                                fontWeight: FontWeight.w400,
-                                              ),
-                                            ),
-                                          ],
-                                        ),
-                                      ),
-                                      RichText(
-                                        text: TextSpan(
-                                          children: [
-                                            TextSpan(
-                                              text: 'Address: ',
-                                              style: TextStyle(
-                                                color: drkmd == true
-                                                    ? HexColor('#bebebe')
-                                                    : HexColor('#636e72'),
-                                                fontSize: 17,
-                                                fontWeight: FontWeight.bold,
-                                              ),
-                                            ),
-                                            TextSpan(
-                                              text:
-                                                  '${documentSnapshot['address']}',
-                                              style: TextStyle(
-                                                color: drkmd == true
-                                                    ? HexColor('#bebebe')
-                                                    : HexColor('#636e72'),
-                                                fontSize: 17,
-                                                fontWeight: FontWeight.w400,
-                                              ),
-                                            ),
-                                          ],
-                                        ),
-                                      ),
-                                      RichText(
-                                        text: TextSpan(
-                                          children: [
-                                            TextSpan(
-                                              text: 'Blood: ',
-                                              style: TextStyle(
-                                                color: drkmd == true
-                                                    ? HexColor('#bebebe')
-                                                    : HexColor('#636e72'),
-                                                fontSize: 17,
-                                                fontWeight: FontWeight.bold,
-                                              ),
-                                            ),
-                                            TextSpan(
-                                              text:
-                                                  '${documentSnapshot['bloodtype']}',
-                                              style: TextStyle(
-                                                color: drkmd == true
-                                                    ? HexColor('#e63946')
-                                                    : HexColor('#e63946'),
-                                                fontSize: 17,
-                                                fontWeight: FontWeight.w600,
-                                              ),
-                                            ),
-                                          ],
-                                        ),
-                                      ),
-                                      RichText(
-                                        text: TextSpan(
-                                          children: [
-                                            TextSpan(
-                                              text: 'Blood Amount: ',
-                                              style: TextStyle(
-                                                color: drkmd == true
-                                                    ? HexColor('#bebebe')
-                                                    : HexColor('#636e72'),
-                                                fontSize: 17,
-                                                fontWeight: FontWeight.bold,
-                                              ),
-                                            ),
-                                            TextSpan(
-                                              text:
-                                                  '${documentSnapshot['bloodamount']}',
-                                              style: TextStyle(
-                                                color: drkmd == true
-                                                    ? HexColor('#e63946')
-                                                    : HexColor('#e63946'),
-                                                fontSize: 17,
-                                                fontWeight: FontWeight.w600,
-                                              ),
-                                            ),
-                                          ],
-                                        ),
-                                      ),
-                                      RichText(
-                                        text: TextSpan(
-                                          children: [
-                                            TextSpan(
-                                              text: 'Contact: ',
-                                              style: TextStyle(
-                                                color: drkmd == true
-                                                    ? HexColor('#bebebe')
-                                                    : HexColor('#636e72'),
-                                                fontSize: 17,
-                                                fontWeight: FontWeight.bold,
-                                              ),
-                                            ),
-                                            TextSpan(
-                                              text:
-                                                  '${documentSnapshot['phone']}',
-                                              style: TextStyle(
-                                                color: drkmd == true
-                                                    ? HexColor('#bebebe')
-                                                    : HexColor('#636e72'),
-                                                fontSize: 17,
-                                                fontWeight: FontWeight.w400,
-                                              ),
-                                            ),
-                                          ],
-                                        ),
-                                      ),
-                                    ],
+      body: Column(
+        children: [
+          Padding(
+            padding: const EdgeInsets.fromLTRB(15, 10, 0, 0),
+            child: Text(
+              "Below are the current volunteers available for blood donation. Feel free to call. ",
+              style: TextStyle(
+                fontFamily: 'Nunito',
+                color:
+                    drkmd == true ? HexColor('#bebebe') : HexColor('#636e72'),
+                fontSize: 15,
+                fontWeight: FontWeight.bold,
+              ),
+            ),
+          ),
+          Flexible(
+            child: StreamBuilder(
+              stream: blood_requests.snapshots(),
+              builder: (context, AsyncSnapshot<QuerySnapshot> streamSnapshot) {
+                if (streamSnapshot.hasData) {
+                  return ListView.builder(
+                    itemCount: streamSnapshot.data!.docs.length,
+                    itemBuilder: (context, index) {
+                      final DocumentSnapshot documentSnapshot =
+                          streamSnapshot.data!.docs[index];
+                      return Column(
+                        children: [
+                          Padding(
+                            padding: const EdgeInsets.all(15),
+                            child: Container(
+                              width: width,
+                              // height: 150,
+                              decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(30),
+                                color: drkmd == true
+                                    ? HexColor('#444444')
+                                    : HexColor('#dfe6e9'),
+                                boxShadow: [
+                                  BoxShadow(
+                                    spreadRadius: 3,
+                                    color: drkmd == true
+                                        ? HexColor('#444444')
+                                        : HexColor('#dfe6e9'),
+                                    offset: const Offset(0, 6),
                                   ),
-                                ),
+                                ],
                               ),
-                              Expanded(
-                                flex: 1,
-                                child: Column(
-                                  // mainAxisAlignment: MainAxisAlignment.end,
+                              child: Padding(
+                                padding: EdgeInsets.fromLTRB(5, 15, 10, 5),
+                                child: Row(
                                   children: [
-                                    TextButton(
-                                      onPressed: () {
-                                        launch(
-                                            "tel://${documentSnapshot['phone']}");
-                                      },
-                                      // color: HexColor('#e63946'),
-                                      style: TextButton.styleFrom(
-                                        backgroundColor: HexColor('#e63946'),
-                                        shape: RoundedRectangleBorder(
-                                          borderRadius:
-                                              BorderRadius.circular(20),
-                                        ),
-                                      ),
-                                      child: const Icon(
-                                        Icons.call,
-                                        color: Colors.white,
+                                    CircleAvatar(
+                                      radius: 30,
+                                      backgroundColor: HexColor('#e63946'),
+                                      child: Icon(
+                                        size: 40,
+                                        Icons.person,
                                       ),
                                     ),
-                                    TextButton(
-                                      style: TextButton.styleFrom(
-                                        backgroundColor: HexColor('#e63946'),
-                                        shape: RoundedRectangleBorder(
-                                          borderRadius:
-                                              BorderRadius.circular(20),
-                                        ),
-                                      ),
-                                      onPressed: () =>
-                                          _update(documentSnapshot),
-                                      child: const Text(
-                                        "U",
-                                        style: TextStyle(
-                                          fontWeight: FontWeight.w900,
-                                          fontFamily: 'Nunito',
-                                          color: Colors.white,
-                                          fontSize: 18,
+                                    Expanded(
+                                      flex: 5,
+                                      child: Padding(
+                                        padding: const EdgeInsets.fromLTRB(
+                                            10.0, 10.0, 0, 5.0),
+                                        child: Column(
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.start,
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.center,
+                                          children: [
+                                            RichText(
+                                              text: TextSpan(
+                                                children: [
+                                                  TextSpan(
+                                                    text: 'Name: ',
+                                                    style: TextStyle(
+                                                      color: drkmd == true
+                                                          ? HexColor('#bebebe')
+                                                          : HexColor('#636e72'),
+                                                      fontSize: 17,
+                                                      fontWeight:
+                                                          FontWeight.bold,
+                                                    ),
+                                                  ),
+                                                  TextSpan(
+                                                    text:
+                                                        '${documentSnapshot['name']}',
+                                                    style: TextStyle(
+                                                      color: drkmd == true
+                                                          ? HexColor('#bebebe')
+                                                          : HexColor('#636e72'),
+                                                      fontSize: 17,
+                                                      fontWeight:
+                                                          FontWeight.w400,
+                                                    ),
+                                                  ),
+                                                ],
+                                              ),
+                                            ),
+                                            RichText(
+                                              text: TextSpan(
+                                                children: [
+                                                  TextSpan(
+                                                    text: 'Address: ',
+                                                    style: TextStyle(
+                                                      color: drkmd == true
+                                                          ? HexColor('#bebebe')
+                                                          : HexColor('#636e72'),
+                                                      fontSize: 17,
+                                                      fontWeight:
+                                                          FontWeight.bold,
+                                                    ),
+                                                  ),
+                                                  TextSpan(
+                                                    text:
+                                                        '${documentSnapshot['address']}',
+                                                    style: TextStyle(
+                                                      color: drkmd == true
+                                                          ? HexColor('#bebebe')
+                                                          : HexColor('#636e72'),
+                                                      fontSize: 17,
+                                                      fontWeight:
+                                                          FontWeight.w400,
+                                                    ),
+                                                  ),
+                                                ],
+                                              ),
+                                            ),
+                                            RichText(
+                                              text: TextSpan(
+                                                children: [
+                                                  TextSpan(
+                                                    text: 'Blood: ',
+                                                    style: TextStyle(
+                                                      color: drkmd == true
+                                                          ? HexColor('#bebebe')
+                                                          : HexColor('#636e72'),
+                                                      fontSize: 17,
+                                                      fontWeight:
+                                                          FontWeight.bold,
+                                                    ),
+                                                  ),
+                                                  TextSpan(
+                                                    text:
+                                                        '${documentSnapshot['bloodtype']}',
+                                                    style: TextStyle(
+                                                      color: drkmd == true
+                                                          ? HexColor('#e63946')
+                                                          : HexColor('#e63946'),
+                                                      fontSize: 17,
+                                                      fontWeight:
+                                                          FontWeight.w600,
+                                                    ),
+                                                  ),
+                                                ],
+                                              ),
+                                            ),
+                                            // RichText(
+                                            //   text: TextSpan(
+                                            //     children: [
+                                            //       TextSpan(
+                                            //         text: 'Blood Amount: ',
+                                            //         style: TextStyle(
+                                            //           color: drkmd == true
+                                            //               ? HexColor('#bebebe')
+                                            //               : HexColor('#636e72'),
+                                            //           fontSize: 17,
+                                            //           fontWeight:
+                                            //               FontWeight.bold,
+                                            //         ),
+                                            //       ),
+                                            //       TextSpan(
+                                            //         text:
+                                            //             '${documentSnapshot['bloodamount']}',
+                                            //         style: TextStyle(
+                                            //           color: drkmd == true
+                                            //               ? HexColor('#e63946')
+                                            //               : HexColor('#e63946'),
+                                            //           fontSize: 17,
+                                            //           fontWeight:
+                                            //               FontWeight.w600,
+                                            //         ),
+                                            //       ),
+                                            //     ],
+                                            //   ),
+                                            // ),
+                                            RichText(
+                                              text: TextSpan(
+                                                children: [
+                                                  TextSpan(
+                                                    text: 'Contact: ',
+                                                    style: TextStyle(
+                                                      color: drkmd == true
+                                                          ? HexColor('#bebebe')
+                                                          : HexColor('#636e72'),
+                                                      fontSize: 17,
+                                                      fontWeight:
+                                                          FontWeight.bold,
+                                                    ),
+                                                  ),
+                                                  TextSpan(
+                                                    text:
+                                                        '${documentSnapshot['phone']}',
+                                                    style: TextStyle(
+                                                      color: drkmd == true
+                                                          ? HexColor('#bebebe')
+                                                          : HexColor('#636e72'),
+                                                      fontSize: 17,
+                                                      fontWeight:
+                                                          FontWeight.w400,
+                                                    ),
+                                                  ),
+                                                ],
+                                              ),
+                                            ),
+                                          ],
                                         ),
                                       ),
                                     ),
-                                    TextButton(
-                                      style: TextButton.styleFrom(
-                                        backgroundColor: HexColor('#e63946'),
-                                        shape: RoundedRectangleBorder(
-                                          borderRadius:
-                                              BorderRadius.circular(20),
-                                        ),
-                                      ),
-                                      onPressed: () =>
-                                          _delete(documentSnapshot.id),
-                                      child: const Text(
-                                        "D",
-                                        style: TextStyle(
-                                          fontWeight: FontWeight.w900,
-                                          fontFamily: 'Nunito',
-                                          color: Colors.white,
-                                          fontSize: 18,
-                                        ),
+                                    Expanded(
+                                      flex: 1,
+                                      child: Column(
+                                        // mainAxisAlignment: MainAxisAlignment.end,
+                                        children: [
+                                          TextButton(
+                                            onPressed: () {
+                                              launch(
+                                                  "tel://${documentSnapshot['phone']}");
+                                            },
+                                            // color: HexColor('#e63946'),
+                                            style: TextButton.styleFrom(
+                                              backgroundColor:
+                                                  HexColor('#e63946'),
+                                              shape: RoundedRectangleBorder(
+                                                borderRadius:
+                                                    BorderRadius.circular(20),
+                                              ),
+                                            ),
+                                            child: const Icon(
+                                              Icons.call,
+                                              color: Colors.white,
+                                            ),
+                                          ),
+                                          // TextButton(
+                                          //   style: TextButton.styleFrom(
+                                          //     backgroundColor:
+                                          //         HexColor('#e63946'),
+                                          //     shape: RoundedRectangleBorder(
+                                          //       borderRadius:
+                                          //           BorderRadius.circular(20),
+                                          //     ),
+                                          //   ),
+                                          //   onPressed: () {},
+                                          //   // _update(documentSnapshot),
+                                          //   child: const Text(
+                                          //     "U",
+                                          //     style: TextStyle(
+                                          //       fontWeight: FontWeight.w900,
+                                          //       fontFamily: 'Nunito',
+                                          //       color: Colors.white,
+                                          //       fontSize: 18,
+                                          //     ),
+                                          //   ),
+                                          // ),
+                                          // TextButton(
+                                          //   style: TextButton.styleFrom(
+                                          //     backgroundColor:
+                                          //         HexColor('#e63946'),
+                                          //     shape: RoundedRectangleBorder(
+                                          //       borderRadius:
+                                          //           BorderRadius.circular(20),
+                                          //     ),
+                                          //   ),
+                                          //   onPressed: () {},
+                                          //   // _delete(documentSnapshot.id),
+                                          //   child: const Text(
+                                          //     "D",
+                                          //     style: TextStyle(
+                                          //       fontWeight: FontWeight.w900,
+                                          //       fontFamily: 'Nunito',
+                                          //       color: Colors.white,
+                                          //       fontSize: 18,
+                                          //     ),
+                                          //   ),
+                                          // ),
+                                        ],
                                       ),
                                     ),
                                   ],
                                 ),
                               ),
-                            ],
+                            ),
                           ),
-                        ),
-                      ),
-                    ),
-                    /*ListTile(
-                      title: Text(
-                        'Name: ${documentSnapshot['name']}',
-                      ),
-                      subtitle: RichText(
-                        text: TextSpan(
-                          children: [
-                            TextSpan(
-                              text: 'Phone: ${documentSnapshot['phone']}\n',
-                              style: const TextStyle(
-                                color: Colors.black,
+                          /*ListTile(
+                            title: Text(
+                              'Name: ${documentSnapshot['name']}',
+                            ),
+                            subtitle: RichText(
+                              text: TextSpan(
+                                children: [
+                                  TextSpan(
+                                    text: 'Phone: ${documentSnapshot['phone']}\n',
+                                    style: const TextStyle(
+                                      color: Colors.black,
+                                    ),
+                                  ),
+                                  TextSpan(
+                                    text:
+                                        'Address: ${documentSnapshot['address']}\n',
+                                    style: const TextStyle(
+                                      color: Colors.black,
+                                    ),
+                                  ),
+                                  TextSpan(
+                                    text:
+                                        'BloodType: ${documentSnapshot['bloodtype']}\n',
+                                    style: const TextStyle(
+                                      color: Colors.black,
+                                    ),
+                                  ),
+                                ],
                               ),
                             ),
-                            TextSpan(
-                              text:
-                                  'Address: ${documentSnapshot['address']}\n',
-                              style: const TextStyle(
-                                color: Colors.black,
+                            trailing: SizedBox(
+                              width: 100,
+                              child: Row(
+                                children: [
+                                  IconButton(
+                                      icon: const Icon(Icons.edit),
+                                      onPressed: () => _update(documentSnapshot)),
+                                  IconButton(
+                                      icon: const Icon(Icons.delete),
+                                      onPressed: () =>
+                                          _delete(documentSnapshot.id)),
+                                ],
                               ),
                             ),
-                            TextSpan(
-                              text:
-                                  'BloodType: ${documentSnapshot['bloodtype']}\n',
-                              style: const TextStyle(
-                                color: Colors.black,
-                              ),
-                            ),
-                          ],
-                        ),
-                      ),
-                      trailing: SizedBox(
-                        width: 100,
-                        child: Row(
-                          children: [
-                            IconButton(
-                                icon: const Icon(Icons.edit),
-                                onPressed: () => _update(documentSnapshot)),
-                            IconButton(
-                                icon: const Icon(Icons.delete),
-                                onPressed: () =>
-                                    _delete(documentSnapshot.id)),
-                          ],
-                        ),
-                      ),
-                    ),*/
-                  ],
+                          ),*/
+                        ],
+                      );
+                    },
+                  );
+                }
+
+                if (streamSnapshot.connectionState == ConnectionState.waiting) {
+                  return const Center(
+                    child: CircularProgressIndicator(),
+                  );
+                }
+                if (streamSnapshot.connectionState == ConnectionState.none) {
+                  return const Center(
+                    child: Text('Connect to Internet'),
+                  );
+                }
+                return const Center(
+                  child: CircularProgressIndicator(),
                 );
               },
-            );
-          }
-
-          if (streamSnapshot.connectionState == ConnectionState.waiting) {
-            return const Center(
-              child: CircularProgressIndicator(),
-            );
-          }
-          if (streamSnapshot.connectionState == ConnectionState.none) {
-            return const Center(
-              child: Text('Connect to Internet'),
-            );
-          }
-          return const Center(
-            child: CircularProgressIndicator(),
-          );
-        },
+            ),
+          ),
+          Padding(
+            padding: const EdgeInsets.fromLTRB(10, 5, 10, 5),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Text(
+                  "If you wish to be a donor,",
+                  textAlign: TextAlign.end,
+                  style: TextStyle(
+                    fontFamily: 'Nunito',
+                    color: drkmd == true
+                        ? HexColor('#bebebe')
+                        : HexColor('#636e72'),
+                    fontSize: 15,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+                SizedBox(
+                  width: 5,
+                ),
+                TextButton(
+                  style: TextButton.styleFrom(
+                    backgroundColor: HexColor('#e63946'),
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(20),
+                    ),
+                  ),
+                  child: const Text(
+                    'Click Here',
+                    style: TextStyle(
+                      color: Colors.white,
+                      fontFamily: 'Nunito',
+                    ),
+                  ),
+                  onPressed: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(builder: (context) => BeADonor()),
+                    );
+                  },
+                ),
+              ],
+            ),
+          ),
+        ],
       ),
 // Add new product
       // floatingActionButton: FloatingActionButton(

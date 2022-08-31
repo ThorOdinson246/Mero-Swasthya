@@ -26,7 +26,7 @@ class _SplashState extends State<Splash> {
       isLoggedIn = logInInfo.getBool('isLogged') ?? false;
       drkmd = logInInfo.getBool('isDarkModeEnabled') ?? false;
     });
-    Future.delayed(const Duration(milliseconds: 200), () {
+    Future.delayed(const Duration(milliseconds: 300), () {
 // Here you can write your code
       print('isLoggedIn' + '=' + '${isLoggedIn}');
       if (isLoggedIn == false) {
@@ -44,12 +44,13 @@ class _SplashState extends State<Splash> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.white,
       body: Container(
         height: double.infinity,
         width: double.infinity,
         decoration: BoxDecoration(
           image: DecorationImage(
-            image: AssetImage('images/biology_grid.png'),
+            image: AssetImage('images/logoblack.png'),
           ),
         ),
       ),
