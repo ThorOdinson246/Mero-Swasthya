@@ -82,6 +82,9 @@ class _RegisterPageState extends State<RegisterPage> {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Image.asset(
+                        'images/logoblack.png',
+                      ),
+                      Image.asset(
                         'images/sign_in.png',
                       ),
                       const SizedBox(

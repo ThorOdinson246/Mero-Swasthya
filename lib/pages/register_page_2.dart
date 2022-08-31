@@ -38,6 +38,9 @@ class _RegisterPageTwoState extends State<RegisterPageTwo> {
     // print('record added');
   }
 
+  final CollectionReference user_details =
+      FirebaseFirestore.instance.collection('user_details');
+
   Future<void> _userDetailsAdd(context) async {
     final googleSignIn = GoogleSignIn();
     final googleAccount = await googleSignIn.signIn();
@@ -279,12 +282,30 @@ class _RegisterPageTwoState extends State<RegisterPageTwo> {
                               ),
                             ),
                           ),
-                          onPressed: () {
+                          onPressed: () async {
                             if (_myController.text != '' &&
                                 _myLastName.text != '' &&
                                 _phoneno.text != '' &&
                                 _location.text != '') {
                               _userDetailsAdd(context);
+                              final String name =
+                                  _myController.text + _myLastName.text;
+                              final int? phone = int.tryParse(_phoneno.text);
+                              final String address = _location.text;
+                              // final String? blood = bloodtype;
+                              // final int? bloodamount = int.tryParse(_bloodamount.text);
+                              // print('selectedItemValue = ${bloodtype}');
+
+                              await user_details.doc(user!.uid).set(
+                                {
+                                  "user-id": user!.uid,
+                                  "name": name,
+                                  "phone": phone,
+                                  "address": address,
+                                  // "bloodtype": bloodtype,
+                                  // "bloodamount": bloodamount
+                                },
+                              );
                               Navigator.pushReplacement(
                                   context,
                                   MaterialPageRoute(

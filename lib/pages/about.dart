@@ -40,18 +40,11 @@ class _AboutState extends State<About> {
                   children: [
                     Padding(
                       padding: const EdgeInsets.fromLTRB(0, 80, 0, 20),
-                      child: CircleAvatar(
-                          backgroundColor: Colors.blue,
-                          // maxRadius: 90,
-                          radius: 80,
-                          backgroundImage: AssetImage('images/logo_heart.png')),
-                    ),
-                    Text(
-                      "Mero Swasthya",
-                      style: TextStyle(
-                        fontSize: 20,
-                        fontWeight: FontWeight.bold,
-                        color: HexColor("#ffffff"),
+                      child: Image.asset(
+                        'images/logo.png',
+                        fit: BoxFit.contain,
+                        height: 200,
+                        width: width,
                       ),
                     ),
 
@@ -109,30 +102,7 @@ class _AboutState extends State<About> {
                             Padding(
                               padding: const EdgeInsets.all(8.0),
                               child: Column(
-                                children: [
-                                  // Padding(
-                                  //   padding:
-                                  //       const EdgeInsets.fromLTRB(0, 0, 0, 8),
-                                  //   child: CircleAvatar(
-                                  //     // backgroundColor: Colors.yellow,
-                                  //     radius: 40,
-                                  //     backgroundImage: AssetImage(
-                                  //       'images/bipinsir.png',
-                                  //     ),
-                                  //   ),
-                                  // ),
-                                  // Text(
-                                  //   "Mukesh Poudel ",
-                                  //   textAlign: TextAlign.center,
-                                  //   style: TextStyle(
-                                  //     fontFamily: 'Nunito',
-                                  //     fontWeight: FontWeight.w700,
-                                  //     color: drkmd == true
-                                  //         ? HexColor('#bebebe')
-                                  //         : Colors.grey[800],
-                                  //   ),
-                                  // ),
-                                ],
+                                children: [],
                               ),
                             ),
                             // ),

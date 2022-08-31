@@ -380,7 +380,7 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
                                   ),
                                   const Image(
                                     image: AssetImage(
-                                      "images/environment.png",
+                                      "images/blood-bank.png",
                                     ),
                                     height: 110,
                                     width: 120,
@@ -466,7 +466,7 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
                                   ),
                                   const Image(
                                     image: const AssetImage(
-                                      "images/Astronomy.png",
+                                      "images/request.png",
                                     ),
                                     height: 110,
                                     width: 120,
@@ -553,7 +553,7 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
                                   ),
                                   const Image(
                                     image: AssetImage(
-                                      "images/chemistry.png",
+                                      "images/scalpel.png",
                                     ),
                                     height: 110,
                                     width: 120,
@@ -639,7 +639,7 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
                                   ),
                                   const Image(
                                     image: AssetImage(
-                                      "images/Biology.png",
+                                      "images/donor.png",
                                     ),
                                     height: 110,
                                     width: 120,
@@ -726,7 +726,7 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
                                   ),
                                   const Image(
                                     image: AssetImage(
-                                      "images/PHYSICS.png",
+                                      "images/doctor.png",
                                     ),
                                     height: 110,
                                     width: 120,
