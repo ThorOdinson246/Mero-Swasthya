@@ -1,16 +1,11 @@
-# testapp1
+# MeroSwasthya
 
-A new Flutter project.
+The official repository of MeroSwasthya App created by Mukesh Poudel.
 
-## Getting Started
+“Your Health at your Fingertips.”
 
-This project is a starting point for a Flutter application.
+Mero Swasthya is a all-in-one solution to all your health problems. Physical, Mental and Emotional Health, Mero Swasthya has got you all covered.
 
-A few resources to get you started if this is your first Flutter project:
+Currently in development, It is a first of its kind to attempt in unifying all the health services ranging from blood donation campaign and requests, doctors consultation and appointment, AI based disease diagnosis, Anxiety and depression tests, health calculators like BMI Calculators, IBW calculators, Estimated Date of Delivery, Mensuration Cycle and Hygiene tracker,  Heart Rate measurement from your own device, access to health tips and news and a lot more.
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
