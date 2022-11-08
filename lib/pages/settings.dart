@@ -177,6 +177,7 @@ class _SettingsState extends State<Settings> {
                 Padding(
                     padding: const EdgeInsets.all(15),
                     child: Container(
+                      // margin: EdgeInsets.all(0),
                       width: width,
                       height: 40,
                       decoration: BoxDecoration(
@@ -194,7 +195,7 @@ class _SettingsState extends State<Settings> {
                             ),
                           ]),
                       child: Padding(
-                        padding: EdgeInsets.fromLTRB(20, 10, 10, 4),
+                        padding: EdgeInsets.fromLTRB(20, 10, 10, 0),
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.start,
                           children: [
@@ -214,11 +215,7 @@ class _SettingsState extends State<Settings> {
                             ),
                             Expanded(
                               flex: 1,
-                              child: FlatButton(
-                                textColor: Colors.white,
-                                color: HexColor('#00b894'),
-                                shape: RoundedRectangleBorder(
-                                    borderRadius: BorderRadius.circular(15)),
+                              child: TextButton(
                                 onPressed: () {
                                   // clear();
                                   Navigator.push(
@@ -226,6 +223,13 @@ class _SettingsState extends State<Settings> {
                                       MaterialPageRoute(
                                           builder: (context) => FAQs()));
                                 },
+                                style: TextButton.styleFrom(
+                                  foregroundColor: Colors.white,
+                                  backgroundColor: HexColor('#00b894'),
+                                  shape: RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(20),
+                                  ),
+                                ),
                                 child: Text(
                                   "See",
                                   style: TextStyle(
@@ -260,7 +264,7 @@ class _SettingsState extends State<Settings> {
                             ),
                           ]),
                       child: Padding(
-                        padding: EdgeInsets.fromLTRB(20, 10, 10, 4),
+                        padding: EdgeInsets.fromLTRB(20, 10, 10, 0),
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.start,
                           children: [
@@ -280,11 +284,15 @@ class _SettingsState extends State<Settings> {
                             ),
                             Expanded(
                               flex: 1,
-                              child: FlatButton(
-                                textColor: Colors.white,
-                                color: HexColor('#00b894'),
-                                shape: RoundedRectangleBorder(
-                                    borderRadius: BorderRadius.circular(15)),
+                              child: TextButton(
+                                child: Text(
+                                  "Log Out",
+                                  style: TextStyle(
+                                    fontWeight: FontWeight.w900,
+                                    fontFamily: 'Nunito',
+                                    fontSize: 18,
+                                  ),
+                                ),
                                 onPressed: () {
                                   // signOut();
                                   // clear();
@@ -296,12 +304,11 @@ class _SettingsState extends State<Settings> {
                                   );
                                   // PhoenixNative.restartApp();
                                 },
-                                child: Text(
-                                  "Log Out",
-                                  style: TextStyle(
-                                    fontWeight: FontWeight.w900,
-                                    fontFamily: 'Nunito',
-                                    fontSize: 18,
+                                style: TextButton.styleFrom(
+                                  foregroundColor: Colors.white,
+                                  backgroundColor: HexColor('#00b894'),
+                                  shape: RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(20),
                                   ),
                                 ),
                               ),

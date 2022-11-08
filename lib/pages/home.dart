@@ -193,7 +193,7 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
                         )
                       ],
                       color: Colors.grey[300],
-                      borderRadius: BorderRadius.circular(30),
+                      borderRadius: BorderRadius.circular(40),
                     ),
                     child: Row(
                       children: [
@@ -216,9 +216,19 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
                         Expanded(
                           child: SizedBox(
                             height: 45,
-                            child: FlatButton(
-                              color: HexColor('#FFA400'),
-                              padding: const EdgeInsets.all(0),
+                            child: TextButton(
+                              style: TextButton.styleFrom(
+                                backgroundColor: HexColor('#FFA400'),
+                                foregroundColor: Colors.black,
+                                shape: const RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.only(
+                                    bottomLeft: const Radius.circular(40),
+                                    topLeft: Radius.circular(40),
+                                    bottomRight: const Radius.circular(40),
+                                    topRight: Radius.circular(40),
+                                  ),
+                                ),
+                              ),
                               onPressed: () {
                                 Navigator.push(
                                   context,
@@ -226,20 +236,12 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
                                       builder: (context) => ExplorePage()),
                                 );
                               },
-                              shape: const RoundedRectangleBorder(
-                                borderRadius: BorderRadius.only(
-                                  bottomLeft: const Radius.circular(30),
-                                  topLeft: Radius.circular(30),
-                                  bottomRight: const Radius.circular(30),
-                                  topRight: Radius.circular(30),
-                                ),
-                              ),
                               child: const Text(
                                 "EXPLORE",
                                 style: const TextStyle(
                                   fontFamily: 'Nunito',
                                   fontWeight: FontWeight.w900,
-                                  fontSize: 18,
+                                  fontSize: 17,
                                 ),
                               ),
                             ),
@@ -344,7 +346,7 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
                       width: width,
                       height: 150,
                       decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(30),
+                        borderRadius: BorderRadius.circular(40),
                         color: drkmd == true
                             ? HexColor('#444444')
                             : HexColor('#dfe6e9'),
@@ -393,12 +395,19 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
                               child: Row(
                                 mainAxisAlignment: MainAxisAlignment.end,
                                 children: [
-                                  FlatButton(
-                                    textColor: Colors.white,
-                                    color: HexColor('#0984e3'),
-                                    shape: RoundedRectangleBorder(
-                                        borderRadius:
-                                            BorderRadius.circular(20)),
+                                  TextButton(
+                                    style: TextButton.styleFrom(
+                                      backgroundColor: HexColor('#0984e3'),
+                                      shape: const RoundedRectangleBorder(
+                                        borderRadius: BorderRadius.only(
+                                          bottomLeft: const Radius.circular(40),
+                                          topLeft: Radius.circular(40),
+                                          bottomRight:
+                                              const Radius.circular(40),
+                                          topRight: Radius.circular(40),
+                                        ),
+                                      ),
+                                    ),
                                     onPressed: () {
                                       Navigator.push(
                                         context,
@@ -410,9 +419,10 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
                                     child: const Text(
                                       "Proceed",
                                       style: TextStyle(
+                                        color: Colors.white,
                                         fontWeight: FontWeight.w900,
                                         fontFamily: 'Nunito',
-                                        fontSize: 18,
+                                        fontSize: 17,
                                       ),
                                     ),
                                   ),
@@ -479,12 +489,19 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
                               child: Row(
                                 mainAxisAlignment: MainAxisAlignment.end,
                                 children: [
-                                  FlatButton(
-                                    textColor: Colors.white,
-                                    color: HexColor('#0984e3'),
-                                    shape: RoundedRectangleBorder(
-                                        borderRadius:
-                                            BorderRadius.circular(20)),
+                                  TextButton(
+                                    style: TextButton.styleFrom(
+                                      backgroundColor: HexColor('#0984e3'),
+                                      shape: const RoundedRectangleBorder(
+                                        borderRadius: BorderRadius.only(
+                                          bottomLeft: const Radius.circular(40),
+                                          topLeft: Radius.circular(40),
+                                          bottomRight:
+                                              const Radius.circular(40),
+                                          topRight: Radius.circular(40),
+                                        ),
+                                      ),
+                                    ),
                                     onPressed: () {
                                       Navigator.push(
                                         context,
@@ -497,9 +514,10 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
                                     child: const Text(
                                       "Proceed",
                                       style: const TextStyle(
+                                        color: Colors.white,
                                         fontWeight: FontWeight.w900,
                                         fontFamily: 'Nunito',
-                                        fontSize: 18,
+                                        fontSize: 17,
                                       ),
                                     ),
                                   ),
@@ -566,12 +584,19 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
                               child: Row(
                                 mainAxisAlignment: MainAxisAlignment.end,
                                 children: [
-                                  FlatButton(
-                                    textColor: Colors.white,
-                                    color: HexColor('#0984e3'),
-                                    shape: RoundedRectangleBorder(
-                                        borderRadius:
-                                            BorderRadius.circular(20)),
+                                  TextButton(
+                                    style: TextButton.styleFrom(
+                                      backgroundColor: HexColor('#0984e3'),
+                                      shape: const RoundedRectangleBorder(
+                                        borderRadius: BorderRadius.only(
+                                          bottomLeft: const Radius.circular(40),
+                                          topLeft: Radius.circular(40),
+                                          bottomRight:
+                                              const Radius.circular(40),
+                                          topRight: Radius.circular(40),
+                                        ),
+                                      ),
+                                    ),
                                     onPressed: () {
                                       Navigator.push(
                                         context,
@@ -583,9 +608,10 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
                                     child: const Text(
                                       "Proceed",
                                       style: TextStyle(
+                                        color: Colors.white,
                                         fontWeight: FontWeight.w900,
                                         fontFamily: 'Nunito',
-                                        fontSize: 18,
+                                        fontSize: 17,
                                       ),
                                     ),
                                   ),
@@ -652,12 +678,19 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
                               child: Row(
                                 mainAxisAlignment: MainAxisAlignment.end,
                                 children: [
-                                  FlatButton(
-                                    textColor: Colors.white,
-                                    color: HexColor('#0984e3'),
-                                    shape: RoundedRectangleBorder(
-                                        borderRadius:
-                                            BorderRadius.circular(20)),
+                                  TextButton(
+                                    style: TextButton.styleFrom(
+                                      backgroundColor: HexColor('#0984e3'),
+                                      shape: const RoundedRectangleBorder(
+                                        borderRadius: BorderRadius.only(
+                                          bottomLeft: const Radius.circular(40),
+                                          topLeft: Radius.circular(40),
+                                          bottomRight:
+                                              const Radius.circular(40),
+                                          topRight: Radius.circular(40),
+                                        ),
+                                      ),
+                                    ),
                                     onPressed: () {
                                       Navigator.push(
                                         context,
@@ -670,9 +703,10 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
                                     child: const Text(
                                       "Proceed",
                                       style: TextStyle(
+                                        color: Colors.white,
                                         fontWeight: FontWeight.w900,
                                         fontFamily: 'Nunito',
-                                        fontSize: 18,
+                                        fontSize: 17,
                                       ),
                                     ),
                                   ),
@@ -739,12 +773,19 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
                               child: Row(
                                 mainAxisAlignment: MainAxisAlignment.end,
                                 children: [
-                                  FlatButton(
-                                    color: HexColor('#0984e3'),
-                                    textColor: Colors.white,
-                                    shape: RoundedRectangleBorder(
-                                        borderRadius:
-                                            BorderRadius.circular(20)),
+                                  TextButton(
+                                    style: TextButton.styleFrom(
+                                      backgroundColor: HexColor('#0984e3'),
+                                      shape: const RoundedRectangleBorder(
+                                        borderRadius: BorderRadius.only(
+                                          bottomLeft: const Radius.circular(40),
+                                          topLeft: Radius.circular(40),
+                                          bottomRight:
+                                              const Radius.circular(40),
+                                          topRight: Radius.circular(40),
+                                        ),
+                                      ),
+                                    ),
                                     onPressed: () {
                                       Navigator.push(
                                         context,
@@ -757,7 +798,8 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
                                     child: const Text(
                                       "Proceed",
                                       style: const TextStyle(
-                                        fontSize: 18,
+                                        color: Colors.white,
+                                        fontSize: 17,
                                         fontWeight: FontWeight.w900,
                                         fontFamily: 'Nunito',
                                       ),
