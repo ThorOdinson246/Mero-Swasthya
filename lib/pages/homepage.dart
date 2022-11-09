@@ -2,6 +2,7 @@ import 'dart:async';
 import 'package:animated_bottom_navigation_bar/animated_bottom_navigation_bar.dart';
 import 'package:circular_reveal_animation/circular_reveal_animation.dart';
 import 'package:testapp1/pages/bmi_calculator.dart';
+import 'package:testapp1/pages/firebaseeasydataentry.dart';
 import 'package:testapp1/pages/health_tools.dart';
 import 'package:testapp1/pages/ibw_calculator.dart';
 // import 'package:internet_popup/internet_popup.dart';
@@ -166,8 +167,8 @@ class _MyHomePageState extends State<MyHomePage>
               color: HexColor('#373A36'),
             ),
             onPressed: () {
-              Navigator.push(context,
-                  MaterialPageRoute(builder: (context) => HealthTools()));
+              Navigator.push(
+                  context, MaterialPageRoute(builder: (context) => easyData()));
               // _animationController.reset();
               // _animationController.forward();
             },

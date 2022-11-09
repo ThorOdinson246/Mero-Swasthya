@@ -1,4 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:testapp1/pages/common_concerns.dart';
 import 'package:testapp1/pages/explore.dart';
 import 'package:testapp1/pages/health_tools.dart';
 import 'package:testapp1/pages/anxiety_quiz.dart';
@@ -602,6 +603,100 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
                                         context,
                                         MaterialPageRoute(
                                           builder: (context) => HealthTools(),
+                                        ),
+                                      );
+                                    },
+                                    child: const Text(
+                                      "Proceed",
+                                      style: TextStyle(
+                                        color: Colors.white,
+                                        fontWeight: FontWeight.w900,
+                                        fontFamily: 'Nunito',
+                                        fontSize: 17,
+                                      ),
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                    ),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.all(15),
+                    child: Container(
+                      width: width,
+                      height: 150,
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(30),
+                        color: drkmd == true
+                            ? HexColor('#444444')
+                            : HexColor('#dfe6e9'),
+                        boxShadow: [
+                          BoxShadow(
+                            spreadRadius: 3,
+                            color: drkmd == true
+                                ? HexColor('#444444')
+                                : HexColor('#dfe6e9'),
+                            offset: const Offset(0, 6),
+                          ),
+                        ],
+                      ),
+                      child: Padding(
+                        padding: const EdgeInsets.fromLTRB(15, 15, 20, 5),
+                        child: Row(
+                          children: [
+                            Expanded(
+                              flex: 3,
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Text(
+                                    "COMMON CONCERNS",
+                                    style: TextStyle(
+                                      fontFamily: 'Nunito',
+                                      color: drkmd == true
+                                          ? HexColor('#bebebe')
+                                          : HexColor('#636e72'),
+                                      fontSize: 15,
+                                      fontWeight: FontWeight.bold,
+                                    ),
+                                  ),
+                                  const Image(
+                                    image: AssetImage(
+                                      "images/scalpel.png",
+                                    ),
+                                    height: 110,
+                                    width: 120,
+                                  ),
+                                ],
+                              ),
+                            ),
+                            Expanded(
+                              flex: 2,
+                              child: Row(
+                                mainAxisAlignment: MainAxisAlignment.end,
+                                children: [
+                                  TextButton(
+                                    style: TextButton.styleFrom(
+                                      backgroundColor: HexColor('#0984e3'),
+                                      shape: const RoundedRectangleBorder(
+                                        borderRadius: BorderRadius.only(
+                                          bottomLeft: const Radius.circular(40),
+                                          topLeft: Radius.circular(40),
+                                          bottomRight:
+                                              const Radius.circular(40),
+                                          topRight: Radius.circular(40),
+                                        ),
+                                      ),
+                                    ),
+                                    onPressed: () {
+                                      Navigator.push(
+                                        context,
+                                        MaterialPageRoute(
+                                          builder: (context) => commonConcerns(),
                                         ),
                                       );
                                     },

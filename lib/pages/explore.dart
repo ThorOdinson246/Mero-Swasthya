@@ -210,7 +210,6 @@ class _ExplorePageState extends State<ExplorePage> {
               },
             );
           }
-
           return const Center(child: CircularProgressIndicator());
         },
       ),
