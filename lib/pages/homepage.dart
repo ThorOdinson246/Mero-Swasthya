@@ -5,7 +5,7 @@ import 'package:testapp1/pages/bmi_calculator.dart';
 import 'package:testapp1/pages/health_tools.dart';
 import 'package:testapp1/pages/ibw_calculator.dart';
 // import 'package:internet_popup/internet_popup.dart';
-import 'package:testapp1/pages/quiz.dart';
+import 'package:testapp1/pages/anxiety_quiz.dart';
 import 'package:testapp1/widgets/mydrawer.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';

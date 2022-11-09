@@ -1,7 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:testapp1/pages/explore.dart';
 import 'package:testapp1/pages/health_tools.dart';
-import 'package:testapp1/pages/quiz.dart';
+import 'package:testapp1/pages/anxiety_quiz.dart';
 import 'package:testapp1/pages/search_blood.dart';
 import 'package:testapp1/pages/request_blood.dart';
 import 'package:testapp1/pages_home/lesson_chemistry.dart';

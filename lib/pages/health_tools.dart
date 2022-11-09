@@ -3,11 +3,13 @@ import 'package:flutter/src/foundation/key.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:testapp1/pages/bmi_calculator.dart';
 import 'package:testapp1/pages/bpm.dart';
+import 'package:testapp1/pages/cat_quiz.dart';
 import 'package:testapp1/pages/homepage.dart';
 import 'package:testapp1/pages/ibw_calculator.dart';
 import 'package:testapp1/pages/medicine_reminder.dart';
-import 'package:testapp1/pages/quiz.dart';
+import 'package:testapp1/pages/anxiety_quiz.dart';
 
+import 'depression_quiz.dart';
 import 'settings.dart';
 
 class HealthTools extends StatefulWidget {
@@ -264,6 +266,170 @@ class _HealthToolsState extends State<HealthTools> {
                                   'This anxiety self test can give you an understanding of the likelihood that you have an anxiety disorder. Please note, results are not a diagnosis.',
                                   maxLines: 3,
                                   textAlign: TextAlign.justify,
+                                  style: TextStyle(
+                                    color: drkmd == true
+                                        ? HexColor('#bebebe')
+                                        : HexColor('#636e72'),
+                                    fontSize: 15,
+                                    fontFamily: 'Nunito',
+                                    fontWeight: FontWeight.w400,
+                                    overflow: TextOverflow.ellipsis,
+                                  ),
+                                ),
+                              )
+                            ],
+                          ),
+                        )
+                      ],
+                    ),
+                  ),
+                ),
+              ),
+            ),
+            Padding(
+              padding: const EdgeInsets.all(10.0),
+              child: InkWell(
+                borderRadius: BorderRadius.circular(30),
+                onTap: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => DepressionQuizPage(),
+                    ),
+                  );
+                },
+                child: Container(
+                  // margin: const EdgeInsets.all(10),
+                  height: 100,
+                  width: width,
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(30),
+                    color: drkmd == true
+                        ? HexColor('#444444')
+                        : HexColor('#dfe6e9'),
+                  ),
+                  child: Padding(
+                    padding: const EdgeInsets.fromLTRB(10.0, 5, 10, 5),
+                    child: Row(
+                      children: [
+                        const Expanded(
+                          flex: 1,
+                          child: CircleAvatar(
+                            radius: 30,
+                            child: Icon(
+                              Icons.stream_sharp,
+                              size: 45,
+                            ),
+                          ),
+                        ),
+                        Expanded(
+                          flex: 6,
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Padding(
+                                padding: EdgeInsets.fromLTRB(15, 0, 8, 1),
+                                child: Text(
+                                  'Depression Self Test',
+                                  style: TextStyle(
+                                    color: drkmd == true
+                                        ? HexColor('#bebebe')
+                                        : HexColor('#636e72'),
+                                    fontSize: 20,
+                                    fontFamily: 'Nunito',
+                                    fontWeight: FontWeight.w900,
+                                  ),
+                                ),
+                              ),
+                              Padding(
+                                padding: EdgeInsets.fromLTRB(15, 0, 8, 0),
+                                child: Text(
+                                  'This anxiety self test can give you an understanding of the likelihood that you have an anxiety disorder. Please note, results are not a diagnosis.',
+                                  maxLines: 3,
+                                  textAlign: TextAlign.justify,
+                                  style: TextStyle(
+                                    color: drkmd == true
+                                        ? HexColor('#bebebe')
+                                        : HexColor('#636e72'),
+                                    fontSize: 15,
+                                    fontFamily: 'Nunito',
+                                    fontWeight: FontWeight.w400,
+                                    overflow: TextOverflow.ellipsis,
+                                  ),
+                                ),
+                              )
+                            ],
+                          ),
+                        )
+                      ],
+                    ),
+                  ),
+                ),
+              ),
+            ),
+            Padding(
+              padding: const EdgeInsets.all(10.0),
+              child: InkWell(
+                borderRadius: BorderRadius.circular(30),
+                onTap: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => CATQuizPage(),
+                    ),
+                  );
+                },
+                child: Container(
+                  // margin: const EdgeInsets.all(10),
+                  height: 100,
+                  width: width,
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(30),
+                    color: drkmd == true
+                        ? HexColor('#444444')
+                        : HexColor('#dfe6e9'),
+                  ),
+                  child: Padding(
+                    padding: const EdgeInsets.fromLTRB(10.0, 5, 10, 5),
+                    child: Row(
+                      children: [
+                        const Expanded(
+                          flex: 1,
+                          child: CircleAvatar(
+                            radius: 30,
+                            child: Icon(
+                              Icons.stream_sharp,
+                              size: 45,
+                            ),
+                          ),
+                        ),
+                        Expanded(
+                          flex: 6,
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Padding(
+                                padding: EdgeInsets.fromLTRB(15, 0, 8, 1),
+                                child: Text(
+                                  'COPD Assesment Tool(CAT)',
+                                  style: TextStyle(
+                                    color: drkmd == true
+                                        ? HexColor('#bebebe')
+                                        : HexColor('#636e72'),
+                                    fontSize: 19,
+                                    fontFamily: 'Nunito',
+                                    fontWeight: FontWeight.w900,
+                                  ),
+                                ),
+                              ),
+                              Padding(
+                                padding: EdgeInsets.fromLTRB(15, 0, 8, 0),
+                                child: Text(
+                                  'This COPD Assesment  self test can give you an understanding of the likelihood that you have an anxiety disorder. Please note, results are not a diagnosis.',
+                                  overflow: TextOverflow.ellipsis,
+                                  maxLines: 3,
+                                  textAlign: TextAlign.justify,
+                                  textScaleFactor: 1,
                                   style: TextStyle(
                                     color: drkmd == true
                                         ? HexColor('#bebebe')

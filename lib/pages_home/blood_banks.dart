@@ -1,10 +1,10 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:testapp1/pages/homepage.dart';
-import 'package:testapp1/pages/quiz.dart';
+import 'package:testapp1/pages/anxiety_quiz.dart';
 import 'package:testapp1/pages/settings.dart';
 import 'package:flutter/material.dart';
-import 'package:testapp1/pages/quiz.dart';
+import 'package:testapp1/pages/anxiety_quiz.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class bloodBanks extends StatefulWidget {

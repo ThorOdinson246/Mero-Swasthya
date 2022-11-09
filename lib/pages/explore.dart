@@ -52,135 +52,155 @@ class _ExplorePageState extends State<ExplorePage> {
                             ),
                           ],
                         ),
-                        child: Padding(
-                          padding: const EdgeInsets.fromLTRB(0, 0, 0, 5),
-                          child: Column(
-                            children: [
-                              Column(
-                                children: [
-                                  Column(
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.start,
-                                    children: [
-                                      Container(
-                                        height:
-                                            MediaQuery.of(context).size.height /
-                                                3,
-                                        width:
-                                            MediaQuery.of(context).size.width,
-                                        decoration: BoxDecoration(
-                                          image: DecorationImage(
-                                            fit: BoxFit.cover,
-                                            image: NetworkImage(
-                                              '${documentSnapshot['image']}',
+                        child: GestureDetector(
+                          onTap: () {
+                            launch(
+                              '${documentSnapshot['webpage']}',
+                              // universalLinksOnly: true,
+                              // forceWebView: true,
+                              forceSafariVC: true,
+                              enableJavaScript: true,
+                            );
+                          },
+                          child: Padding(
+                            padding: const EdgeInsets.fromLTRB(0, 0, 0, 5),
+                            child: Column(
+                              children: [
+                                Column(
+                                  children: [
+                                    Column(
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.start,
+                                      children: [
+                                        Container(
+                                          height: MediaQuery.of(context)
+                                                  .size
+                                                  .height /
+                                              3,
+                                          width:
+                                              MediaQuery.of(context).size.width,
+                                          decoration: BoxDecoration(
+                                            image: DecorationImage(
+                                              fit: BoxFit.cover,
+                                              image: NetworkImage(
+                                                '${documentSnapshot['image']}',
+                                              ),
                                             ),
+                                            borderRadius:
+                                                BorderRadius.circular(30),
+                                            color: drkmd == true
+                                                ? HexColor('#444444')
+                                                : HexColor('#dfe6e9'),
+                                            boxShadow: [
+                                              BoxShadow(
+                                                spreadRadius: 3,
+                                                color: drkmd == true
+                                                    ? HexColor('#444444')
+                                                    : HexColor('#dfe6e9'),
+                                                offset: const Offset(0, 6),
+                                              ),
+                                            ],
                                           ),
-                                          borderRadius:
-                                              BorderRadius.circular(30),
-                                          color: drkmd == true
-                                              ? HexColor('#444444')
-                                              : HexColor('#dfe6e9'),
-                                          boxShadow: [
-                                            BoxShadow(
-                                              spreadRadius: 3,
-                                              color: drkmd == true
-                                                  ? HexColor('#444444')
-                                                  : HexColor('#dfe6e9'),
-                                              offset: const Offset(0, 6),
-                                            ),
-                                          ],
                                         ),
-                                      ),
-                                      const SizedBox(
-                                        height: 10,
-                                      ),
-                                      Padding(
-                                        padding: const EdgeInsets.fromLTRB(
-                                            10, 0, 10, 0),
-                                        child: Column(
-                                          crossAxisAlignment:
-                                              CrossAxisAlignment.start,
-                                          children: [
-                                            RichText(
-                                              text: TextSpan(
-                                                children: [
-                                                  TextSpan(
-                                                    text:
-                                                        '${documentSnapshot['title']} ',
-                                                    style: TextStyle(
-                                                      color: drkmd == true
-                                                          ? HexColor('#0984e3')
-                                                          : HexColor('#0984e3'),
-                                                      fontSize: 17,
-                                                      fontWeight:
-                                                          FontWeight.bold,
-                                                    ),
-                                                  ),
-                                                ],
-                                              ),
-                                            ),
-                                            RichText(
-                                              text: TextSpan(
-                                                children: [
-                                                  TextSpan(
-                                                    text:
-                                                        '${documentSnapshot['subtitle']}',
-                                                    style: TextStyle(
-                                                      color: drkmd == true
-                                                          ? HexColor('#bebebe')
-                                                          : HexColor('#636e72'),
-                                                      fontSize: 17,
-                                                      fontWeight:
-                                                          FontWeight.w300,
-                                                    ),
-                                                  ),
-                                                ],
-                                              ),
-                                            ),
-                                            RichText(
-                                              text: TextSpan(
-                                                children: [
-                                                  TextSpan(
-                                                    text:
-                                                        '${documentSnapshot['webpage']}',
-                                                    style: TextStyle(
-                                                      color: drkmd == true
-                                                          ? HexColor('#bebebe')
-                                                          : HexColor('#636e72'),
-                                                      fontSize: 17,
-                                                      fontWeight:
-                                                          FontWeight.w400,
-                                                    ),
-                                                  ),
-                                                ],
-                                              ),
-                                            ),
-                                            RichText(
-                                              text: TextSpan(
-                                                children: [
-                                                  TextSpan(
-                                                    text:
-                                                        '${documentSnapshot['title']}',
-                                                    style: TextStyle(
-                                                      color: drkmd == true
-                                                          ? HexColor('#bebebe')
-                                                          : HexColor('#636e72'),
-                                                      fontSize: 17,
-                                                      fontWeight:
-                                                          FontWeight.normal,
-                                                    ),
-                                                  ),
-                                                ],
-                                              ),
-                                            ),
-                                          ],
+                                        const SizedBox(
+                                          height: 10,
                                         ),
-                                      ),
-                                    ],
-                                  ),
-                                ],
-                              ),
-                            ],
+                                        Padding(
+                                          padding: const EdgeInsets.fromLTRB(
+                                              10, 0, 10, 0),
+                                          child: Column(
+                                            crossAxisAlignment:
+                                                CrossAxisAlignment.start,
+                                            children: [
+                                              RichText(
+                                                text: TextSpan(
+                                                  children: [
+                                                    TextSpan(
+                                                      text:
+                                                          '${documentSnapshot['title']} ',
+                                                      style: TextStyle(
+                                                        color: drkmd == true
+                                                            ? HexColor(
+                                                                '#0984e3')
+                                                            : HexColor(
+                                                                '#0984e3'),
+                                                        fontSize: 17,
+                                                        fontWeight:
+                                                            FontWeight.bold,
+                                                      ),
+                                                    ),
+                                                  ],
+                                                ),
+                                              ),
+                                              RichText(
+                                                text: TextSpan(
+                                                  children: [
+                                                    TextSpan(
+                                                      text:
+                                                          '${documentSnapshot['subtitle']}',
+                                                      style: TextStyle(
+                                                        color: drkmd == true
+                                                            ? HexColor(
+                                                                '#bebebe')
+                                                            : HexColor(
+                                                                '#636e72'),
+                                                        fontSize: 17,
+                                                        fontWeight:
+                                                            FontWeight.w300,
+                                                      ),
+                                                    ),
+                                                  ],
+                                                ),
+                                              ),
+                                              RichText(
+                                                text: TextSpan(
+                                                  children: [
+                                                    TextSpan(
+                                                      text:
+                                                          '${documentSnapshot['webpage']}',
+                                                      style: TextStyle(
+                                                        color: drkmd == true
+                                                            ? HexColor(
+                                                                '#bebebe')
+                                                            : HexColor(
+                                                                '#636e72'),
+                                                        fontSize: 17,
+                                                        fontWeight:
+                                                            FontWeight.w400,
+                                                      ),
+                                                    ),
+                                                  ],
+                                                ),
+                                              ),
+                                              RichText(
+                                                text: TextSpan(
+                                                  children: [
+                                                    TextSpan(
+                                                      text:
+                                                          'Uploaded ${documentSnapshot['date']}',
+                                                      style: TextStyle(
+                                                        color: drkmd == true
+                                                            ? HexColor(
+                                                                '#bebebe')
+                                                            : HexColor(
+                                                                '#636e72'),
+                                                        fontSize: 12,
+                                                        fontWeight:
+                                                            FontWeight.normal,
+                                                      ),
+                                                    ),
+                                                  ],
+                                                ),
+                                              ),
+                                            ],
+                                          ),
+                                        ),
+                                      ],
+                                    ),
+                                  ],
+                                ),
+                              ],
+                            ),
                           ),
                         ),
                       ),
