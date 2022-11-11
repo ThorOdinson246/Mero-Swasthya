@@ -61,6 +61,7 @@ class _commonConcernsState extends State<commonConcerns> {
               builder: (context, AsyncSnapshot<QuerySnapshot> streamSnapshot) {
                 if (streamSnapshot.hasData) {
                   return ListView.builder(
+                  
                     itemCount: streamSnapshot.data!.docs.length,
                     itemBuilder: (context, index) {
                       final DocumentSnapshot documentSnapshot =
@@ -209,13 +210,11 @@ class _commonConcernsState extends State<commonConcerns> {
                                                   ],
                                                 ),
                                               ),
-                                              Text('Symptoms'),
                                               RichText(
                                                 text: TextSpan(
                                                   children: [
                                                     TextSpan(
-                                                      text:
-                                                          '${documentSnapshot['symptoms']}',
+                                                      text: 'Symptoms',
                                                       style: TextStyle(
                                                           color: drkmd == true
                                                               ? HexColor(
@@ -230,13 +229,31 @@ class _commonConcernsState extends State<commonConcerns> {
                                                   ],
                                                 ),
                                               ),
-                                              Text('Prevention'),
                                               RichText(
                                                 text: TextSpan(
                                                   children: [
                                                     TextSpan(
                                                       text:
-                                                          '${documentSnapshot['prevention']} ',
+                                                          '${documentSnapshot['symptoms']}\n',
+                                                      style: TextStyle(
+                                                          color: drkmd == true
+                                                              ? HexColor(
+                                                                  '#bebebe')
+                                                              : HexColor(
+                                                                  '#636e72'),
+                                                          fontSize: 15,
+                                                          fontWeight:
+                                                              FontWeight.w600,
+                                                          fontFamily: 'Nunito'),
+                                                    ),
+                                                  ],
+                                                ),
+                                              ),
+                                              RichText(
+                                                text: TextSpan(
+                                                  children: [
+                                                    TextSpan(
+                                                      text: 'Prevention',
                                                       style: TextStyle(
                                                           color: drkmd == true
                                                               ? HexColor(
@@ -246,6 +263,26 @@ class _commonConcernsState extends State<commonConcerns> {
                                                           fontSize: 15,
                                                           fontWeight:
                                                               FontWeight.w900,
+                                                          fontFamily: 'Nunito'),
+                                                    ),
+                                                  ],
+                                                ),
+                                              ),
+                                              RichText(
+                                                text: TextSpan(
+                                                  children: [
+                                                    TextSpan(
+                                                      text:
+                                                          '${documentSnapshot['prevention']} ',
+                                                      style: TextStyle(
+                                                          color: drkmd == true
+                                                              ? HexColor(
+                                                                  '#bebebe')
+                                                              : HexColor(
+                                                                  '#636e72'),
+                                                          fontSize: 15,
+                                                          fontWeight:
+                                                              FontWeight.w600,
                                                           fontFamily: 'Nunito'),
                                                     ),
                                                   ],

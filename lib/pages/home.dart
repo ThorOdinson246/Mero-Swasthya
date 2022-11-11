@@ -81,6 +81,8 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
     double width = MediaQuery.of(context).size.width;
     final Stream<QuerySnapshot> dataStream =
         FirebaseFirestore.instance.collection('daily_quote').snapshots();
+    final Stream<QuerySnapshot> homepagead =
+        FirebaseFirestore.instance.collection('homepagead').snapshots();
     //HOME PAGE
     return Scaffold(
         backgroundColor: Colors.transparent,
@@ -251,81 +253,54 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
                       ],
                     ),
                   ),
-                  /*
-                  Positioned(
-                    top: 75,
-                    left: 15,
-                    child: CircleAvatar(
-                      radius: 28,
-                      child: Text(
-                        pastd.substring(0, 1).toUpperCase(),
-                        style: TextStyle(
-                            fontSize: 36, fontWeight: FontWeight.bold),
-                      ),
-                    ),
-                  ),
-                  Positioned(
-                    top: 81,
-                    left: 80,
-                    child: Text(
-                      pastd.isEmpty == false
-                          ? "Hello," + " " + pastd
-                          : "Hello, User",
-                      style: TextStyle(
-                        color: HexColor('#ffffff'),
-                        fontSize: 20,
-                        fontWeight: FontWeight.w700,
-                        fontFamily: 'Nunito',
-                      ),
-                    ),
-                  ),
-                  Positioned(
-                      top: 101,
-                      left: 80,
-                      child: RichText(
-                        text: TextSpan(
-                          children: [
-                            TextSpan(
-                              text: grade.isEmpty == false
-                                  ? "Grade " + grade + "," + " "
-                                  : 'Grade 10, ',
-                              style: TextStyle(
-                                color: HexColor('#b2bec3'),
-                                fontSize: 13,
-                                fontWeight: FontWeight.w700,
-                                fontFamily: 'Nunito',
-                              ),
-                            ),
-                            TextSpan(
-                              text: schname.isEmpty == false
-                                  ? schname
-                                  : 'Ekata Shishu Niketan',
-                              style: TextStyle(
-                                color: HexColor('#b2bec3'),
-                                fontSize: 13,
-                                fontWeight: FontWeight.w700,
-                                fontFamily: 'Nunito',
-                              ),
-                            ),
-                          ],
-                        ),
-                      )
-
-                      /* Text(
-                    "Grade-9,Ekata Shishu Niketan",
-                    style: TextStyle(
-                      color: HexColor('#b2bec3'),
-                      fontSize: 13,
-                      fontWeight: FontWeight.w700,
-                      fontFamily: 'Nunito',
-                    ),
-                  ),*/
-                      ),
-                */
                 ],
               ),
               Padding(
-                padding: const EdgeInsets.fromLTRB(15, 5, 15, 0),
+                padding: const EdgeInsets.fromLTRB(15.0, 15, 15, 5),
+                child: Column(
+                  children: [
+                    StreamBuilder<QuerySnapshot>(
+                      stream: homepagead,
+                      builder: (BuildContext context,
+                          AsyncSnapshot<QuerySnapshot> snapshot) {
+                        if (snapshot.hasData) {
+                          final List storedocs = [];
+                          snapshot.data!.docs.map(
+                            (DocumentSnapshot document) {
+                              Map a = document.data() as Map<String, dynamic>;
+                              storedocs.add(a);
+                              a['id'] = document.id;
+                            },
+                          ).toList();
+                          return Column(
+                            children: List.generate(
+                              storedocs.length,
+                              (i) => Container(
+                                width: width,
+                                height: 100,
+                                decoration: BoxDecoration(
+                                  image: DecorationImage(
+                                    fit: BoxFit.cover,
+                                    image: NetworkImage(
+                                        '${storedocs[i]['adlink']}'),
+                                  ),
+                                  borderRadius: BorderRadius.circular(30),
+                                  color: drkmd == true
+                                      ? HexColor('#444444')
+                                      : HexColor('#dfe6e9'),
+                                ),
+                              ),
+                            ),
+                          );
+                        }
+                        return const CircularProgressIndicator();
+                      },
+                    ),
+                  ],
+                ),
+              ),
+              Padding(
+                padding: const EdgeInsets.fromLTRB(15, 0, 15, 0),
                 child: Text(
                   "Services",
                   style: TextStyle(
@@ -696,7 +671,8 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
                                       Navigator.push(
                                         context,
                                         MaterialPageRoute(
-                                          builder: (context) => commonConcerns(),
+                                          builder: (context) =>
+                                              commonConcerns(),
                                         ),
                                       );
                                     },

@@ -2,8 +2,10 @@
 
 // import 'dart:ffi';
 
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:testapp1/allpages.dart';
 
 import '../lists/questions_lists.dart';
 import 'homepage.dart';
@@ -42,6 +44,8 @@ class _DepressionQuizPageState extends State<DepressionQuizPage> {
   @override
   Widget build(BuildContext context) {
     double width = MediaQuery.of(context).size.width;
+    final Stream<QuerySnapshot> depressionpagead =
+        FirebaseFirestore.instance.collection('depressionpagead').snapshots();
     print('index= ' + '$index');
     return Scaffold(
       backgroundColor: Color(0xff1a1a2e),
@@ -58,6 +62,52 @@ class _DepressionQuizPageState extends State<DepressionQuizPage> {
             fontWeight: FontWeight.bold,
           ),
         ),
+        actions: [
+          TextButton(
+            onPressed: () {
+              showDialog(
+                  context: context,
+                  builder: (BuildContext context) {
+                    return AlertDialog(
+                      backgroundColor:
+                          drkmd == true ? Colors.grey[900] : Colors.grey[100],
+                      title: Text(
+                        "Depression Check",
+                        style: TextStyle(
+                          color: drkmd == true
+                              ? HexColor('#bebebe')
+                              : HexColor('#636e72'),
+                          fontSize: 17,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                      actions: [
+                        TextButton(
+                          onPressed: () {
+                            Navigator.pop(context);
+                          },
+                          child: Text('OK'),
+                        )
+                      ],
+                      content: Text(
+                        "The Patient Health Questionnaire 9 (PHQ-9) is one of the tools used to screen for the presence and severity of depression and to monitor response to treatment. This is not intended to provide a diagnosis and should be followed up by a doctor. It is not a screening tool for depression but it is used to monitor the severity of depression and response to treatment. However, it can be used to make a tentative diagnosis of depression in at-risk populations.",
+                        style: TextStyle(
+                          color: drkmd == true
+                              ? HexColor('#bebebe')
+                              : HexColor('#636e72'),
+                          fontSize: 17,
+                          fontWeight: FontWeight.w400,
+                        ),
+                      ),
+                    );
+                  });
+            },
+            child: Icon(
+              Icons.info,
+              color: Colors.white,
+            ),
+          )
+        ],
       ),
       body: SingleChildScrollView(
         child: Column(
@@ -471,6 +521,52 @@ class _DepressionQuizPageState extends State<DepressionQuizPage> {
                             fontFamily: 'Nunito',
                             fontWeight: FontWeight.w900,
                           ),
+                        ),
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.fromLTRB(15.0, 15, 15, 5),
+                        child: Column(
+                          children: [
+                            StreamBuilder<QuerySnapshot>(
+                              stream: depressionpagead,
+                              builder: (BuildContext context,
+                                  AsyncSnapshot<QuerySnapshot> snapshot) {
+                                if (snapshot.hasData) {
+                                  final List storedocs = [];
+                                  snapshot.data!.docs.map(
+                                    (DocumentSnapshot document) {
+                                      Map a = document.data()
+                                          as Map<String, dynamic>;
+                                      storedocs.add(a);
+                                      a['id'] = document.id;
+                                    },
+                                  ).toList();
+                                  return Column(
+                                    children: List.generate(
+                                      storedocs.length,
+                                      (i) => Container(
+                                        width: width,
+                                        height: 200,
+                                        decoration: BoxDecoration(
+                                          image: DecorationImage(
+                                            fit: BoxFit.cover,
+                                            image: NetworkImage(
+                                                '${storedocs[i]['adlink']}'),
+                                          ),
+                                          borderRadius:
+                                              BorderRadius.circular(30),
+                                          color: drkmd == true
+                                              ? HexColor('#444444')
+                                              : HexColor('#dfe6e9'),
+                                        ),
+                                      ),
+                                    ),
+                                  );
+                                }
+                                return const CircularProgressIndicator();
+                              },
+                            ),
+                          ],
                         ),
                       ),
                     ],

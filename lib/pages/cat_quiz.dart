@@ -5,6 +5,7 @@
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
+import '../allpages.dart';
 import '../lists/questions_lists.dart';
 import 'homepage.dart';
 
@@ -47,12 +48,58 @@ class _CATQuizPageState extends State<CATQuizPage> {
     return Scaffold(
       backgroundColor: Color(0xff1a1a2e),
       appBar: AppBar(
+        actions: [
+          TextButton(
+            onPressed: () {
+              showDialog(
+                  context: context,
+                  builder: (BuildContext context) {
+                    return AlertDialog(
+                      backgroundColor:
+                          drkmd == true ? Colors.grey[900] : Colors.grey[100],
+                      title: Text(
+                        "COPD Assessment Test (CAT)",
+                        style: TextStyle(
+                          color: drkmd == true
+                              ? HexColor('#bebebe')
+                              : HexColor('#636e72'),
+                          fontSize: 17,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                      actions: [
+                        TextButton(
+                          onPressed: () {
+                            Navigator.pop(context);
+                          },
+                          child: Text('OK'),
+                        )
+                      ],
+                      content: Text(
+                        "The COPD Assessment Test (CAT) is a questionnaire for people with Chronic Obstructive Pulmonary Disease (COPD). It is designed to measure the impact of COPD on a person's life, and how this changes over time. \nThe results of the test should only be used in discussion with your healthcare professional to better manage your COPD..",
+                        style: TextStyle(
+                          color: drkmd == true
+                              ? HexColor('#bebebe')
+                              : HexColor('#636e72'),
+                          fontSize: 17,
+                          fontWeight: FontWeight.w400,
+                        ),
+                      ),
+                    );
+                  });
+            },
+            child: Icon(
+              Icons.info,
+              color: Colors.white,
+            ),
+          ),
+        ],
         centerTitle: true,
         toolbarHeight: 50,
         elevation: 0,
         backgroundColor: Color(0xff0404f1),
         title: Text(
-          'COPD Check',
+          'COPD Assessment Test (CAT)',
           style: TextStyle(
             fontFamily: 'SuezOne',
             color: Colors.white,
@@ -158,6 +205,7 @@ class _CATQuizPageState extends State<CATQuizPage> {
                               _colorb = _colorgrey;
                               _colorc = _colorgrey;
                               _colord = _colorgrey;
+                              _colore = _colorgrey;
                             });
                           },
                           child: Padding(
@@ -228,6 +276,7 @@ class _CATQuizPageState extends State<CATQuizPage> {
                                 _colorb = _colorgrey;
                                 _colorc = _colorgreen;
                                 _colord = _colorgrey;
+                                _colore = _colorgrey;
                               },
                             );
                           },
@@ -263,6 +312,7 @@ class _CATQuizPageState extends State<CATQuizPage> {
                                 _colorb = _colorgrey;
                                 _colorc = _colorgrey;
                                 _colord = _colorgreen;
+                                _colore = _colorgrey;
                               },
                             );
                           },
@@ -343,8 +393,8 @@ class _CATQuizPageState extends State<CATQuizPage> {
                               setState(
                                 () {
                                   index = index + 1;
-                                  _colora =
-                                      _colorb = _colorc = _colord = _colorgrey;
+                                  _colora = _colorb =
+                                      _colorc = _colord = _colore = _colorgrey;
                                   answerindex += 1;
                                   score += CATMarks[index][optionclicked];
                                   optionclicked = 5;

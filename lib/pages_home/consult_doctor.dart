@@ -214,7 +214,7 @@ class _consultDoctorsState extends State<consultDoctors> {
                                 ),
                               ),
                             ),
-                          )
+                          ),
                         ],
                       );
                     },

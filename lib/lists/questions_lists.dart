@@ -82,10 +82,10 @@ List DepressionMarks = <List>[
 ];
 
 List CATQuestions = <String>[
-  'Cough : ',
-  'Phlegm : ',
-  'Chest tightness : ',
-  'Breathlessness : ',
+  'How often do you cough? : ',
+  'How often do you have Phlegm? : ',
+  'How often do you feel Chest tightness? : ',
+  'How often do you feel Breathlessness? : ',
   'Activities : ',
   'Confidence : ',
   'Sleep : ',
@@ -93,14 +93,14 @@ List CATQuestions = <String>[
 ];
 
 List CATOptions = <List>[
-  ['5', '4', '3', '2', '1', '0'],
-  ['5', '4', '3', '2', '1', '0'],
-  ['5', '4', '3', '2', '1', '0'],
-  ['5', '4', '3', '2', '1', '0'],
-  ['5', '4', '3', '2', '1', '0'],
-  ['5', '4', '3', '2', '1', '0'],
-  ['5', '4', '3', '2', '1', '0'],
-  ['5', '4', '3', '2', '1', '0'],
+  ['5(Nearly every time)', '4', '3', '2', '1(Not that much)', '0'],
+  ['5(Nearly every time)', '4', '3', '2', '1(Not that much)', '0'],
+  ['5(Nearly every time)', '4', '3', '2', '1(Not that much)', '0'],
+  ['5(Nearly every time)', '4', '3', '2', '1(Not that much)', '0'],
+  ['5(Nearly every time)', '4', '3', '2', '1(Not that much)', '0'],
+  ['5(Nearly every time)', '4', '3', '2', '1(Not that much)', '0'],
+  ['5(Nearly every time)', '4', '3', '2', '1(Not that much)', '0'],
+  ['5(Nearly every time)', '4', '3', '2', '1(Not that much)', '0'],
 ];
 
 List CATMarks = <List>[

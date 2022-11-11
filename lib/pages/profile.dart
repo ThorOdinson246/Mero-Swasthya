@@ -21,6 +21,8 @@ final FirebaseAuth authInstance = FirebaseAuth.instance;
 final User? user = authInstance.currentUser;
 final CollectionReference user_details =
     FirebaseFirestore.instance.collection('user_details');
+final Stream<QuerySnapshot> profilepagead =
+    FirebaseFirestore.instance.collection('profilepagead').snapshots();
 String? name;
 String? address;
 String? userid;
@@ -241,7 +243,7 @@ class _ProfileState extends State<Profile> {
                   ),
                 ),
                 Padding(
-                  padding: const EdgeInsets.fromLTRB(15, 15, 15, 60),
+                  padding: const EdgeInsets.fromLTRB(15, 15, 15, 15),
                   child: Container(
                     width: width,
                     // height: 150,
@@ -346,6 +348,50 @@ class _ProfileState extends State<Profile> {
                         ],
                       ),
                     ),
+                  ),
+                ),
+                Padding(
+                  padding: const EdgeInsets.fromLTRB(15.0, 15, 15, 5),
+                  child: Column(
+                    children: [
+                      StreamBuilder<QuerySnapshot>(
+                        stream: profilepagead,
+                        builder: (BuildContext context,
+                            AsyncSnapshot<QuerySnapshot> snapshot) {
+                          if (snapshot.hasData) {
+                            final List storedocs = [];
+                            snapshot.data!.docs.map(
+                              (DocumentSnapshot document) {
+                                Map a = document.data() as Map<String, dynamic>;
+                                storedocs.add(a);
+                                a['id'] = document.id;
+                              },
+                            ).toList();
+                            return Column(
+                              children: List.generate(
+                                storedocs.length,
+                                (i) => Container(
+                                  width: width,
+                                  height: 100,
+                                  decoration: BoxDecoration(
+                                    image: DecorationImage(
+                                      fit: BoxFit.cover,
+                                      image: NetworkImage(
+                                          '${storedocs[i]['adlink']}'),
+                                    ),
+                                    borderRadius: BorderRadius.circular(30),
+                                    color: drkmd == true
+                                        ? HexColor('#444444')
+                                        : HexColor('#dfe6e9'),
+                                  ),
+                                ),
+                              ),
+                            );
+                          }
+                          return const CircularProgressIndicator();
+                        },
+                      ),
+                    ],
                   ),
                 ),
               ],

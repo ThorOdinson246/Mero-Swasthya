@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/src/foundation/key.dart';
 import 'package:flutter/src/widgets/framework.dart';
@@ -24,6 +25,8 @@ class _HealthToolsState extends State<HealthTools> {
   Widget build(BuildContext context) {
     double height = MediaQuery.of(context).size.height;
     double width = MediaQuery.of(context).size.width;
+    final Stream<QuerySnapshot> healthutilsad =
+        FirebaseFirestore.instance.collection('healthutilsad').snapshots();
     return Scaffold(
       appBar: AppBar(
         centerTitle: true,
@@ -344,7 +347,7 @@ class _HealthToolsState extends State<HealthTools> {
                               Padding(
                                 padding: EdgeInsets.fromLTRB(15, 0, 8, 0),
                                 child: Text(
-                                  'This anxiety self test can give you an understanding of the likelihood that you have an anxiety disorder. Please note, results are not a diagnosis.',
+                                  'This depression self test can give you an understanding of the likelihood that you have an depression risk. Please note, results are not a diagnosis.',
                                   maxLines: 3,
                                   textAlign: TextAlign.justify,
                                   style: TextStyle(
@@ -411,12 +414,12 @@ class _HealthToolsState extends State<HealthTools> {
                               Padding(
                                 padding: EdgeInsets.fromLTRB(15, 0, 8, 1),
                                 child: Text(
-                                  'COPD Assesment Tool(CAT)',
+                                  'COPD Assesment Test (CAT)',
                                   style: TextStyle(
                                     color: drkmd == true
                                         ? HexColor('#bebebe')
                                         : HexColor('#636e72'),
-                                    fontSize: 19,
+                                    fontSize: 18,
                                     fontFamily: 'Nunito',
                                     fontWeight: FontWeight.w900,
                                   ),
@@ -425,7 +428,7 @@ class _HealthToolsState extends State<HealthTools> {
                               Padding(
                                 padding: EdgeInsets.fromLTRB(15, 0, 8, 0),
                                 child: Text(
-                                  'This COPD Assesment  self test can give you an understanding of the likelihood that you have an anxiety disorder. Please note, results are not a diagnosis.',
+                                  'This COPD Assesment test can give you an understanding of the likelihood that you have an COPD risk. Please note, results are not a diagnosis.',
                                   overflow: TextOverflow.ellipsis,
                                   maxLines: 3,
                                   textAlign: TextAlign.justify,
@@ -448,6 +451,50 @@ class _HealthToolsState extends State<HealthTools> {
                     ),
                   ),
                 ),
+              ),
+            ),
+            Padding(
+              padding: const EdgeInsets.fromLTRB(15.0, 15, 15, 5),
+              child: Column(
+                children: [
+                  StreamBuilder<QuerySnapshot>(
+                    stream: healthutilsad,
+                    builder: (BuildContext context,
+                        AsyncSnapshot<QuerySnapshot> snapshot) {
+                      if (snapshot.hasData) {
+                        final List storedocs = [];
+                        snapshot.data!.docs.map(
+                          (DocumentSnapshot document) {
+                            Map a = document.data() as Map<String, dynamic>;
+                            storedocs.add(a);
+                            a['id'] = document.id;
+                          },
+                        ).toList();
+                        return Column(
+                          children: List.generate(
+                            storedocs.length,
+                            (i) => Container(
+                              width: width,
+                              height: 100,
+                              decoration: BoxDecoration(
+                                image: DecorationImage(
+                                  fit: BoxFit.cover,
+                                  image:
+                                      NetworkImage('${storedocs[i]['adlink']}'),
+                                ),
+                                borderRadius: BorderRadius.circular(30),
+                                color: drkmd == true
+                                    ? HexColor('#444444')
+                                    : HexColor('#dfe6e9'),
+                              ),
+                            ),
+                          ),
+                        );
+                      }
+                      return const CircularProgressIndicator();
+                    },
+                  ),
+                ],
               ),
             ),
             Padding(

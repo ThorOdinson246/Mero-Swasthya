@@ -2,9 +2,11 @@
 
 // import 'dart:ffi';
 
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
+import '../allpages.dart';
 import '../lists/questions_lists.dart';
 import 'homepage.dart';
 
@@ -42,6 +44,8 @@ class _QuizPageState extends State<QuizPage> {
   @override
   Widget build(BuildContext context) {
     double width = MediaQuery.of(context).size.width;
+    final Stream<QuerySnapshot> anxietypagead =
+        FirebaseFirestore.instance.collection('anxietypagead').snapshots();
     print('index= ' + '$index');
     return Scaffold(
       backgroundColor: Color(0xff1a1a2e),
@@ -58,6 +62,52 @@ class _QuizPageState extends State<QuizPage> {
             fontWeight: FontWeight.bold,
           ),
         ),
+        actions: [
+          TextButton(
+            onPressed: () {
+              showDialog(
+                  context: context,
+                  builder: (BuildContext context) {
+                    return AlertDialog(
+                      backgroundColor:
+                          drkmd == true ? Colors.grey[900] : Colors.grey[100],
+                      title: Text(
+                        "Anxiety Check",
+                        style: TextStyle(
+                          color: drkmd == true
+                              ? HexColor('#bebebe')
+                              : HexColor('#636e72'),
+                          fontSize: 17,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                      actions: [
+                        TextButton(
+                          onPressed: () {
+                            Navigator.pop(context);
+                          },
+                          child: Text('OK'),
+                        )
+                      ],
+                      content: Text(
+                        "This questionnaire called the GAD-7 screening tool can help you find out if you might have an anxiety disorder that needs treatment. It calculates how many common symptoms you have and based on your answers suggests where you might be on a scale, from mild to severe anxiety.\nPlease note: Online screening tools are not diagnostic instruments. You are encouraged to share your results with a physician or healthcare provider.",
+                        style: TextStyle(
+                          color: drkmd == true
+                              ? HexColor('#bebebe')
+                              : HexColor('#636e72'),
+                          fontSize: 17,
+                          fontWeight: FontWeight.w400,
+                        ),
+                      ),
+                    );
+                  });
+            },
+            child: Icon(
+              Icons.info,
+              color: Colors.white,
+            ),
+          ),
+        ],
       ),
       body: SingleChildScrollView(
         child: Column(
@@ -455,6 +505,52 @@ class _QuizPageState extends State<QuizPage> {
                             fontFamily: 'Nunito',
                             fontWeight: FontWeight.w900,
                           ),
+                        ),
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.fromLTRB(15.0, 15, 15, 5),
+                        child: Column(
+                          children: [
+                            StreamBuilder<QuerySnapshot>(
+                              stream: anxietypagead,
+                              builder: (BuildContext context,
+                                  AsyncSnapshot<QuerySnapshot> snapshot) {
+                                if (snapshot.hasData) {
+                                  final List storedocs = [];
+                                  snapshot.data!.docs.map(
+                                    (DocumentSnapshot document) {
+                                      Map a = document.data()
+                                          as Map<String, dynamic>;
+                                      storedocs.add(a);
+                                      a['id'] = document.id;
+                                    },
+                                  ).toList();
+                                  return Column(
+                                    children: List.generate(
+                                      storedocs.length,
+                                      (i) => Container(
+                                        width: width,
+                                        height: 200,
+                                        decoration: BoxDecoration(
+                                          image: DecorationImage(
+                                            fit: BoxFit.cover,
+                                            image: NetworkImage(
+                                                '${storedocs[i]['adlink']}'),
+                                          ),
+                                          borderRadius:
+                                              BorderRadius.circular(30),
+                                          color: drkmd == true
+                                              ? HexColor('#444444')
+                                              : HexColor('#dfe6e9'),
+                                        ),
+                                      ),
+                                    ),
+                                  );
+                                }
+                                return const CircularProgressIndicator();
+                              },
+                            ),
+                          ],
                         ),
                       ),
                     ],
