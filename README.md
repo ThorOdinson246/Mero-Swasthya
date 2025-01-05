@@ -6,7 +6,7 @@ The official repository of MeroSwasthya App created by Mukesh Poudel.
 
 Mero Swasthya is a all-in-one solution to all your health problems. Physical, Mental and Emotional Health, Mero Swasthya has got you all covered.
 
-Currently in development, It is a first of its kind to attempt in unifying all the health services ranging from blood donation campaign and requests, doctors consultation and appointment, AI based disease diagnosis, Anxiety and depression tests, health calculators like BMI Calculators, IBW calculators, Estimated Date of Delivery, Mensuration Cycle and Hygiene tracker,  Heart Rate measurement from your own device, access to health tips and news and a lot more.
+Currently in development, It is a first of its kind to attempt in unifying all the health services ranging from blood donation campaign and requests, doctors consultation and appointment, Anxiety and depression tests, health calculators like BMI Calculators, IBW calculators, Estimated Date of Delivery, Mensuration Cycle and Hygiene tracker,  Heart Rate measurement from your own device, access to health tips and news and a lot more.
 
 
 ![9945cc3896b6764318e86d33f11cbde9-1-1024x576](https://user-images.githubusercontent.com/110178596/188385076-00cd98ed-0e27-44f4-8391-1ee9b61297ec.png)
